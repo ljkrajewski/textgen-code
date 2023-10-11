@@ -29,8 +29,7 @@ git clone --single-branch --branch main https://huggingface.co/$MODEL
 #cd $MODEL_DIR
 #wget https://huggingface.co/$MODEL/resolve/main/model.safetensors
 
-## Command-line flag options:
-#  https://github.com/oobabooga/text-generation-webui#starting-the-web-ui
+## Command-line flag options:  https://github.com/oobabooga/text-generation-webui#starting-the-web-ui
 cd $TGWBASE
 #echo "--listen --chat --auto-devices --model llama" >> CMD_FLAGS.txt
 #echo "--listen --chat --auto-devices --cpu --model $MODEL_DIR" >> CMD_FLAGS.txt
