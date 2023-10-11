@@ -4,9 +4,8 @@ BASE='/workspace'
 TGWBASE="$BASE/text-generation-webui"
 #MODEL='TheBloke/WizardCoder-15B-1.0-GPTQ'
 #   https://huggingface.co/TheBloke/WizardCoder-15B-1.0-GPTQ#how-to-easily-download-and-use-this-model-in-text-generation-webui
-MODEL='TheBloke/WizardCoder-Python-34B-V1.0-GPTQ'   #Original: WizardLM/WizardCoder-Python-34B-V1.0
-#   https://huggingface.co/TheBloke/WizardCoder-Python-34B-V1.0-GPTQ#how-to-easily-download-and-use-this-model-in-text-generation-webui
 #MODEL='WizardLM/WizardCoder-Python-34B-V1.0'   #Original: WizardLM/WizardCoder-Python-34B-V1.0
+MODEL='TheBloke/WizardCoder-Python-34B-V1.0-GPTQ'   #Original: WizardLM/WizardCoder-Python-34B-V1.0
 #   https://huggingface.co/TheBloke/WizardCoder-Python-34B-V1.0-GPTQ#how-to-easily-download-and-use-this-model-in-text-generation-webui
 MODEL_DIR=$(echo $MODEL | awk -F '/' '{ print $2 }')
 
