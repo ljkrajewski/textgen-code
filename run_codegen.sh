@@ -18,6 +18,7 @@ python -m venv venv
 source venv/bin/activate
 
 ## Download model from Hugging Face
+#  https://huggingface.co/TheBloke/WizardCoder-15B-1.0-GPTQ#how-to-easily-download-and-use-this-model-in-text-generation-webui
 cd $TGWBASE/models
 git lfs install
 git clone https://huggingface.co/$MODEL
