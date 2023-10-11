@@ -3,7 +3,9 @@
 BASE='/workspace'
 TGWBASE="$BASE/text-generation-webui"
 #MODEL='TheBloke/WizardCoder-15B-1.0-GPTQ'
+#   https://huggingface.co/TheBloke/WizardCoder-15B-1.0-GPTQ#how-to-easily-download-and-use-this-model-in-text-generation-webui
 MODEL='TheBloke/WizardCoder-Python-34B-V1.0-GPTQ'   #Original: WizardLM/WizardCoder-Python-34B-V1.0
+#   https://huggingface.co/TheBloke/WizardCoder-Python-34B-V1.0-GPTQ#how-to-easily-download-and-use-this-model-in-text-generation-webui
 MODEL_DIR=$(echo $MODEL | awk -F '/' '{ print $2 }')
 
 ## Prereqs
@@ -19,11 +21,11 @@ python -m venv venv
 source venv/bin/activate
 
 ## Download model from Hugging Face
-#  https://huggingface.co/TheBloke/WizardCoder-15B-1.0-GPTQ#how-to-easily-download-and-use-this-model-in-text-generation-webui
 cd $TGWBASE/models
 git lfs install
 git clone --single-branch --branch main https://huggingface.co/$MODEL
-#export GIT_LFS_SKIP_SMUDGE=1; git clone https://huggingface.co/$MODEL
+##  If git chokes on the large files...
+#export GIT_LFS_SKIP_SMUDGE=1; git clone --single-branch --branch main https://huggingface.co/$MODEL
 #cd $MODEL_DIR
 #wget https://huggingface.co/$MODEL/resolve/main/model.safetensors
 
