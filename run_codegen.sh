@@ -22,7 +22,7 @@ source venv/bin/activate
 #  https://huggingface.co/TheBloke/WizardCoder-15B-1.0-GPTQ#how-to-easily-download-and-use-this-model-in-text-generation-webui
 cd $TGWBASE/models
 git lfs install
-git clone https://huggingface.co/$MODEL
+git clone --single-branch --branch main https://huggingface.co/$MODEL
 #export GIT_LFS_SKIP_SMUDGE=1; git clone https://huggingface.co/$MODEL
 #cd $MODEL_DIR
 #wget https://huggingface.co/$MODEL/resolve/main/model.safetensors
