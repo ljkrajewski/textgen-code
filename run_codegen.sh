@@ -2,7 +2,8 @@
 
 BASE='/workspace'
 TGWBASE="$BASE/text-generation-webui"
-MODEL='TheBloke/WizardCoder-15B-1.0-GPTQ'
+#MODEL='TheBloke/WizardCoder-15B-1.0-GPTQ'
+MODEL='TheBloke/WizardCoder-Python-34B-V1.0-GPTQ'   #Original: WizardLM/WizardCoder-Python-34B-V1.0
 MODEL_DIR=$(echo $MODEL | awk -F '/' '{ print $2 }')
 
 ## Prereqs
