@@ -29,7 +29,8 @@ git clone https://huggingface.co/$MODEL
 #  https://github.com/oobabooga/text-generation-webui#starting-the-web-ui
 cd $TGWBASE
 #echo "--listen --chat --auto-devices --model llama" >> CMD_FLAGS.txt
-echo "--listen --chat --auto-devices --cpu --model $MODEL_DIR" >> CMD_FLAGS.txt
+#echo "--listen --chat --auto-devices --cpu --model $MODEL_DIR" >> CMD_FLAGS.txt
+echo "--listen --listen-port 7860 --chat --cpu --model $MODEL_DIR" >> CMD_FLAGS.txt
 
 ## GPU_CHOICE options
 #    A) NVIDIA
