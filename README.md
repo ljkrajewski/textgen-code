@@ -3,6 +3,7 @@ The goal of this project is to have an easy way to spin up and run an LLM using 
 
 ## To use:
 1. Go to [RunPod.io](https://runpod.io/) and log in.
+> If you haven't set up your account to be able to log into your RunPod instances via SSH key, do it.   
 2. Go to _Templates_ and pick the _RunPod Pytorch 2.0.1_ template.
 3. Select a pod to start.
    - Recommended VRAM:  48GB+ for 13B+ LLMs or hi-res Stable Diffusion pictures, 20GB
