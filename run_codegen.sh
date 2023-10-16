@@ -9,11 +9,6 @@ MODEL='TheBloke/WizardCoder-Python-34B-V1.0-GPTQ'   #Original: WizardLM/WizardCo
 #   https://huggingface.co/TheBloke/WizardCoder-Python-34B-V1.0-GPTQ#how-to-easily-download-and-use-this-model-in-text-generation-webui
 MODEL_DIR=$(echo $MODEL | awk -F '/' '{ print $2 }')
 
-## Prereqs
-apt update && apt upgrade git -y && apt install tmux vim psmisc less unzip git-lfs -y
-python -m pip install --upgrade pip
-python -m pip install virtualenv auto-gptq
-
 ## Install Oobabooga & start virtual environment
 cd $BASE
 git clone https://github.com/oobabooga/text-generation-webui.git
