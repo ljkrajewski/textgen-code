@@ -1,0 +1,12 @@
+    1  cd ..
+    2  git clone https://github.com/oobabooga/text-generation-webui.git
+    3  cd text-generation-webui/
+    4  python -m venv venv
+    5  source venv/bin/activate
+    6  echo "--listen" >> CMD_FLAGS.txt 
+    7  export GPU_CHOICE='A'
+    8  bash start_linux.sh 
+    9  cd ../textgen-code/
+   10  ls
+   11  history
+   12  history > history.txt
