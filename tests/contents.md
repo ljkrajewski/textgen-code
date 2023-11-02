@@ -2,7 +2,7 @@ Testing AI language models (LLMs) designed to write code involves evaluating the
 
 1. **Correctness Tests**:
    - [**Unit Tests**](unit.md): Evaluate the LLM's ability to generate code that produces correct outputs for specific inputs.
-   - **Integration Tests**: Assess the LLM's capability to generate code that works seamlessly within a larger system or program.
+   - [**Integration Tests**](integration.md): Assess the LLM's capability to generate code that works seamlessly within a larger system or program.
    - **Edge Cases**: Test the LLM's handling of uncommon or extreme inputs that might lead to errors or unexpected behavior.
 
 2. **Performance Tests**:
