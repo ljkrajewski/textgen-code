@@ -27,8 +27,8 @@ Testing AI language models (LLMs) designed to write code involves evaluating the
    - [**Error Messages**](06-error_messages.md): Assess the clarity and usefulness of error messages produced by the generated code.
 
 7. **Security Tests**:
-   - **Input Validation**: Evaluate the LLM's ability to generate code that properly validates user inputs to prevent security vulnerabilities like SQL injection or cross-site scripting (XSS).
-   - **Access Control**: Check if the generated code implements appropriate access controls to protect sensitive information.
+   - [**Input Validation**](07-input_validation.md): Evaluate the LLM's ability to generate code that properly validates user inputs to prevent security vulnerabilities like SQL injection or cross-site scripting (XSS).
+   - [**Access Control**](07-access_control.md): Check if the generated code implements appropriate access controls to protect sensitive information.
 
 8. **Scalability Tests**:
    - **Handling Large Datasets**: Evaluate the LLM's ability to generate code that efficiently processes or analyzes large volumes of data.
