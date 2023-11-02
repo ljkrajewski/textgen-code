@@ -29,5 +29,5 @@ $ tmux
 > ```
 > $ tmux attach
 > ```
-9. Inside the _tmux_ session, run ```run_codegen.sh```. This will download and install the web UI and models.
+9. Inside the _tmux_ session, run ```start_codegen.sh```. This will download and install the web UI and models.
 10. When the web UI starts running, connect to the webui through the _connect_ button for your RunPod instance.
