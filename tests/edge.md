@@ -1,4 +1,4 @@
-Certainly! Edge tests focus on evaluating how well a system handles extreme or uncommon scenarios. Here are three specific examples of edge tests for correctness:
+Edge tests focus on evaluating how well a system handles extreme or uncommon scenarios. Here are three specific examples of edge tests for correctness:
 
 1. **Example: Maximum Input Value**
    - **Description**: Test how the system handles the maximum allowable input value for a specific parameter.
