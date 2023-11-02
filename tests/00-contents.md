@@ -32,7 +32,7 @@ Testing AI language models (LLMs) designed to write code involves evaluating the
 
 8. **Scalability Tests**:
    - [**Handling Large Datasets**](08-handling_datasets.md): Evaluate the LLM's ability to generate code that efficiently processes or analyzes large volumes of data.
-   - **Load Handling**: Assess how well the generated code handles high loads or concurrent requests.
+   - [**Load Handling**](08-load_handling.md): Assess how well the generated code handles high loads or concurrent requests.
 
 9. **Adversarial Tests**:
    - **Input Perturbations**: Test the LLM's robustness to small changes in input, to ensure it doesn't produce incorrect or unexpected behavior.
