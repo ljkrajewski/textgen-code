@@ -7,7 +7,7 @@ Testing AI language models (LLMs) designed to write code involves evaluating the
 
 2. **Performance Tests**:
    - [**Efficiency and Speed**](02-efficency_speed.md): Evaluate the generated code for its runtime efficiency and execution speed.
-   - **Resource Usage**: Assess the LLM's ability to generate code that efficiently uses system resources like memory and CPU.
+   - [**Resource Usage**](02-resource.md): Assess the LLM's ability to generate code that efficiently uses system resources like memory and CPU.
 
 3. **Code Quality and Style Tests**:
    - **Code Readability**: Evaluate how well the generated code adheres to established coding standards and conventions.
