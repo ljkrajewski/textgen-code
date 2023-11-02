@@ -1,33 +1,70 @@
-Edge tests focus on evaluating how well a system handles extreme or uncommon scenarios. Here are three specific examples of edge tests for correctness:
+Edge tests evaluate how well a system handles extreme or uncommon scenarios. Here are three specific examples of edge tests for correctness, along with sample code or instructions:
 
-1. **Example: Maximum Input Value**
-   - **Description**: Test how the system handles the maximum allowable input value for a specific parameter.
+1. **Example: Handling Large Inputs (Python)**
+
+   - **Description**: Test how the system handles very large inputs for a specific function.
+
    - **Test Case**:
-     - **Input**: Find the factorial of 20
-     - **Expected Output**: 2432902008176640000
+     - **Input**: Compute the factorial of a very large number, e.g., 1000
+     - **Expected Output**: The computed factorial
 
-   - **Edge Test Scenario**:
-     1. Provide the maximum allowable input value for the factorial function.
-     2. Verify that the system correctly computes and returns the result.
+   - **Edge Test Code (Python)**:
 
-2. **Example: Empty Input**
-   - **Description**: Test how the system handles cases where input data is missing or empty.
+   ```python
+   def factorial(n):
+       if n == 0:
+           return 1
+       else:
+           return n * factorial(n-1)
+
+   def edge_test_large_factorial():
+       result = factorial(1000)
+       assert result == 40238726007709377354370243392300398571937486421071463254379991042993851239862902059204420848696940480047998861019719605863166687299480855890132382966994459099742450408707375991882362772718873251977950595099527612087497546249704360141827809464649629105639388743788648733711918104582578364784997701247663288983595573543251318532395846307555740911426241747434934755342864657661166779739666882029120737914385371958824980812686783837455973174613608537953452422158659320192809087829730843139284440328123155861103697680135730421616874760967587134831202547858932076716913244842623613141250878020800026168315102734182797770478463586817016436502415369139828126481021309276124489635992870511496497541990934222156683257208082133318611681155361583654698404670897560290095053761647584772842188967964624494516076535340819890138544248798495995331910172335555660213945039973628075013783761530712776192684903435262520001588853514733161170210396817592151090778801939317811419454525722386554146106289218796022383897147608850627686296714667469756291123408243920816015378088989396451826324367161676217916890977991190375403127462228998800519544441428201218736174599264295658174662830295557029902432415318161721046583203678690611726015878352075151628422554026517048330422614397428693306169089796848259012545832716822645806652676995865268227280707578139185817888965220816434834482599326604336766017699961283186078838615027946595513115655203609398818061213855860030143569452722420634463179746059468257310379008402443243846565724501440282188525247093519062092902313649327349756551395872055965422874977401141334696271542284586237738753823048386568897646192738381490014076731044664025989949022222176590433990188601856652648506179970235619389701786004081188972991831102117122984590164192106888438712185564612496079872290851929681937238864261483965738229112312502418664935314397013742853192664987533721894069428143411852015801412334482801505139969429015348307764456909907315243327828826986460278986432113908350621709500259738986355427719674282224875758676575234422020757363056949882508796892816275384886339690995982628095612145099487170124451646126037902930912088908694202851064018215439945715680594187274899809425474217358240106367740459574178516082923013535808184009699637252423056085590370062427124341690900453301878483736947866790978756508422755873099227504928312065980868861592093782804077310364323278817498347726215420081058052600235275906501937877655821138148258313858356874769474213121801232363706627671316809524227931329443690211625403473882100139427637127338596370351033451941073015819068217935045469624188925441582815591950699795798611345807260288621288193814537691544135082038208371925550243310
+
+   edge_test_large_factorial()
+   ```
+
+   In this example, we're testing the `factorial` function with an extremely large input value to ensure it handles edge cases like this correctly.
+
+2. **Example: Division by Zero (Python)**
+
+   - **Description**: Test how the system handles division by zero.
+
    - **Test Case**:
-     - **Input**: Empty string for a text processing function
-     - **Expected Output**: Error or appropriate response indicating empty input
+     - **Input**: Attempt to divide a number by zero
+     - **Expected Output**: Error or appropriate response indicating division by zero
 
-   - **Edge Test Scenario**:
-     1. Pass an empty string as input to the text processing function.
-     2. Verify that the system handles this case appropriately, such as returning an error message or providing a clear indication of the empty input.
+   - **Edge Test Code (Python)**:
 
-3. **Example: Maximum Load and Concurrent Requests**
-   - **Description**: Test the system's behavior when subjected to a very high load or a large number of concurrent requests.
+   ```python
+   def edge_test_division_by_zero():
+       try:
+           result = 10 / 0  # Attempting to divide by zero
+       except ZeroDivisionError as e:
+           assert str(e) == "division by zero"
+   ```
+
+   This test intentionally attempts to perform a division by zero operation and expects it to raise a `ZeroDivisionError` exception.
+
+3. **Example: Overflow in Integer Arithmetic (Python)**
+
+   - **Description**: Test how the system handles situations where integer values exceed their maximum representable value.
+
    - **Test Case**:
-     - **Input**: Simulate 1000 simultaneous requests to a server
-     - **Expected Output**: All requests are processed without system failure or significant degradation in performance
+     - **Input**: Perform arithmetic operations leading to integer overflow
+     - **Expected Output**: Error or appropriate response indicating integer overflow
 
-   - **Edge Test Scenario**:
-     1. Use a load testing tool to simulate a large number of concurrent requests to the server.
-     2. Monitor the system's response time, resource utilization, and ensure that it can handle the load without crashing or significantly slowing down.
+   - **Edge Test Code (Python)**:
 
-In these examples, edge tests focus on extreme or unusual conditions that may not occur frequently in typical usage but are important to validate the robustness and resilience of the system. These tests help ensure that the system behaves appropriately under adverse conditions.
+   ```python
+   def edge_test_integer_overflow():
+       max_int = 2**31 - 1  # Maximum representable integer value in a 32-bit system
+       try:
+           result = max_int + 1  # Attempting to exceed the maximum value
+       except OverflowError as e:
+           assert str(e) == "overflow in int addition"
+   ```
+
+   This test attempts to exceed the maximum representable value for integers and expects it to raise an `OverflowError` exception.
+
+These examples demonstrate edge tests for handling extreme or uncommon scenarios, such as very large inputs, division by zero, and integer overflow. The test code provided helps verify that the system responds appropriately in these edge cases.
