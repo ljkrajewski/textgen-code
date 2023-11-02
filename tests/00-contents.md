@@ -18,9 +18,9 @@ Testing AI language models (LLMs) designed to write code involves evaluating the
    - [**Algorithms and Data Structures**](04-algorithms.md): Evaluate the LLM's proficiency in generating code for common algorithms and data structures.
 
 5. **Domain-Specific Tests**:
-   - **Web Development**: Assess the LLM's ability to generate HTML, CSS, JavaScript, or backend code for web applications.
-   - **Machine Learning and Data Science**: Test the LLM's proficiency in generating code for tasks like data preprocessing, model training, and evaluation.
-   - **System Administration and DevOps**: Evaluate the LLM's capability to generate code for tasks related to server configuration, deployment, and automation.
+   - [**Web Development**](05-web_development.md): Assess the LLM's ability to generate HTML, CSS, JavaScript, or backend code for web applications.
+   - [**Machine Learning and Data Science**](05-machine_learning.md): Test the LLM's proficiency in generating code for tasks like data preprocessing, model training, and evaluation.
+   - [**System Administration and DevOps**](05-system_administration.md): Evaluate the LLM's capability to generate code for tasks related to server configuration, deployment, and automation.
 
 6. **Error Handling Tests**:
    - **Graceful Degradation**: Evaluate how well the LLM handles and recovers from errors or exceptions in the generated code.
