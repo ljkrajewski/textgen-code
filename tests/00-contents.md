@@ -24,7 +24,7 @@ Testing AI language models (LLMs) designed to write code involves evaluating the
 
 6. **Error Handling Tests**:
    - [**Graceful Degradation**](06-graceful_degradation.md): Evaluate how well the LLM handles and recovers from errors or exceptions in the generated code.
-   - **Error Messages**: Assess the clarity and usefulness of error messages produced by the generated code.
+   - [**Error Messages**](06-error_messages.md): Assess the clarity and usefulness of error messages produced by the generated code.
 
 7. **Security Tests**:
    - **Input Validation**: Evaluate the LLM's ability to generate code that properly validates user inputs to prevent security vulnerabilities like SQL injection or cross-site scripting (XSS).
