@@ -36,9 +36,9 @@ Testing AI language models (LLMs) designed to write code involves evaluating the
 
 9. **Adversarial Tests**:
    - [**Input Perturbations**](09-input_perturbations.md): Test the LLM's robustness to small changes in input, to ensure it doesn't produce incorrect or unexpected behavior.
-   - **Security Vulnerabilities**: Assess the LLM's susceptibility to adversarial attacks aimed at exploiting vulnerabilities in the generated code.
+   - [**Security Vulnerabilities**](09-security_vulnerabilities.md): Assess the LLM's susceptibility to adversarial attacks aimed at exploiting vulnerabilities in the generated code.
 
 10. **Feedback Loop Tests**:
-    - **Feedback Incorporation**: Evaluate how well the LLM can incorporate feedback on generated code to improve its performance over time.
+    - [**Feedback Incorporation**](10-feedback_incorporation.md): Evaluate how well the LLM can incorporate feedback on generated code to improve its performance over time.
 
 Remember to curate a diverse set of tests that cover a wide range of scenarios and use cases to get a comprehensive assessment of the LLM's capabilities. Additionally, consider using real-world projects or applications as a benchmark for evaluating the LLM's code-writing abilities.
