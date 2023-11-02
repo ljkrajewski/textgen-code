@@ -15,7 +15,7 @@ Testing AI language models (LLMs) designed to write code involves evaluating the
 
 4. **Generalization Tests**:
    - [**General Programming Tasks**](04-general_programming.md): Assess the LLM's ability to perform a wide range of programming tasks, covering different programming paradigms (e.g., procedural, object-oriented, functional).
-   - **Algorithms and Data Structures**: Evaluate the LLM's proficiency in generating code for common algorithms and data structures.
+   - [**Algorithms and Data Structures**](04-algorithms.md): Evaluate the LLM's proficiency in generating code for common algorithms and data structures.
 
 5. **Domain-Specific Tests**:
    - **Web Development**: Assess the LLM's ability to generate HTML, CSS, JavaScript, or backend code for web applications.
