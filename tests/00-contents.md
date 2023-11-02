@@ -10,7 +10,7 @@ Testing AI language models (LLMs) designed to write code involves evaluating the
    - [**Resource Usage**](02-resource.md): Assess the LLM's ability to generate code that efficiently uses system resources like memory and CPU.
 
 3. **Code Quality and Style Tests**:
-   - **Code Readability**: Evaluate how well the generated code adheres to established coding standards and conventions.
+   - [**Code Readability**](03-readability.md): Evaluate how well the generated code adheres to established coding standards and conventions.
    - **Code Structure**: Check if the generated code follows good practices for modularity, maintainability, and organization.
 
 4. **Generalization Tests**:
