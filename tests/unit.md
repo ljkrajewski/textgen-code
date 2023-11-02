@@ -1,4 +1,4 @@
-Certainly! Here are three specific examples of unit tests for correctness:
+Here are three specific examples of unit tests for correctness:
 
 1. **Example: String Reversal Function**
    - **Description**: Suppose you want to test a function that reverses a given string.
