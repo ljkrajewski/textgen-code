@@ -11,10 +11,10 @@ Testing AI language models (LLMs) designed to write code involves evaluating the
 
 3. **Code Quality and Style Tests**:
    - [**Code Readability**](03-readability.md): Evaluate how well the generated code adheres to established coding standards and conventions.
-   - **Code Structure**: Check if the generated code follows good practices for modularity, maintainability, and organization.
+   - [**Code Structure**](03-structure.md): Check if the generated code follows good practices for modularity, maintainability, and organization.
 
 4. **Generalization Tests**:
-   - **General Programming Tasks**: Assess the LLM's ability to perform a wide range of programming tasks, covering different programming paradigms (e.g., procedural, object-oriented, functional).
+   - [**General Programming Tasks**](04-general_programming.md): Assess the LLM's ability to perform a wide range of programming tasks, covering different programming paradigms (e.g., procedural, object-oriented, functional).
    - **Algorithms and Data Structures**: Evaluate the LLM's proficiency in generating code for common algorithms and data structures.
 
 5. **Domain-Specific Tests**:
