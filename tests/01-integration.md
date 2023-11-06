@@ -96,7 +96,8 @@ Integration tests are designed to verify that different parts of a system work t
 3. **Example: Database Integration Test (Python with SQLAlchemy)**
 
    - **Description**: Test the interaction between application code and a database.
-
+   - **Sample prompt**
+     ```Write a python script that demonstrates the interaction between application code and a database. ```
    - **Test Case**:
      - **Input**: Python function to retrieve data from the database
      - **Expected Output**: Retrieved data
@@ -104,14 +105,39 @@ Integration tests are designed to verify that different parts of a system work t
    - **Integration Test Code (Python with SQLAlchemy)**:
 
    ```python
-   from app import db, User
-
-   def test_database_integration():
-       # Assuming you have a User model and a function to retrieve user data from the database
-       user = User.query.filter_by(username='test_user').first()
-
-       # Check if the retrieved user data matches the expected data
-       assert user.username == 'test_user'
+   import sqlite3
+   
+   def create_database():
+       conn = sqlite3.connect('example.db')
+       c = conn.cursor()
+   
+       # Create a table
+       c.execute('''CREATE TABLE IF NOT EXISTS users
+                    (id INTEGER PRIMARY KEY, name TEXT, email TEXT)''')
+   
+       # Insert some data
+       c.execute("INSERT INTO users (name, email) VALUES (?, ?)", ('John Doe', 'john@example.com'))
+       c.execute("INSERT INTO users (name, email) VALUES (?, ?)", ('Jane Doe', 'jane@example.com'))
+   
+       conn.commit()
+       conn.close()
+   
+   def query_database():
+       conn = sqlite3.connect('example.db')
+       c = conn.cursor()
+   
+       # Query the database
+       c.execute("SELECT * FROM users")
+       rows = c.fetchall()
+   
+       for row in rows:
+           print(row)
+   
+       conn.close()
+   
+   if __name__ == '__main__':
+       create_database()
+       query_database()
    ```
 
    This test uses SQLAlchemy (assuming you're using a Flask application with an SQLAlchemy database) to interact with the database and verify that user data can be retrieved correctly.
