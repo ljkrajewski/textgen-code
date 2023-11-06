@@ -63,9 +63,21 @@ Integration tests are designed to verify that different parts of a system work t
    - **Sample prompt**
      ```Write a working python script that demonstrates client interaction with a RESTful API. Use a well-known API that does not require any kind of authentication or API key.```
    - **Test Case**:
-     - **Input**: HTTP request to create a new resource
-     - **Expected Output**: HTTP response indicating successful resource creation
-
+     - **Expected Output**:  
+      ```
+      Post #1
+      Title: sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+      Body: quia et suscipit
+      suscipit recusandae consequuntur expedita et cum
+      reprehenderit molestiae ut ut quas totam
+      nostrum rerum est autem sunt rem eveniet architecto
+      ==============================
+      Post #2
+      Title: qui est esse
+      Body: est rerum tempore vitae
+      sequi sint nihil reprehenderit dolor beatae ea dolores neque
+      [and so forth...]
+      ```
    - **Integration Test Code (Python with requests library)**:  
    Here's a Python script that demonstrates client interaction with the JSONPlaceholder API, which is a free online REST API for testing and prototyping.
    ```python
