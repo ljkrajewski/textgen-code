@@ -5,11 +5,21 @@ Here are three specific examples of unit tests for correctness:
    - **Test Case**:
      - **Input**: "hello"
      - **Expected Output**: "olleh"
-
-   - **Unit Test Code (Python)**:
+   - **Sample Prompt**
+     - ```Write a python script that takes an input string, reverses it, and outputs the result```
+   - **Example Code (Python)**:
      ```python
-     def test_string_reversal():
-         assert string_reversal("hello") == "olleh"
+      def reverse_string(input_str):
+          return input_str[::-1]
+      
+      # Get user input
+      user_input = input("Enter a string: ")
+      
+      # Reverse the input string
+      reversed_string = reverse_string(user_input)
+      
+      # Print the reversed string
+      print("Reversed string:", reversed_string)
      ```
 
 2. **Example: Fibonacci Sequence Generator**
