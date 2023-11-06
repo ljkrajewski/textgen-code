@@ -60,29 +60,38 @@ Integration tests are designed to verify that different parts of a system work t
 2. **Example: API Integration Test (Python with requests library)**
 
    - **Description**: Test the interaction between a client and a RESTful API.
-
+   - **Sample prompt**
+     ```Write a working python script that demonstrates client interaction with a RESTful API. Use a well-known API that does not require any kind of authentication or API key.```
    - **Test Case**:
      - **Input**: HTTP request to create a new resource
      - **Expected Output**: HTTP response indicating successful resource creation
 
    - **Integration Test Code (Python with requests library)**:  
-  This example uses the Chuck Norris Jokes API.
+   Here's a Python script that demonstrates client interaction with the JSONPlaceholder API, which is a free online REST API for testing and prototyping.
    ```python
    import requests
    
-   def get_random_joke():
-       url = 'https://api.chucknorris.io/jokes/random'
+   def get_posts():
+       url = 'https://jsonplaceholder.typicode.com/posts'
        response = requests.get(url)
    
        if response.status_code == 200:
-           joke = response.json()['value']
-           return joke
+           posts = response.json()
+           return posts
        else:
-           return f"Error: Unable to fetch joke (Status Code {response.status_code})"
+           return f"Error: Unable to fetch posts (Status Code {response.status_code})"
    
    if __name__ == '__main__':
-       joke = get_random_joke()
-       print(joke)
+       posts = get_posts()
+   
+       if isinstance(posts, list):
+           for post in posts[:5]:  # Display the first 5 posts for demonstration
+               print(f"Post #{post['id']}")
+               print(f"Title: {post['title']}")
+               print(f"Body: {post['body']}")
+               print("="*30)
+       else:
+           print(posts)
    ```
 3. **Example: Database Integration Test (Python with SQLAlchemy)**
 
