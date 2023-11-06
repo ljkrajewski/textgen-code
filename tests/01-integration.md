@@ -111,8 +111,7 @@ Integration tests are designed to verify that different parts of a system work t
    - **Sample prompt**
      ```Write a python script that demonstrates the interaction between application code and a database. ```
    - **Test Case**:
-     - **Input**: Python function to retrieve data from the database
-     - **Expected Output**: Retrieved data
+     - **Expected Output**: A list of names and emails in the database.
 
    - **Integration Test Code (Python with SQLAlchemy)**:
 
@@ -151,7 +150,4 @@ Integration tests are designed to verify that different parts of a system work t
        create_database()
        query_database()
    ```
-
-   This test uses SQLAlchemy (assuming you're using a Flask application with an SQLAlchemy database) to interact with the database and verify that user data can be retrieved correctly.
-
 These examples demonstrate how to perform integration tests for different components of a system, including web applications, APIs, and database interactions. Keep in mind that you'll need to adapt the code to fit your specific application and testing framework.
