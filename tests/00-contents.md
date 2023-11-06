@@ -1,4 +1,4 @@
-Testing AI language models (LLMs) designed to write code involves evaluating their performance on a range of tasks that assess their ability to generate correct and efficient code. Here is a list of tests you can consider:
+Testing AI language models (LLMs) designed to write code involves evaluating their performance on a range of tasks that assess their ability to generate correct and efficient code. Here is a list of tests to consider:
 
 1. **Correctness Tests**:
    - [**Unit Tests**](unit.md): Evaluate the LLM's ability to generate code that produces correct outputs for specific inputs.
