@@ -27,11 +27,26 @@ Here are three specific examples of unit tests for correctness:
    - **Test Case**:
      - **Input**: n = 6
      - **Expected Output**: 8
-
-   - **Unit Test Code (Python)**:
+   - **Sample Prompt**
+     - ```Write a python script that calculates the Fibonacci sequence to the n-th number, where n is provided by the user.```
+   - **Example Code (Python)**:
      ```python
-     def test_fibonacci_generator():
-         assert fibonacci(6) == 8
+      def fibonacci(n):
+          fib_sequence = [0, 1]
+          while len(fib_sequence) < n+1:
+              fib_sequence.append(fib_sequence[-1] + fib_sequence[-2])
+          return fib_sequence[:n+1]
+      
+      # Get user input for n
+      n = int(input("Enter the value of n: "))
+      
+      # Calculate Fibonacci sequence
+      fib_sequence = fibonacci(n)
+      
+      # Print the Fibonacci sequence
+      print(f"Fibonacci sequence up to the {n}-th number:")
+      for i, num in enumerate(fib_sequence):
+          print(f"F({i}) = {num}")
      ```
 
 3. **Example: Prime Number Checker**
