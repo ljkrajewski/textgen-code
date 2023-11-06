@@ -56,6 +56,7 @@ Integration tests are designed to verify that different parts of a system work t
       </body>
       </html>
       ```
+      Run ```python3 login.py``` and point a web browser to ```http://127.0.0.1:5000``` to test.
 2. **Example: API Integration Test (Python with requests library)**
 
    - **Description**: Test the interaction between a client and a RESTful API.
