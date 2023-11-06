@@ -1,5 +1,5 @@
 ## Integration Tests for Correctness
-Integration tests are designed to verify that different parts of a system work together correctly. Here are three specific examples of integration tests for correctness, along with sample code or instructions:
+Integration tests are designed to verify that different parts of a system work together correctly. Here are three specific examples of integration tests for correctness, along with sample code or instructions. Please note, Generated code may not match exactly with what is presented below.
 
 1. **Example: User Authentication in a Web Application (Python with Flask)**
 
