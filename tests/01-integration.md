@@ -39,22 +39,7 @@ Integration tests are designed to verify that different parts of a system work t
       ```
       _templates/login.html_
       ```html
-      <!doctype html>
-      <html lang="en">
-      <head>
-        <meta charset="utf-8">
-        <title>Login</title>
-      </head>
-      <body>
-        <form action="/login" method="post">
-          <label for="username">Username:</label><br>
-          <input type="text" id="username" name="username"><br>
-          <label for="password">Password:</label><br>
-          <input type="password" id="password" name="password"><br><br>
-          <input type="submit" value="Login">
-        </form>
-      </body>
-      </html>
+
       ```
       Run ```python3 login.py``` and point a web browser to ```http://127.0.0.1:5000``` to test.
 2. **Example: API Integration Test (Python with requests library)**
