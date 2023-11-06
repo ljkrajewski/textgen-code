@@ -1,35 +1,61 @@
+## Integration Tests for Correctness
 Integration tests are designed to verify that different parts of a system work together correctly. Here are three specific examples of integration tests for correctness, along with sample code or instructions:
 
 1. **Example: User Authentication in a Web Application (Python with Flask)**
 
    - **Description**: Test the interaction between the frontend, backend, and database for user authentication in a web application.
-
+   - **Sample prompt**
+     ```Write a simple web application using python and flask demonstrating a user login and allowing access if the username and password are valid.```
    - **Test Case**:
-     - **Input**: Valid username and password
-     - **Expected Output**: Successful login
+     - **Input**: Valid username and password. In this example, it's literally "username" and "password".
+     - **Expected Output**: Successful login with valid credentials; rejected login with invalid credentials.
 
-   - **Integration Test Code (Python with Flask)**:
-
-   ```python
-   # Assuming you have a Flask web application with user authentication
-
-   from app import app, db, User
-
-   def test_user_authentication():
-       # Create a test user in the database
-       test_user = User(username='test_user', password='test_password')
-       db.session.add(test_user)
-       db.session.commit()
-
-       # Simulate a login request with valid credentials
-       response = app.test_client().post('/login', data={'username': 'test_user', 'password': 'test_password'}, follow_redirects=True)
-
-       # Check if the response contains the expected success message or redirect to the dashboard
-       assert b'Welcome, test_user!' in response.data
-   ```
-
-   In this example, we assume you have a Flask web application with user authentication functionality. The test creates a test user in the database, simulates a login request with valid credentials, and checks if the response indicates a successful login.
-
+   - **Integration Test Code (Python with Flask)**:  
+      _login.py_
+      ```python
+      from flask import Flask, render_template, request, redirect, url_for
+      
+      app = Flask(__name__)
+      
+      # Simple in-memory database for demonstration purposes
+      users = {'username': 'password'}
+      
+      @app.route('/')
+      def home():
+          return render_template('login.html')
+      
+      @app.route('/login', methods=['POST'])
+      def login():
+          username = request.form['username']
+          password = request.form['password']
+      
+          if username in users and users[username] == password:
+              return f'Welcome, {username}!'
+          else:
+              return 'Invalid username or password. Please try again.'
+      
+      if __name__ == '__main__':
+          app.run(debug=True)
+      ```
+      _templates/login.html_
+      ```html
+      <!doctype html>
+      <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <title>Login</title>
+      </head>
+      <body>
+        <form action="/login" method="post">
+          <label for="username">Username:</label><br>
+          <input type="text" id="username" name="username"><br>
+          <label for="password">Password:</label><br>
+          <input type="password" id="password" name="password"><br><br>
+          <input type="submit" value="Login">
+        </form>
+      </body>
+      </html>
+      ```
 2. **Example: API Integration Test (Python with requests library)**
 
    - **Description**: Test the interaction between a client and a RESTful API.
