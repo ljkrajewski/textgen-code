@@ -56,12 +56,26 @@ Here are three specific examples of unit tests for correctness:
      - **Expected Output**: True
      - **Input**: 4
      - **Expected Output**: False
-
+   - **Sample Prompt**
+     ```Write a python script that returns if a user-entered integer is a prime number or not.```
    - **Unit Test Code (Python)**:
      ```python
-     def test_prime_checker():
-         assert is_prime(7) == True
-         assert is_prime(4) == False
+      def is_prime(n):
+          if n < 2:
+              return False
+          for i in range(2, int(n**0.5) + 1):
+              if n % i == 0:
+                  return False
+          return True
+      
+      # Get user input
+      user_input = int(input("Enter an integer: "))
+      
+      # Check if the number is prime
+      if is_prime(user_input):
+          print(f"{user_input} is a prime number")
+      else:
+          print(f"{user_input} is not a prime number")
      ```
 
 In these examples, each unit test checks a specific function (e.g., `string_reversal`, `fibonacci`, `is_prime`) with given inputs and compares the actual output to the expected output. If the actual and expected outputs match, the test passes; otherwise, it fails, indicating a potential issue with the function's correctness. These unit tests are written in Python using the `assert` statement to validate the expected behavior of the functions.
