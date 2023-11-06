@@ -65,25 +65,25 @@ Integration tests are designed to verify that different parts of a system work t
      - **Input**: HTTP request to create a new resource
      - **Expected Output**: HTTP response indicating successful resource creation
 
-   - **Integration Test Code (Python with requests library)**:
-
+   - **Integration Test Code (Python with requests library)**:  
+  This example uses the Chuck Norris Jokes API.
    ```python
    import requests
-
-   def test_api_integration():
-       # Assuming you have an API endpoint to create a new resource
-       url = 'https://api.example.com/resource'
-       payload = {'name': 'New Resource'}
-
-       # Send a POST request to create a new resource
-       response = requests.post(url, json=payload)
-
-       # Check if the response status code indicates success (e.g., 201 Created)
-       assert response.status_code == 201
+   
+   def get_random_joke():
+       url = 'https://api.chucknorris.io/jokes/random'
+       response = requests.get(url)
+   
+       if response.status_code == 200:
+           joke = response.json()['value']
+           return joke
+       else:
+           return f"Error: Unable to fetch joke (Status Code {response.status_code})"
+   
+   if __name__ == '__main__':
+       joke = get_random_joke()
+       print(joke)
    ```
-
-   This test sends a POST request to an API endpoint to create a new resource and checks if the response status code indicates a successful creation.
-
 3. **Example: Database Integration Test (Python with SQLAlchemy)**
 
    - **Description**: Test the interaction between application code and a database.
