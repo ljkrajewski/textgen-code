@@ -38,7 +38,7 @@ Edge tests evaluate how well a system handles extreme or uncommon scenarios. Her
 2. **Example: Division by Zero (Python)**
 
    - **Description**: Test how the system handles division by zero.
-
+   - **Sample prompt**: ```Write a python script that cleanly handles a "division by zero" error instead of just crashing.```
    - **Test Case**:
      - **Input**: Attempt to divide a number by zero
      - **Expected Output**: Error or appropriate response indicating division by zero
@@ -46,12 +46,23 @@ Edge tests evaluate how well a system handles extreme or uncommon scenarios. Her
    - **Edge Test Code (Python)**:
 
    ```python
-   def edge_test_division_by_zero():
+   def divide_numbers(num1, num2):
        try:
-           result = 10 / 0  # Attempting to divide by zero
+           result = num1 / num2
+           return result
        except ZeroDivisionError as e:
-           assert str(e) == "division by zero"
-   ```
+           return f"Error: {e}"
+   
+   # Get user input
+   num1 = float(input("Enter the numerator: "))
+   num2 = float(input("Enter the denominator: "))
+   
+   # Calculate division
+   result = divide_numbers(num1, num2)
+   
+   # Print the result
+   print(f"The result of the division is: {result}")
+```
 
    This test intentionally attempts to perform a division by zero operation and expects it to raise a `ZeroDivisionError` exception.
 
