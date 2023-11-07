@@ -92,7 +92,7 @@ Efficiency and speed tests aim to evaluate how well a system performs in terms o
 
 3. **Example: Matrix Multiplication Performance Test (C++)**
    - **Description**: Compare the runtime of different matrix multiplication algorithms.
-   - **Sample prompt**" ```Write a python script that compares the runtime of different matrix multiplication algorithms.```
+   - **Sample prompt:** ```Write a python script that compares the runtime of different matrix multiplication algorithms.```
    - **Test Case**:
      - **Input**: Two randomly generated matrices of size 1000x1000
      - **Expected Output**: Resultant matrix
