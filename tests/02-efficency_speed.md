@@ -43,18 +43,52 @@ Efficiency and speed tests aim to evaluate how well a system performs in terms o
 
 2. **Example: Database Query Performance Test (SQL)**
    - **Description**: Evaluate the execution time of a complex SQL query on a large dataset.
+   - **Sample Prompt:** ```Write a python script that evaluates the execution time of a complex SQL query on a large dataset.```
    - **Test Case**:
      - **Input**: SQL query for retrieving specific information from a database
      - **Expected Output**: Query result set
 
    - **Test Code**:
 
-   ```sql
-   -- Sample SQL Query
-   SELECT * FROM orders WHERE order_date >= '2023-01-01';
+   ```python
+   import sqlite3
+   import time
+   
+   # Connect to the database
+   conn = sqlite3.connect('your_database.db')  # Replace with your database file
+   
+   # Create a cursor object to execute queries
+   cursor = conn.cursor()
+   
+   # Define the complex SQL query
+   complex_query = '''
+   SELECT column1, column2, ...
+   FROM your_table
+   WHERE condition1 AND condition2
+   GROUP BY column1
+   HAVING condition3
+   ORDER BY column2 DESC;
+   '''
+   
+   # Measure execution time
+   start_time = time.time()
+   
+   # Execute the query
+   cursor.execute(complex_query)
+   
+   # Fetch results if needed (optional)
+   # results = cursor.fetchall()
+   
+   # Calculate execution time
+   execution_time = time.time() - start_time
+   
+   # Close the connection
+   conn.close()
+   
+   # Print the execution time
+   print(f"Execution time: {execution_time:.4f} seconds")
    ```
-
-   Measure the execution time using a database management system or query profiling tool.
+   Note that the script as currently written uses SQLite3 and requires a pre-populated database. Adjust your propmt to the type of database you use.
 
 3. **Example: Matrix Multiplication Performance Test (C++)**
    - **Description**: Compare the runtime of different matrix multiplication algorithms.
