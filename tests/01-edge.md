@@ -69,7 +69,7 @@ Edge tests evaluate how well a system handles extreme or uncommon scenarios. Her
 3. **Example: Overflow in Integer Arithmetic (Python)**
 
    - **Description**: Test how the system handles situations where integer values exceed their maximum representable value.
-
+   - **Sample Prompt:** ```Write a python script that finds where integer values overflow the system's maximum representable value.```
    - **Test Case**:
      - **Input**: Perform arithmetic operations leading to integer overflow
      - **Expected Output**: Error or appropriate response indicating integer overflow
