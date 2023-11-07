@@ -62,7 +62,7 @@ Edge tests evaluate how well a system handles extreme or uncommon scenarios. Her
    
    # Print the result
    print(f"The result of the division is: {result}")
-```
+   ```
 
    This test intentionally attempts to perform a division by zero operation and expects it to raise a `ZeroDivisionError` exception.
 
@@ -77,14 +77,21 @@ Edge tests evaluate how well a system handles extreme or uncommon scenarios. Her
    - **Edge Test Code (Python)**:
 
    ```python
-   def edge_test_integer_overflow():
-       max_int = 2**31 - 1  # Maximum representable integer value in a 32-bit system
-       try:
-           result = max_int + 1  # Attempting to exceed the maximum value
-       except OverflowError as e:
-           assert str(e) == "overflow in int addition"
+   import sys
+   
+   def find_max_integer():
+       n = 1
+       while True:
+           try:
+               result = n * n  # Attempt to square the number
+               n += 1
+           except OverflowError:
+               return n - 1
+   
+   max_integer = find_max_integer()
+   print(f"The maximum representable integer on this system is: {max_integer}")
    ```
 
-   This test attempts to exceed the maximum representable value for integers and expects it to raise an `OverflowError` exception.
+   This test finds the maximum representable value for integers by generating an `OverflowError` exception then prints that value
 
 These examples demonstrate edge tests for handling extreme or uncommon scenarios, such as very large inputs, division by zero, and integer overflow. The test code provided helps verify that the system responds appropriately in these edge cases.
