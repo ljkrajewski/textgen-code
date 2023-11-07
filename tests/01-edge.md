@@ -1,4 +1,4 @@
-## Integration Tests for Correctness
+## Edge Tests for Correctness
 Edge tests evaluate how well a system handles extreme or uncommon scenarios. Here are three specific examples of edge tests for correctness, along with sample code or instructions:
 
 1. **Example: Handling Large Inputs (Python)**
