@@ -43,6 +43,7 @@ Resource usage tests are important for evaluating how efficiently a system utili
 
 2. **Example: Memory Usage Test (Python)**
    - **Description**: Measure the memory usage of a specific function or process.
+   - **Sample Prompt:** ```Write a python script to measure the memory usage of a specific user-selected process```
    - **Test Case**:
      - **Input**: Python function that uses a significant amount of memory
      - **Expected Output**: Memory usage in megabytes (MB)
@@ -50,19 +51,31 @@ Resource usage tests are important for evaluating how efficiently a system utili
    - **Test Code**:
 
    ```python
-   import sys
-
-   def memory_intensive_task():
-       large_data = [0] * (10**6)  # Allocate a large list
-
-   def resource_usage_test():
-       before_memory = psutil.virtual_memory().used
-       memory_intensive_task()
-       after_memory = psutil.virtual_memory().used
-
-       memory_usage = (after_memory - before_memory) / (1024 * 1024)  # Convert to MB
-
-       print(f"Memory Usage: {memory_usage} MB")
+   import psutil
+   
+   def get_process_pid(process_name):
+       for proc in psutil.process_iter(['pid', 'name']):
+           if process_name.lower() in proc.info['name'].lower():
+               return proc.info['pid']
+       return None
+   
+   def get_memory_usage(pid):
+       process = psutil.Process(pid)
+       memory_info = process.memory_info()
+       return memory_info.rss / (1024 * 1024)  # Convert to MB
+   
+   # Prompt the user to enter the process name
+   process_name = input("Enter the name of the process to monitor: ")
+   
+   # Get the PID of the selected process
+   pid = get_process_pid(process_name)
+   
+   if pid is not None:
+       # Get the memory usage of the process
+       memory_usage = get_memory_usage(pid)
+       print(f"Memory usage of process '{process_name}': {memory_usage:.2f} MB")
+   else:
+       print(f"No process with name '{process_name}' found.")
    ```
 
    This code uses the `psutil` library to measure memory usage.
