@@ -1,38 +1,44 @@
+## Efficiency and Speed Tests for Performance
 Efficiency and speed tests aim to evaluate how well a system performs in terms of execution time and resource utilization. Here are three specific examples of efficiency and speed tests, along with sample code:
 
 1. **Example: Sorting Algorithm Performance Test (Python)**
    - **Description**: Compare the runtime of different sorting algorithms for a large dataset.
+   - **Sample Prompt:** ```Write a python script that will sort a list of random numbers of a user-defined length and time how long it takes.  For exceedingly large lists, it does not need to print the list.```
    - **Test Case**:
-     - **Input**: List of 100,000 random integers
-     - **Expected Output**: Sorted list
+     - **Input**: 100,000 (or any large integer)
+     - **Expected Output**: Time to sort list
 
    - **Test Code**:
 
    ```python
    import random
    import time
-
-   def bubble_sort(arr):
-       # Bubble sort implementation
-       pass
-
-   def quick_sort(arr):
-       # Quick sort implementation
-       pass
-
-   def efficiency_speed_test():
-       random_list = [random.randint(1, 1000000) for _ in range(100000)]
-       
+   
+   def generate_random_list(length):
+       random_list = [random.randint(1, 100) for _ in range(length)]
+       return random_list
+   
+   def sort_list(random_list):
        start_time = time.time()
-       bubble_sort(random_list.copy())
-       bubble_sort_time = time.time() - start_time
-
-       start_time = time.time()
-       quick_sort(random_list.copy())
-       quick_sort_time = time.time() - start_time
-
-       print(f"Bubble Sort Time: {bubble_sort_time} seconds")
-       print(f"Quick Sort Time: {quick_sort_time} seconds")
+       sorted_list = sorted(random_list)
+       end_time = time.time()
+       return sorted_list, end_time - start_time
+   
+   # Get user input for list length
+   length = int(input("Enter the length of the random list: "))
+   
+   # Generate a random list
+   random_list = generate_random_list(length)
+   
+   # Sort the list and measure time
+   sorted_list, sorting_time = sort_list(random_list)
+   
+   # Print the original and sorted lists if the length is below a threshold
+   if length <= 100:
+       print(f"Original random list: {random_list}")
+       print(f"Sorted list: {sorted_list}")
+   
+   print(f"Time taken to sort: {sorting_time:.6f} seconds")
    ```
 
 2. **Example: Database Query Performance Test (SQL)**
