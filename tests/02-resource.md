@@ -82,23 +82,33 @@ Resource usage tests are important for evaluating how efficiently a system utili
 
 3. **Example: Disk Space Usage Test (Shell Script)**
    - **Description**: Evaluate the amount of free disk space on a specific drive or partition.
+   - **Sample Promt**: ```Write a python script to measure the available free space on a specific partition.```
    - **Test Case**:
      - **Input**: Drive or partition path
      - **Expected Output**: Free space in gigabytes (GB)
 
-   - **Test Code (Shell Script)**:
+   - **Test Code**:
 
-   ```bash
-   #!/bin/bash
-
-   drive_path="/dev/sda1"  # Example drive path
-
-   function resource_usage_test() {
-       free_space=$(df -h $drive_path | awk 'NR==2 {print $4}')
-       echo "Free Disk Space: $free_space"
-   }
-
-   resource_usage_test
+   ```python
+   import psutil
+   
+   def get_partition_free_space(partition):
+       try:
+           partition_info = psutil.disk_usage(partition)
+           return partition_info.free / (1024 * 1024 * 1024)  # Convert to GB
+       except Exception as e:
+           return str(e)
+   
+   # Define the partition you want to check (e.g., 'C:\\' on Windows or '/' on Linux)
+   partition = '/'  # Replace with your specific partition
+   
+   # Get the available free space on the partition
+   free_space = get_partition_free_space(partition)
+   
+   if isinstance(free_space, float):
+       print(f"Available free space on partition '{partition}': {free_space:.2f} GB")
+   else:
+       print(f"Error: {free_space}")
    ```
 
    Save the above code in a `.sh` file and execute it in a Linux environment.
