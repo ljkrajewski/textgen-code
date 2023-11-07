@@ -3,33 +3,43 @@ Resource usage tests are important for evaluating how efficiently a system utili
 
 1. **Example: CPU Usage Test (Python)**
    - **Description**: Measure the CPU usage of a specific function or process.
+   - **Sample Prompt:** ```Write a python script to measure the CPU usage of a computationally intensive task.```
    - **Test Case**:
-     - **Input**: Python function that performs a computationally intensive task
      - **Expected Output**: CPU usage percentage
 
    - **Test Code**:
 
    ```python
-   import time
    import psutil
-
-   def cpu_intensive_task():
-       for _ in range(1000000):
-           _ = 2 ** 10
-
-   def resource_usage_test():
-       start_time = time.time()
-       cpu_intensive_task()
-       end_time = time.time()
-
-       elapsed_time = end_time - start_time
-       cpu_usage = psutil.cpu_percent(interval=1)
-
-       print(f"Elapsed Time: {elapsed_time} seconds")
-       print(f"CPU Usage: {cpu_usage}%")
+   import time
+   
+   # Define a computationally intensive task (in this case, calculating factorials)
+   def factorial(n):
+       if n == 0:
+           return 1
+       else:
+           return n * factorial(n-1)
+   
+   # Get the initial CPU usage
+   initial_cpu_usage = psutil.cpu_percent()
+   
+   # Start the task
+   n = 500  # Adjust the complexity of the task as needed
+   result = factorial(n)
+   
+   # Get the final CPU usage
+   final_cpu_usage = psutil.cpu_percent()
+   
+   # Calculate the CPU usage during the task
+   cpu_usage_during_task = final_cpu_usage - initial_cpu_usage
+   
+   # Print the results
+   print(f"Result: {result}")
+   print(f"Initial CPU Usage: {initial_cpu_usage}%")
+   print(f"Final CPU Usage: {final_cpu_usage}%")
+   print(f"CPU Usage During Task: {cpu_usage_during_task}%")
    ```
-
-   This code uses the `psutil` library in Python to measure CPU usage.
+   This code uses the `psutil` library in Python to measure CPU usage. Be sure to install the `psutil` library before attempting to run (```pip install psutil```).
 
 2. **Example: Memory Usage Test (Python)**
    - **Description**: Measure the memory usage of a specific function or process.
