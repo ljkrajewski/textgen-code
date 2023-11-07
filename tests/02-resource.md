@@ -111,6 +111,4 @@ Resource usage tests are important for evaluating how efficiently a system utili
        print(f"Error: {free_space}")
    ```
 
-   Save the above code in a `.sh` file and execute it in a Linux environment.
-
 In these examples, resource usage tests focus on measuring specific aspects like CPU usage, memory usage, or disk space. The code provides a means to perform these tests and obtain relevant resource usage information.
