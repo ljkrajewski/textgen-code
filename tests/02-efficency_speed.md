@@ -97,7 +97,7 @@ Efficiency and speed tests aim to evaluate how well a system performs in terms o
      - **Input**: Two randomly generated matrices of size 1000x1000
      - **Expected Output**: Resultant matrix
 
-   - **Test Code** (C++):
+   - **Test Code**:
 
    ```python
    import numpy as np
