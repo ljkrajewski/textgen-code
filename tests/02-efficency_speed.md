@@ -92,34 +92,65 @@ Efficiency and speed tests aim to evaluate how well a system performs in terms o
 
 3. **Example: Matrix Multiplication Performance Test (C++)**
    - **Description**: Compare the runtime of different matrix multiplication algorithms.
+   - **Sample prompt**" ```Write a python script that compares the runtime of different matrix multiplication algorithms.```
    - **Test Case**:
      - **Input**: Two randomly generated matrices of size 1000x1000
      - **Expected Output**: Resultant matrix
 
    - **Test Code** (C++):
 
-   ```cpp
-   #include <iostream>
-   #include <vector>
-   #include <chrono>
-
-   void matrix_multiplication(const std::vector<std::vector<int>>& A, const std::vector<std::vector<int>>& B, std::vector<std::vector<int>>& result) {
-       // Matrix multiplication implementation
-   }
-
-   void efficiency_speed_test() {
-       const int N = 1000;
-       std::vector<std::vector<int>> A(N, std::vector<int>(N, 1));
-       std::vector<std::vector<int>> B(N, std::vector<int>(N, 2));
-       std::vector<std::vector<int>> result(N, std::vector<int>(N, 0));
-
-       auto start_time = std::chrono::high_resolution_clock::now();
-       matrix_multiplication(A, B, result);
-       auto end_time = std::chrono::high_resolution_clock::now();
-       auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count();
-
-       std::cout << "Matrix Multiplication Time: " << duration << " milliseconds" << std::endl;
-   }
+   ```python
+   import numpy as np
+   import time
+   import numba
+   
+   # Define matrix dimensions
+   n = 1000
+   m = 1000
+   p = 1000
+   
+   # Generate random matrices A and B
+   A = np.random.rand(n, m)
+   B = np.random.rand(m, p)
+   
+   # Naive Matrix Multiplication
+   def naive_matrix_multiplication(A, B):
+       C = np.zeros((A.shape[0], B.shape[1]))
+       for i in range(A.shape[0]):
+           for j in range(B.shape[1]):
+               for k in range(B.shape[0]):
+                   C[i][j] += A[i][k] * B[k][j]
+       return C
+   
+   # Numpy Matrix Multiplication
+   def numpy_matrix_multiplication(A, B):
+       return np.dot(A, B)
+   
+   # Numba-accelerated Matrix Multiplication
+   @numba.jit
+   def numba_matrix_multiplication(A, B):
+       return np.dot(A, B)
+   
+   # Measure execution time for each algorithm
+   start_time = time.time()
+   result_naive = naive_matrix_multiplication(A, B)
+   naive_time = time.time() - start_time
+   
+   start_time = time.time()
+   result_numpy = numpy_matrix_multiplication(A, B)
+   numpy_time = time.time() - start_time
+   
+   start_time = time.time()
+   result_numba = numba_matrix_multiplication(A, B)
+   numba_time = time.time() - start_time
+   
+   # Verify that the results are equivalent
+   assert np.allclose(result_naive, result_numpy)
+   assert np.allclose(result_naive, result_numba)
+   
+   print(f"Naive Multiplication Time: {naive_time:.4f} seconds")
+   print(f"Numpy Multiplication Time: {numpy_time:.4f} seconds")
+   print(f"Numba Multiplication Time: {numba_time:.4f} seconds")
    ```
 
 In these examples, efficiency and speed tests measure the performance of different algorithms or operations. They involve generating inputs (e.g., random data) and timing the execution using suitable functions or tools. The results will provide insights into the relative performance of different approaches.
