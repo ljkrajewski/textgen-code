@@ -48,7 +48,7 @@ Efficiency and speed tests aim to evaluate how well a system performs in terms o
      - **Input**: SQL query for retrieving specific information from a database
      - **Expected Output**: Query result set
 
-   - **Test Code**:
+   - **Test Code**:  Please note, this code has _not_ been tested. Use at your own risk.
 
    ```python
    import sqlite3
