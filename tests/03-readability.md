@@ -26,9 +26,9 @@ Code readability tests focus on evaluating how well-written and understandable t
 2. **Example: Meaningful Variable and Function Names (Python)**
 
    - **Description**: Evaluate if variable and function names are descriptive and convey their purpose.
-
-   - **Test Code (Python)**:
-
+   - **Sample Prompt**: There is no sample prompt for this example. Generated code will need to be manually reviewed to ensure meaninful variable names.
+   - **Test Code (Python)**:  
+  This code is an example of meaningful and meaningless variable names. It is _not_ working code.
    ```python
    def code_readability_test_meaningful_names():
        def a_function_with_non_descriptive_name():
@@ -50,9 +50,9 @@ Code readability tests focus on evaluating how well-written and understandable t
 3. **Example: Proper Comments and Documentation (Python)**
 
    - **Description**: Assess if the code includes appropriate comments and documentation to explain complex or non-intuitive sections.
-
-   - **Test Code (Python)**:
-
+   - **Sample Prompt**: ```Write a python script to ______. Be sure to include appropriate comments to explain complex or non-intuitive sections.``` Any generated code will need to be manually reviewed to ensure proper commenting.
+   - **Test Code (Python)**:  
+   This code is an example of well-commented code. It is _not_ working code.
    ```python
    def code_readability_test_comments_and_documentation():
        # This is a poorly documented function.
