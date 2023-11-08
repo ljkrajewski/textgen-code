@@ -1,11 +1,12 @@
+## Code Readability Tests for Code Quality and Style
 Code readability tests focus on evaluating how well-written and understandable the code is. Here are three specific examples of code readability tests for code quality and style, along with sample code or instructions:
 
 1. **Example: Consistent Indentation (Python)**
 
-   - **Description**: Ensure that the code uses consistent indentation for blocks of code.
-
-   - **Test Code (Python)**:
-
+   - **Description**: Ensure that the code uses consistent indentation for blocks of code.  
+   - **Sample Prompt**: There is no sample prompt for this example. Generated code will need to be manually reviewed to ensure proper indentation.
+   - **Test Code (Python)**:  
+   This code is an example of correct and incorrect code indentaion. It is _not_ working code.
    ```python
    def code_readability_test_indentation():
        def function_with_inconsistent_indentation():
