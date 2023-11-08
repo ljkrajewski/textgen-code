@@ -4,9 +4,9 @@ Code structure tests assess how well-organized and modular the code is. Here are
 1. **Example: Modularization and Function Decomposition (Python)**
 
    - **Description**: Evaluate if the code is properly modularized with well-defined functions that perform specific tasks.
-
-   - **Test Code (Python)**:
-
+   - **Sample Prompt**: ```Write a python script to _______. Be sure the code is modularized and that functions are well-defined and perform specific tasks.```
+   - **Test Code (Python)**:  
+   This code is an example of correct and incorrect code indentaion. It is _not_ meant to be a working code example.
    ```python
    def code_structure_test_modularization():
        def task_1():
@@ -32,7 +32,7 @@ Code structure tests assess how well-organized and modular the code is. Here are
 2. **Example: Class and Object Structure (Python)**
 
    - **Description**: Assess if the code utilizes classes and objects effectively to organize data and behavior.
-
+   - **Sample Prompt**: There is no sample prompt for this example. Code will have to be manually reviewed to ensure this criteria is met.
    - **Test Code (Python)**:
 
    ```python
@@ -57,7 +57,7 @@ Code structure tests assess how well-organized and modular the code is. Here are
 3. **Example: Proper Use of Control Structures (Python)**
 
    - **Description**: Evaluate if control structures (e.g., loops, conditionals) are used appropriately and effectively.
-
+   - **Sample Prompt**: There is no sample prompt for this example. Code will have to be manually reviewed to ensure this criteria is met.
    - **Test Code (Python)**:
 
    ```python
