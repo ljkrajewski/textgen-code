@@ -132,44 +132,31 @@ Algorithms and data structures tests assess the ability to apply fundamental alg
 3. **Example: Depth-First Search (DFS) on a Graph (Python)**
 
    - **Description**: Implement a depth-first search algorithm to traverse a graph and find a specific node.
-   - **Sample prompt**: 
+   - **Sample prompt**: ```Write a python scrupt that creates and prints a graph, then finds a user-specified node on that graph.```
    - **Test Code (Python)**:
 
    ```python
-   def dfs(graph, start, target, visited=set()):
-       visited.add(start)
-
-       if start == target:
-           return True
-
-       for neighbor in graph[start]:
-           if neighbor not in visited:
-               if dfs(graph, neighbor, target, visited):
-                   return True
-
-       return False
-
-   def algorithms_test_dfs():
-       graph = {
-           'A': ['B', 'C'],
-           'B': ['D', 'E'],
-           'C': ['F'],
-           'D': [],
-           'E': ['G'],
-           'F': ['H'],
-           'G': [],
-           'H': []
-       }
-
-       result_1 = dfs(graph, 'A', 'G')
-       result_2 = dfs(graph, 'A', 'H')
-       result_3 = dfs(graph, 'A', 'X')  # X is not in the graph
-
-       assert result_1 is True
-       assert result_2 is True
-       assert result_3 is False
+   import networkx as nx
+   import matplotlib.pyplot as plt
+   import random
+   
+   # Create a random graph (you can replace this with your own graph creation logic)
+   G = nx.erdos_renyi_graph(10, 0.3)
+   
+   # Draw the graph
+   pos = nx.spring_layout(G)
+   nx.draw(G, pos, with_labels=True, node_color='skyblue', node_size=800, font_size=12, font_weight='bold', font_color='black')
+   plt.title("Random Graph")
+   plt.show()
+   
+   # Prompt user for a node to find
+   target_node = int(input("Enter the node to find: "))
+   
+   # Check if the node exists in the graph
+   if target_node in G.nodes():
+       print(f"The node {target_node} exists in the graph.")
+   else:
+       print(f"The node {target_node} does not exist in the graph.")
    ```
-
-   In this example, we define a graph and implement a depth-first search (DFS) algorithm to search for a target node. The `algorithms_test_dfs` function tests this algorithm with different target nodes.
 
 These examples demonstrate tests for applying algorithms and data structures, including binary search, linked list operations, and depth-first search on a graph. The test code provided verifies the correctness of the implemented functions.
