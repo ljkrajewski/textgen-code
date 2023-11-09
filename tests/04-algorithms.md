@@ -1,9 +1,10 @@
+## Algorithms and Data Structures Tests
 Algorithms and data structures tests assess the ability to apply fundamental algorithms and data structures to solve various types of problems. Here are three specific examples for generalization, along with sample code or instructions:
 
 1. **Example: Binary Search (Python)**
 
    - **Description**: Write a function that performs a binary search to find the index of a target element in a sorted list.
-
+   - **Sample prompt**: 
    - **Test Code (Python)**:
 
    ```python
@@ -36,7 +37,7 @@ Algorithms and data structures tests assess the ability to apply fundamental alg
 2. **Example: Linked List Operations (Python)**
 
    - **Description**: Implement basic operations on a singly linked list, such as insertion, deletion, and traversal.
-
+   - **Sample prompt**: 
    - **Test Code (Python)**:
 
    ```python
@@ -80,7 +81,7 @@ Algorithms and data structures tests assess the ability to apply fundamental alg
 3. **Example: Depth-First Search (DFS) on a Graph (Python)**
 
    - **Description**: Implement a depth-first search algorithm to traverse a graph and find a specific node.
-
+   - **Sample prompt**: 
    - **Test Code (Python)**:
 
    ```python
