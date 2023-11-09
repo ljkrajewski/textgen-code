@@ -50,43 +50,81 @@ Algorithms and data structures tests assess the ability to apply fundamental alg
 2. **Example: Linked List Operations (Python)**
 
    - **Description**: Implement basic operations on a singly linked list, such as insertion, deletion, and traversal.
-   - **Sample prompt**: 
+   - **Sample prompt**: ```Write a python script that creates a random link list, then gives the user to insert an element into the list, delete an element from the list, or print the list. Have the script loop until the user breaks the loop.```
    - **Test Code (Python)**:
 
    ```python
    class ListNode:
-       def __init__(self, val=0, next=None):
-           self.val = val
-           self.next = next
-
-   def insert_node(head, val):
-       new_node = ListNode(val)
-       new_node.next = head
-       return new_node
-
-   def delete_node(head, val):
-       if head and head.val == val:
-           return head.next
-
-       prev, current = None, head
-
-       while current:
-           if current.val == val:
-               prev.next = current.next
-               break
-           prev, current = current, current.next
-
-       return head
-
-   def algorithms_test_linked_list():
-       linked_list = None
-       linked_list = insert_node(linked_list, 5)
-       linked_list = insert_node(linked_list, 7)
-       linked_list = insert_node(linked_list, 9)
-       linked_list = delete_node(linked_list, 7)
-
-       assert linked_list.val == 9
-       assert linked_list.next.val == 5
+       def __init__(self, value):
+           self.value = value
+           self.next = None
+   
+   class LinkedList:
+       def __init__(self):
+           self.head = None
+   
+       def insert(self, value):
+           new_node = ListNode(value)
+           if self.head is None:
+               self.head = new_node
+           else:
+               current = self.head
+               while current.next is not None:
+                   current = current.next
+               current.next = new_node
+   
+       def delete(self, value):
+           if self.head is None:
+               return
+   
+           if self.head.value == value:
+               self.head = self.head.next
+               return
+   
+           current = self.head
+           while current.next is not None:
+               if current.next.value == value:
+                   current.next = current.next.next
+                   return
+               current = current.next
+   
+       def print_list(self):
+           current = self.head
+           while current is not None:
+               print(current.value, end=" -> ")
+               current = current.next
+           print("None")
+   
+   # Create a random linked list
+   import random
+   
+   random_list = [random.randint(1, 100) for _ in range(5)]  # Change the range and list size as needed
+   
+   linked_list = LinkedList()
+   for value in random_list:
+       linked_list.insert(value)
+   
+   # User interaction loop
+   while True:
+       print("\nOptions:")
+       print("1. Insert an element")
+       print("2. Delete an element")
+       print("3. Print the list")
+       print("4. Exit")
+       choice = input("Enter your choice: ")
+   
+       if choice == '1':
+           value = int(input("Enter the value to insert: "))
+           linked_list.insert(value)
+       elif choice == '2':
+           value = int(input("Enter the value to delete: "))
+           linked_list.delete(value)
+       elif choice == '3':
+           linked_list.print_list()
+       elif choice == '4':
+           break
+       else:
+           print("Invalid choice. Please try again.")
    ```
 
    In this example, we define a simple linked list structure and implement operations like insertion and deletion of nodes. The `algorithms_test_linked_list` function tests these operations.
