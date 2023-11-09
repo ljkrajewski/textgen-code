@@ -65,22 +65,31 @@ General programming tests assess the ability to write code that solves a variety
 3. **Example: Calculating Fibonacci Numbers (Python)**
 
    - **Description**: Write a function that calculates the n-th Fibonacci number.
-
+   - **Sample Prompt**:  ```Write a python script that fcalculates the n-th Fibonacci number where n is provided by the user.```
    - **Test Code (Python)**:
 
    ```python
    def fibonacci(n):
-       if n <= 1:
-           return n
+       if n <= 0:
+           return "Please enter a positive integer"
+       elif n == 1:
+           return 0
+       elif n == 2:
+           return 1
        else:
-           return fibonacci(n-1) + fibonacci(n-2)
-
-   def general_programming_test_fibonacci():
-       result_1 = fibonacci(5)
-       result_2 = fibonacci(10)
-
-       assert result_1 == 5
-       assert result_2 == 55
+           fib = [0, 1]
+           for i in range(2, n):
+               fib.append(fib[-1] + fib[-2])
+           return fib[-1]
+   
+   # Get user input
+   n = int(input("Enter a positive integer (n): "))
+   
+   # Calculate the n-th Fibonacci number
+   result = fibonacci(n)
+   
+   # Print the result
+   print(f"The {n}-th Fibonacci number is: {result}")
    ```
 
    In this example, the `fibonacci` function recursively calculates the n-th Fibonacci number. The `general_programming_test_fibonacci` function tests this function with two different values of n.
