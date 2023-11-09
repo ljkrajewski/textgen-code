@@ -41,24 +41,25 @@ General programming tests assess the ability to write code that solves a variety
 2. **Example: Reversing a String (Python)**
 
    - **Description**: Write a function that reverses a given string.
-
+   - **Test Case**:
+     - **Input**: "This is a test string."
+     - **Expected Output**: ".gnirts tset a si sihT"
+   - **Sample Prompt**:  ```Write a python script that reverses a user-defined string.```
    - **Test Code (Python)**:
 
    ```python
-   def reverse_string(input_string):
-       return input_string[::-1]
-
-   def general_programming_test_reverse_string():
-       input_1 = "hello"
-       input_2 = "world"
-
-       result_1 = reverse_string(input_1)
-       result_2 = reverse_string(input_2)
-
-       assert result_1 == "olleh"
-       assert result_2 == "dlrow"
+   def reverse_string(user_input):
+       return user_input[::-1]
+   
+   # Get user input
+   user_input = input("Enter a string: ")
+   
+   # Reverse the string
+   reversed_string = reverse_string(user_input)
+   
+   # Print the reversed string
+   print(f"The reversed string is: {reversed_string}")
    ```
-
    In this example, the `reverse_string` function takes an input string and uses slicing (`[::-1]`) to reverse it. The `general_programming_test_reverse_string` function tests this function with two different input strings.
 
 3. **Example: Calculating Fibonacci Numbers (Python)**
