@@ -7,10 +7,10 @@ Key point: What goes into "the machine" will determine what comes out.
 What can happen if a machine is "incorrectly taught."
 
 ### What Is An LLM, and Where Do They Come From?
-The center of most AIs used today is the large language model (LLM). 
+The center of most AIs used today is the large language model (LLM). This requires an understanding of what LLMs are and how/where they are developed.
 - [What are Large Language Models](https://machinelearningmastery.com/what-are-large-language-models/)  
 A high-level description of large language models (LLMs) and how they work.
-- [Google "We Have No Moat, And Neither Does OpenAI"](https://www.semianalysis.com/p/google-we-have-no-moat-and-neither)  
+- [Google: "We Have No Moat, And Neither Does OpenAI"](https://www.semianalysis.com/p/google-we-have-no-moat-and-neither)  
 A leaked internal Google document written by an engineer about the current sources of AI development. He hypothesises that the open source community, not Google, OpenAI, or other large entities, will be/are the spearhead in AI.
 
 ## Testing Coding LLMs
