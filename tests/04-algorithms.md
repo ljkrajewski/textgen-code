@@ -4,35 +4,48 @@ Algorithms and data structures tests assess the ability to apply fundamental alg
 1. **Example: Binary Search (Python)**
 
    - **Description**: Write a function that performs a binary search to find the index of a target element in a sorted list.
-   - **Sample prompt**: 
+   - **Sample prompt**: ```Write a python script that prints a randomly generated sorted list and performs a binary search to find the index of a user-defined target element in that list.```
    - **Test Code (Python)**:
 
    ```python
-   def binary_search(arr, target):
-       left, right = 0, len(arr) - 1
-
+   import random
+   
+   def binary_search(sorted_list, target):
+       left = 0
+       right = len(sorted_list) - 1
+   
        while left <= right:
            mid = (left + right) // 2
-           if arr[mid] == target:
+           mid_element = sorted_list[mid]
+   
+           if mid_element == target:
                return mid
-           elif arr[mid] < target:
+           elif mid_element < target:
                left = mid + 1
            else:
                right = mid - 1
-
+   
        return -1
-
-   def algorithms_test_binary_search():
-       numbers = [1, 3, 5, 7, 9, 11, 13, 15]
-
-       result_1 = binary_search(numbers, 7)
-       result_2 = binary_search(numbers, 10)
-
-       assert result_1 == 3
-       assert result_2 == -1
+   
+   # Generate a randomly sorted list
+   random_sorted_list = sorted([random.randint(1, 100) for _ in range(10)])  # Change the range and list size as needed
+   
+   # Print the generated list
+   print(f"Generated sorted list: {random_sorted_list}")
+   
+   # Prompt the user to enter a target element
+   target = int(input("Enter the target element to search for: "))
+   
+   # Perform binary search
+   index = binary_search(random_sorted_list, target)
+   
+   if index != -1:
+       print(f"The target element {target} is at index {index}.")
+   else:
+       print(f"The target element {target} was not found in the list.")
    ```
 
-   In this example, the `binary_search` function performs a binary search on a sorted list to find the index of a target element. The `algorithms_test_binary_search` function tests this function with different target values.
+   In this example, the `binary_search` function performs a binary search on a sorted list to find the index of a target element.
 
 2. **Example: Linked List Operations (Python)**
 
