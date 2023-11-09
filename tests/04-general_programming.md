@@ -4,26 +4,36 @@ General programming tests assess the ability to write code that solves a variety
 1. **Example: Finding the Maximum Element in a List (Python)**
 
    - **Description**: Write a function that finds the maximum element in a list of numbers.
-
+   - **Sample Prompt**:  ```Write a python script that finds the maximum element in a random-sized list of random numbers.```
    - **Test Code (Python)**:
 
    ```python
-   def find_max(numbers):
-       max_number = numbers[0]
-       for num in numbers:
-           if num > max_number:
-               max_number = num
-       return max_number
-
-   def general_programming_test_find_max():
-       numbers_1 = [1, 3, 5, 7, 9]
-       numbers_2 = [99, 22, 34, 11, 76, 100]
-
-       result_1 = find_max(numbers_1)
-       result_2 = find_max(numbers_2)
-
-       assert result_1 == 9
-       assert result_2 == 100
+   import random
+   
+   def find_max_in_random_list():
+       # Generate a random-sized list of random numbers
+       list_size = random.randint(1, 20)  # Change the range as needed
+       random_list = [random.randint(1, 100) for _ in range(list_size)]
+   
+       if not random_list:
+           return None
+   
+       max_num = random_list[0]
+       for num in random_list:
+           if num > max_num:
+               max_num = num
+   
+       return random_list, max_num
+   
+   # Find the maximum element in a random list
+   result = find_max_in_random_list()
+   
+   if result is not None:
+       random_list, max_element = result
+       print(f"Random List: {random_list}")
+       print(f"The maximum element in the list is: {max_element}")
+   else:
+       print("The generated list is empty.")
    ```
 
    In this example, the `find_max` function takes a list of numbers and iterates through them to find the maximum element. The `general_programming_test_find_max` function tests this function with two different lists.
