@@ -1,5 +1,20 @@
 # Testing AI Language Models for Code Creation
-Testing AI language models (LLMs) designed to write code involves evaluating their performance on a range of tasks that assess their ability to generate correct and efficient code. Here is a list of tests to consider:
+## A Very Brief Primer On AI
+### The Stakes
+- [VP Kamala Harris Holds Roundtable On Artificial Intelligence [YouTube]](https://www.youtube.com/watch?v=S5MW2aRc4ac&t=183s)  
+Key point: What goes into "the machine" will determine what comes out.
+- [Why Hal 9000 Went insane [YouTube]](https://www.youtube.com/watch?v=dsDI4SxFFck&t=122s)  
+What can happen if a machine is "incorrectly taught."
+
+### What Is An LLM, and Where Do They Come From?
+The center of most AIs used today is the large language model (LLM). 
+- [What are Large Language Models](https://machinelearningmastery.com/what-are-large-language-models/)  
+A high-level description of large language models (LLMs) and how they work.
+- [Google "We Have No Moat, And Neither Does OpenAI"](https://www.semianalysis.com/p/google-we-have-no-moat-and-neither)  
+A leaked internal Google document written by an engineer about the current sources of AI development. He hypothesises that the open source community, not Google, OpenAI, or other large entities, will be/are the spearhead in AI.
+
+## Testing Coding LLMs
+Testing AI LLMs designed to write code involves evaluating their performance on a range of tasks that assess their ability to generate correct and efficient code. Here is a list of tests to consider:
 
 1. **Correctness Tests**:
    - [**Unit Tests**](01-unit.md): Evaluate the LLM's ability to generate code that produces correct outputs for specific inputs.
