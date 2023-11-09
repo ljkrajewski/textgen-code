@@ -127,7 +127,7 @@ Algorithms and data structures tests assess the ability to apply fundamental alg
            print("Invalid choice. Please try again.")
    ```
 
-   In this example, we define a simple linked list structure and implement operations like insertion and deletion of nodes. The `algorithms_test_linked_list` function tests these operations.
+   In this example, we define a simple linked list structure and implement operations like insertion and deletion of nodes.
 
 3. **Example: Depth-First Search (DFS) on a Graph (Python)**
 
