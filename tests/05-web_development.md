@@ -1,9 +1,10 @@
+## Web Development Tests
 Domain-specific tests in web development focus on evaluating specific functionalities or features of a web application. Here are three specific examples of domain-specific tests for web development, along with sample code or instructions:
 
 1. **Example: User Registration and Login (Python with Flask and Selenium)**
 
    - **Description**: Automate testing of user registration and login functionality in a web application using Selenium.
-
+   - **Sample prompt**: ```Write a script using Selenium that tests the user registration and login functionality of a website.```
    - **Test Code (Python with Flask and Selenium)**:
 
    ```python
