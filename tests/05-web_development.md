@@ -9,36 +9,72 @@ Domain-specific tests in web development focus on evaluating specific functional
 
    ```python
    from selenium import webdriver
-
-   def web_dev_test_user_registration_login():
-       # Initialize Selenium WebDriver (Assuming ChromeDriver is installed)
-       driver = webdriver.Chrome()
-
-       # Navigate to the registration page
-       driver.get("http://localhost:5000/register")
-
-       # Fill in registration form
-       driver.find_element_by_id("username").send_keys("test_user")
-       driver.find_element_by_id("password").send_keys("test_password")
-       driver.find_element_by_id("confirm_password").send_keys("test_password")
-       driver.find_element_by_id("register_button").click()
-
-       # Check if registration was successful
-       assert "Welcome, test_user!" in driver.page_source
-
-       # Navigate to the login page
-       driver.get("http://localhost:5000/login")
-
-       # Fill in login form
-       driver.find_element_by_id("username").send_keys("test_user")
-       driver.find_element_by_id("password").send_keys("test_password")
-       driver.find_element_by_id("login_button").click()
-
-       # Check if login was successful
-       assert "Welcome, test_user!" in driver.page_source
-
-       # Close the browser
-       driver.quit()
+   from selenium.webdriver.common.keys import Keys
+   import time
+   
+   # Replace these with the actual URLs of the registration and login pages
+   registration_url = "https://example.com/register"
+   login_url = "https://example.com/login"
+   
+   # Replace these with the actual form field identifiers
+   username_field_id = "username"
+   password_field_id = "password"
+   confirm_password_field_id = "confirm_password"
+   register_button_id = "register_button"
+   login_button_id = "login_button"
+   
+   # Replace these with test credentials
+   test_username = "test_user"
+   test_password = "test_password"
+   
+   # Set up the WebDriver (in this example, using Chrome)
+   driver = webdriver.Chrome()
+   
+   # Test user registration
+   def test_user_registration():
+       driver.get(registration_url)
+   
+       # Fill in the registration form
+       driver.find_element_by_id(username_field_id).send_keys(test_username)
+       driver.find_element_by_id(password_field_id).send_keys(test_password)
+       driver.find_element_by_id(confirm_password_field_id).send_keys(test_password)
+   
+       # Submit the registration form
+       driver.find_element_by_id(register_button_id).click()
+   
+       # Wait for registration to complete (add more sophisticated waiting mechanisms if needed)
+       time.sleep(3)
+   
+       # Check if registration is successful (modify this based on your website's behavior)
+       assert "Registration successful" in driver.page_source
+   
+   # Test user login
+   def test_user_login():
+       driver.get(login_url)
+   
+       # Fill in the login form
+       driver.find_element_by_id(username_field_id).send_keys(test_username)
+       driver.find_element_by_id(password_field_id).send_keys(test_password)
+   
+       # Submit the login form
+       driver.find_element_by_id(login_button_id).click()
+   
+       # Wait for login to complete (add more sophisticated waiting mechanisms if needed)
+       time.sleep(3)
+   
+       # Check if login is successful (modify this based on your website's behavior)
+       assert "Welcome, " + test_username in driver.page_source
+   
+   # Execute the tests
+   try:
+       test_user_registration()
+       test_user_login()
+       print("All tests passed!")
+   except AssertionError as e:
+       print(f"Test failed: {e}")
+   
+   # Close the browser window
+   driver.quit()
    ```
 
    In this example, the test uses Selenium, a browser automation tool, to automate the process of registering a user and logging in. It interacts with the web page elements using element IDs.
