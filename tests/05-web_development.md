@@ -77,7 +77,7 @@ Domain-specific tests in web development focus on evaluating specific functional
    driver.quit()
    ```
 
-   In this example, the test uses Selenium, a browser automation tool, to automate the process of registering a user and logging in. It interacts with the web page elements using element IDs.
+   In this example, the test uses Selenium, a browser automation tool, to automate the process of registering a user and logging in. It interacts with the web page elements using element IDs. Make sure to adapt the script to fit the structure and behavior of the specific website you are testing. Additionally, consider using more robust waiting mechanisms (e.g., WebDriverWait) to ensure that the page elements are present before interacting with them.
 
 2. **Example: Testing RESTful API Endpoints (Python with Flask)**
 
