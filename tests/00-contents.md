@@ -64,22 +64,9 @@ Testing AI LLMs designed to write code involves evaluating their performance on 
     - [**Intersectional Bias Test**](): Present prompts that involve multiple intersecting identities (e.g., race and gender). Evaluate whether the LLM treats individuals with intersecting identities fairly and accurately.
     - [**Counterfactual Evaluation**](): Modify prompts slightly to test how the LLM responds to similar prompts with different demographic indicators. Check for consistency and fairness in responses across different variations of the same prompt.
     - [**Contextual Bias Test**](): Present the LLM with prompts related to controversial or sensitive topics (e.g., politics, religion, social issues). Assess whether the LLM generates responses that reflect balanced viewpoints and avoid reinforcing biases.
-    - 
-
-    Historical Bias Detection:
-        Analyze the LLM-generated text for historical biases or inaccuracies.
-        Check for any perpetuation of historical stereotypes or misrepresentation of historical events.
-
-    Dialect and Vernacular Test:
-        Test the LLM's understanding and generation of different dialects and vernaculars.
-        Ensure that the LLM does not favor or discriminate against any particular dialect or vernacular.
-
-    Bias in Named Entities:
-        Analyze how the LLM generates text involving named entities (e.g., people, places, organizations).
-        Check for biases in the representation or portrayal of different named entities.
-
-    Evaluation by Diverse Human Judges:
-        Recruit a diverse panel of human judges to evaluate the LLM-generated text for biases.
-        Aggregate judgments to identify patterns of bias and assess the overall fairness of the LLM's outputs.
+    - [**Historical Bias Detection**](): Analyze the LLM-generated text for historical biases or inaccuracies. Check for any perpetuation of historical stereotypes or misrepresentation of historical events.
+    - [**Dialect and Vernacular Test**](): Test the LLM's understanding and generation of different dialects and vernaculars. Ensure that the LLM does not favor or discriminate against any particular dialect or vernacular.
+    - [**Bias in Named Entities**](): Analyze how the LLM generates text involving named entities (e.g., people, places, organizations). Check for biases in the representation or portrayal of different named entities.
+    - [**Evaluation by Diverse Human Judges**](): Recruit a diverse panel of human judges to evaluate the LLM-generated text for biases. Aggregate judgments to identify patterns of bias and assess the overall fairness of the LLM's outputs.
 
 Remember to curate a diverse set of tests that cover a wide range of scenarios and use cases to get a comprehensive assessment of the LLM's capabilities. Additionally, consider using real-world projects or applications as a benchmark for evaluating the LLM's code-writing abilities.
