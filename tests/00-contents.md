@@ -12,6 +12,8 @@ The center of most AIs used today is the large language model (LLM). This requir
 A high-level description of large language models (LLMs) and how they work.
 - [Google: "We Have No Moat, And Neither Does OpenAI"](https://www.semianalysis.com/p/google-we-have-no-moat-and-neither)  
 A leaked internal Google document written by an engineer about the current sources of AI development. He hypothesises that the open source community, not Google, OpenAI, or other large entities, will be/are the spearhead in AI innovation.
+- [Forget Open-Source It's OAI-Source - The Moat Exists](https://www.reddit.com/r/singularity/comments/18jv9e3/perhaps_theres_a_reason_why_openai_isnt_releasing/)  
+A counter-argument to "We Have No Moat."
 
 ## Testing Coding LLMs
 Testing AI LLMs designed to write code involves evaluating their performance on a range of tasks that assess their ability to generate correct and efficient code. Here is a list of tests to consider:
