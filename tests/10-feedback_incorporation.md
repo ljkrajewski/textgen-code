@@ -7,6 +7,8 @@ Feedback incorporation is an important aspect of adversarial testing, as it help
    - **Test Code (Python with TensorFlow and CleverHans)**:
 
    ```python
+   !pip install cleverhans
+   !pip install tensorflow
    import tensorflow as tf
    from cleverhans.attacks import FastGradientMethod
    from cleverhans.utils_keras import KerasModelWrapper
