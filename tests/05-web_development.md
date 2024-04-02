@@ -82,42 +82,79 @@ Domain-specific tests in web development focus on evaluating specific functional
 2. **Example: Testing RESTful API Endpoints (Python with Flask)**
 
    - **Description**: Automate testing of RESTful API endpoints to ensure they return the expected responses.
-
-   - **Test Code (Python with Flask)**:
-
+   - **Sample prompt**: ```Write a python script to automate testing of a RESTful API. Also write the API script that would be tested.```
+   - **Test Code (Python)**:
+ 
    ```python
+   #Automated testing script
    import requests
-
-   def web_dev_test_api_endpoints():
-       url = "http://localhost:5000/api/user"
-       data = {"username": "test_user", "password": "test_password"}
-
-       # Test creating a new user
-       response = requests.post(url, json=data)
-       assert response.status_code == 201
-
-       # Test retrieving user information
-       response = requests.get(url + "/test_user")
-       assert response.status_code == 200
-       assert response.json()["username"] == "test_user"
-
-       # Test updating user information
-       updated_data = {"password": "new_password"}
-       response = requests.put(url + "/test_user", json=updated_data)
-       assert response.status_code == 200
-       assert response.json()["password"] == "new_password"
-
-       # Test deleting a user
-       response = requests.delete(url + "/test_user")
-       assert response.status_code == 200
+   import json
+   
+   # Define API base URL
+   base_url = "https://api.example.com"
+   
+   # Define test function with endpoint and expected behavior
+   def test_api(endpoint, method, expected_status_code, expected_data=None):
+     # Build the complete URL
+     url = f"{base_url}/{endpoint}"
+   
+     # Send the request
+     response = requests.request(method, url)
+   
+     # Validate status code
+     assert response.status_code == expected_status_code, f"Unexpected status code: {response.status_code}"
+   
+     # Validate response data (if provided)
+     if expected_data:
+       response_data = response.json()
+       assert response_data == expected_data, f"Unexpected response data: {response_data}"
+   
+   # Example test cases
+   test_api("/users", "GET", 200)  # Test GET for users endpoint
+   
+   # Example with expected data
+   user_data = {"name": "John Doe", "email": "john.doe@example.com"}
+   test_api("/users/1", "GET", 200, user_data)  # Test GET for specific user with expected data
+   
+   # Run the tests
+   print("Tests completed!")
+   ```
+   - **Sample prompt**: ```Write the API script that the above code would test.```
+   - **Test Code (Python)**:
+   ```python (with Flask)
+   # API script to test
+   from flask import Flask, jsonify, request
+   
+   app = Flask(__name__)
+   
+   # Sample user data (replace with your actual data storage)
+   users = [
+       {"id": 1, "name": "John Doe", "email": "john.doe@example.com"},
+   ]
+   
+   @app.route("/users", methods=["GET"])
+   def get_users():
+     """Returns a list of all users"""
+     return jsonify(users)
+   
+   @app.route("/users/<int:user_id>", methods=["GET"])
+   def get_user(user_id):
+     """Returns a specific user based on ID"""
+     user = [u for u in users if u["id"] == user_id]
+     if not user:
+       return jsonify({"error": "User not found"}), 404
+     return jsonify(user[0])
+   
+   if __name__ == "__main__":
+     app.run(debug=True)
    ```
 
-   This example demonstrates automated testing of a RESTful API using the `requests` library in Python. It tests creating, retrieving, updating, and deleting a user.
+
 
 3. **Example: Testing Form Submission (JavaScript with Jest)**
 
    - **Description**: Automate testing of form submission in a web application using Jest, a JavaScript testing framework.
-
+   - **Sample prompt**: ```Write a python script to automate testing of a RESTful API.```
    - **Test Code (JavaScript with Jest)**:
 
    ```javascript
