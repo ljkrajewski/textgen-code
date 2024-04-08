@@ -1,4 +1,4 @@
-# Researching LLM Sources
+# "Supply Chain" Research of LLM Sources
 Part of assessing the safety/sutability of an LLM must include a risk analysis of the LLMs "supply chain," the origins of the LLM. The following are tools and proceedures available to do such analysis.
 1. Most LLM models are hosted on [Hugging Face](https://huggingface.co/models).
 2. Each model on Hugging Face has a model card (for example, [mistralai/Mistral-7B-Instruct-v0.2](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2)) that contains:
