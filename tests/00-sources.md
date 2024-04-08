@@ -6,4 +6,5 @@
      - training sets used,
      - LLMs merged,
      - Links to papers outlining how it the model was created.  
+
 In this example, the Mistral-7B-Instruct-v0.2 LLM was fine-tuned from the Mistral-7B-v0.2 LLM. A [paper](https://arxiv.org/abs/2310.06825) and a [blog post](https://mistral.ai/news/la-plateforme/) on how Mistral-7B was created.
