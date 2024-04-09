@@ -15,6 +15,29 @@ A leaked internal Google document written by an engineer about the current sourc
 - [Forget Open-Source It's OAI-Source - The Moat Exists](https://www.reddit.com/r/singularity/comments/18jv9e3/perhaps_theres_a_reason_why_openai_isnt_releasing/)  
 A counter-argument to "We Have No Moat."
 
+## Supply Chain Research of LLM Sources
+Part of assessing the safety/suitability of an LLM must include a risk analysis of the LLMs "supply chain," the origins of the LLM. The following tools available for such analysis.
+
+1. Most LLM models are hosted on [Hugging Face](https://huggingface.co/models).
+2. Each model on Hugging Face has a model card (for example, [mistralai/Mistral-7B-Instruct-v0.2](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2)) that contains:
+  - who created the model (in this example, Mistral AI [[website](https://mistral.ai/), [Wikipedia article](https://en.wikipedia.org/wiki/Mistral_AI)]), and
+  - information on how the model was generated. This information may include:
+    - training sets used,
+    - LLMs merged,
+    - Links to papers outlining how it the model was created.
+
+In this example, the Mistral-7B-Instruct-v0.2 LLM was fine-tuned from the Mistral-7B-v0.2 LLM. A [paper](https://arxiv.org/abs/2310.06825) and a [blog post](https://mistral.ai/news/la-plateforme/) about how Mistral-7B was created are also available.
+
+### Other sources
+Once information (like company, websites, email addresses, etc.) is gathered from the LLM's model card,
+
+- Search engines like
+  - [Google](https://google.com/)
+  - [Bing](https://bing.com/)
+  - Yandex (Use browser in incognito mode behind a VPN, preferably inside a clean virtual machine. Should not be done onsite.)
+Other sources of information: [OSINT Framework](https://osintframework.com/)
+Bonus points for reading [Psychology of Intelligence Analysis](https://www.cia.gov/resources/csi/books-monographs/psychology-of-intelligence-analysis-2/).
+
 ## Testing Coding LLMs
 Testing AI LLMs designed to write code involves evaluating their performance on a range of tasks that assess their ability to generate correct and efficient code. Here is a list of tests to consider:
 
