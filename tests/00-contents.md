@@ -36,6 +36,7 @@ Once information (like company, websites, email addresses, etc.) is gathered fro
   - [Bing](https://bing.com/)
   - Yandex (Use browser in incognito mode behind a VPN, preferably inside a clean virtual machine. Should not be done onsite.)
 - Other sources of information: [OSINT Framework](https://osintframework.com/)  
+
 Bonus points for reading [Psychology of Intelligence Analysis](https://www.cia.gov/resources/csi/books-monographs/psychology-of-intelligence-analysis-2/).
 
 ## Testing Coding LLMs
