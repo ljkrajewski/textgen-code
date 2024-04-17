@@ -5,6 +5,7 @@
 Key point: What goes into "the machine" will determine what comes out.
 - [Why Hal 9000 Went insane [YouTube]](https://www.youtube.com/watch?v=dsDI4SxFFck&t=122s)  
 What can happen if a machine is "incorrectly taught."
+- [NIST Artificial Intelligence Risk Management Framework (AI RMF 1.0)](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
 
 ### What Is An LLM, and Where Do They Come From?
 The center of most AIs used today is the large language model (LLM). This requires an understanding of what LLMs are and how/where they are developed.
