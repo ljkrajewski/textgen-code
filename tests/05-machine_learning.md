@@ -1,39 +1,68 @@
+## Machine Learning and Data Science
 Machine learning and data science tests assess the effectiveness and accuracy of models and algorithms. Here are three specific examples of tests for machine learning and data science, along with sample code or instructions:
 
 1. **Example: Classification Accuracy Test (Python with scikit-learn)**
 
    - **Description**: Evaluate the classification accuracy of a machine learning model.
-
+   - **Sample Prompt 1**: ```Write a python script to evaluate the classification accuracy of a machine learning model.```
    - **Test Code (Python with scikit-learn)**:
 
    ```python
-   from sklearn.datasets import load_iris
    from sklearn.model_selection import train_test_split
-   from sklearn.linear_model import LogisticRegression
    from sklearn.metrics import accuracy_score
-
-   def ml_ds_test_classification_accuracy():
-       # Load Iris dataset for classification
-       data = load_iris()
-       X, y = data.data, data.target
-
-       # Split data into training and testing sets
-       X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-       # Train a logistic regression model
-       model = LogisticRegression()
-       model.fit(X_train, y_train)
-
-       # Predict labels on the test set
-       y_pred = model.predict(X_test)
-
-       # Calculate classification accuracy
-       accuracy = accuracy_score(y_test, y_pred)
-
-       assert accuracy >= 0.9  # Assuming we want accuracy greater than or equal to 90%
+   
+   # Load your data
+   X = # Your feature data
+   y = # Your target labels
+   
+   # Split data into training and test sets
+   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+   
+   # Train your model (replace this with your model)
+   model = # Your machine learning model
+   
+   # Train the model
+   model.fit(X_train, y_train)
+   
+   # Make predictions on the test set
+   y_pred = model.predict(X_test)
+   
+   # Evaluate accuracy
+   accuracy = accuracy_score(y_test, y_pred)
+   
+   # Print the accuracy
+   print("Accuracy:", accuracy)
+   ```
+   - **Sample Prompt 2**: ```Provide an example of feature data (X) and target labels (Y) that can be used with this script.```
+   - **Test Code (Python with scikit-learn)**:
+   ```python
+   import pandas as pd
+   
+   data = {
+       "Word_count": [200, 50, 120, 300, 100],
+       "Avg_sentence_length": [10, 5, 8, 15, 7],
+       "Has_capital_letters": [False, True, False, True, False],
+       "Has_urls": [True, False, True, True, False],
+       "Has_attachments": [False, False, True, False, True],
+       "Label": [0, 1, 0, 1, 0]  # 0: Not Spam, 1: Spam
+   }
+   
+   df = pd.DataFrame(data)
+   
+   # Separate features and target labels
+   X = df.drop("Label", axis=1)  # Features
+   y = df["Label"]  # Target labels
+   ```
+   - **Sample Prompt 3**: ```Give an example of a training model that can be plugged into this script.```
+   - **Test Code (Python with scikit-learn)**:
+   ```python
+   from sklearn.linear_model import LogisticRegression
+   
+   # Replace the model line in your script with this:
+   model = LogisticRegression(solver='liblinear')
    ```
 
-   In this example, we load the Iris dataset, split it into training and testing sets, train a logistic regression model, and evaluate its classification accuracy using `accuracy_score` from scikit-learn.
+This script calculates accuracy, a common metric. Depending on your problem, you may want to use other metrics like precision, recall, F1-score, or ROC AUC. Scikit-learn provides functions for these metrics as well.
 
 2. **Example: Regression Model R-squared Test (Python with scikit-learn)**
 
