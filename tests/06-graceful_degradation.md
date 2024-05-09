@@ -3,7 +3,7 @@ Graceful degradation is a design principle that ensures a system can continue to
 1. **Example: Web Application with External Service Dependency (Python with Flask)**
 
    - **Description**: Test a web application that depends on an external service. Verify that the application continues to function with reduced functionality if the external service is unavailable.
-
+   - **Sample Prompt**: ```
    - **Test Code (Python with Flask)**:
 
    ```python
