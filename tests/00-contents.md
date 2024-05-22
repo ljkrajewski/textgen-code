@@ -107,3 +107,4 @@ Remember to curate a diverse set of tests that cover a wide range of scenarios a
 - [National Security Commission on Artificial Intelligence, Final Report](https://cybercemetery.unt.edu/nscai/20211005231038mp_/https://www.nscai.gov/wp-content/uploads/2021/03/Full-Report-Digital-1.pdf)
 - [U.S. LEADERSHIP IN AI: A Plan for Federal Engagement in Developing Technical Standards and Related Tools](https://www.nist.gov/system/files/documents/2019/08/10/ai_standards_fedengagement_plan_9aug2019.pdf)
 - [NIST Artificial Intelligence Risk Management Framework (AI RMF 1.0)](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
+- [OECD Framework for the Classification of AI Systems](https://www.oecd-ilibrary.org/docserver/cb6d9eca-en.pdf?expires=1716409048&id=id&accname=guest&checksum=FE468BC2C8EF54C9AED606085E1F7BCA)
