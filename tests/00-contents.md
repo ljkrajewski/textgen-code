@@ -5,7 +5,6 @@
 Key point: What goes into "the machine" will determine what comes out.
 - [Why Hal 9000 Went insane [YouTube]](https://www.youtube.com/watch?v=dsDI4SxFFck&t=122s)  
 What can happen if a machine is "incorrectly taught."
-- [NIST Artificial Intelligence Risk Management Framework (AI RMF 1.0)](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
 
 ### What Is An LLM, and Where Do They Come From?
 The center of most AIs used today is the large language model (LLM). This requires an understanding of what LLMs are and how/where they are developed.
@@ -101,3 +100,9 @@ Remember to curate a diverse set of tests that cover a wide range of scenarios a
 ## Epilouge -- The weaknesses of AI
 [I took advantage of AI Art's GREATEST weakness- and you should too. [YouTube]](https://www.youtube.com/watch?v=K5PBELqbfVA)
  
+## Resources
+- [H.R.6216 - National Artificial Intelligence Initiative Act of 2020](https://www.congress.gov/bill/116th-congress/house-bill/6216)
+- [Executive Order 13859: Maintaining American Leadership in Artificial Intelligence](https://www.federalregister.gov/documents/2019/02/14/2019-02544/maintaining-american-leadership-in-artificial-intelligence)
+- [National Security Commission on Artificial Intelligence, Final Report](https://cybercemetery.unt.edu/nscai/20211005231038mp_/https://www.nscai.gov/wp-content/uploads/2021/03/Full-Report-Digital-1.pdf)
+- [U.S. LEADERSHIP IN AI: A Plan for Federal Engagement in Developing Technical Standards and Related Tools](https://www.nist.gov/system/files/documents/2019/08/10/ai_standards_fedengagement_plan_9aug2019.pdf)
+- [NIST Artificial Intelligence Risk Management Framework (AI RMF 1.0)](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
