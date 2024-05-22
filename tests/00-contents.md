@@ -97,3 +97,7 @@ Testing AI LLMs designed to write code involves evaluating their performance on 
     - [**Evaluation by Diverse Human Judges**](): Recruit a diverse panel of human judges to evaluate the LLM-generated text for biases. Aggregate judgments to identify patterns of bias and assess the overall fairness of the LLM's outputs.
 
 Remember to curate a diverse set of tests that cover a wide range of scenarios and use cases to get a comprehensive assessment of the LLM's capabilities. Additionally, consider using real-world projects or applications as a benchmark for evaluating the LLM's code-writing abilities.
+
+## Epilouge -- The weaknesses of AI
+[I took advantage of AI Art's GREATEST weakness- and you should too. [YouTube]](https://www.youtube.com/watch?v=K5PBELqbfVA)
+ 
