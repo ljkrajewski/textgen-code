@@ -101,7 +101,8 @@ Remember to curate a diverse set of tests that cover a wide range of scenarios a
 [I took advantage of AI Art's GREATEST weakness- and you should too. [YouTube]](https://www.youtube.com/watch?v=K5PBELqbfVA)
  
 ## Resources
-- [H.R.6216 - National Artificial Intelligence Initiative Act of 2020](https://www.congress.gov/bill/116th-congress/house-bill/6216)
+- [H.R.6216 - National Artificial Intelligence Initiative Act of 2020](https://www.congress.gov/bill/116th-congress/house-bill/6216)  
+  Emphasis on Section 2 (d).
 - [Executive Order 13859: Maintaining American Leadership in Artificial Intelligence](https://www.federalregister.gov/documents/2019/02/14/2019-02544/maintaining-american-leadership-in-artificial-intelligence)
 - [National Security Commission on Artificial Intelligence, Final Report](https://cybercemetery.unt.edu/nscai/20211005231038mp_/https://www.nscai.gov/wp-content/uploads/2021/03/Full-Report-Digital-1.pdf)
 - [U.S. LEADERSHIP IN AI: A Plan for Federal Engagement in Developing Technical Standards and Related Tools](https://www.nist.gov/system/files/documents/2019/08/10/ai_standards_fedengagement_plan_9aug2019.pdf)
