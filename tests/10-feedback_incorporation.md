@@ -174,31 +174,83 @@ Feedback incorporation is an important aspect of adversarial testing, as it help
    print('Finished Training')
    ```
 
-   In this example, the pre-trained model is fine-tuned using adversarial examples generated for a validation set. This process helps the model become more robust against adversarial attacks.
+   This script will fine-tune the pre-trained model using adversarial examples, enhancing its robustness against adversarial attacks. Adjust the epsilon parameter to control the strength of the adversarial perturbations.
 
 3. **Example: Adaptive Adversarial Training with Feedback (Python with TensorFlow and CleverHans)**
 
    - **Description**: Incorporate adversarial examples during training, and dynamically adjust the adversarial strength based on model performance.
-
-   - **Test Code (Python with TensorFlow and CleverHans)**:
+   - **Sample Prompt**: ```Write a python script that incorporates adversarial examples during training and dynamically adjusts the adversarial strength based on model performance.```
+   - **Test Code (Python with TensorFlow)**:
 
    ```python
-   for epoch in range(num_epochs):
-       # Generate adversarial examples with dynamically adjusted strength
-       eps = calculate_adversarial_strength(model, validation_data)
-
-       # Create an attack object with the dynamically adjusted epsilon
-       fgsm = FastGradientMethod(keras_model, sess=tf.compat.v1.Session())
-       adv_x = fgsm.generate(x, eps=eps, clip_min=0.0, clip_max=1.0)
-
-       # Incorporate adversarial examples into the training data
-       combined_x = tf.concat([x, adv_x], axis=0)
-       combined_y = tf.concat([y, y], axis=0)
-
-       # Train the model with the combined dataset for one epoch
-       model.fit(combined_x, combined_y, epochs=1)
+   import tensorflow as tf
+   from tensorflow.keras.datasets import mnist
+   from tensorflow.keras.models import Sequential
+   from tensorflow.keras.layers import Dense, Flatten
+   from tensorflow.keras.optimizers import Adam
+   import numpy as np
+   
+   # Load MNIST data
+   (x_train, y_train), (x_test, y_test) = mnist.load_data()
+   x_train, x_test = x_train / 255.0, x_test / 255.0
+   
+   # Model definition
+   def create_model():
+       model = Sequential([
+           Flatten(input_shape=(28, 28)),
+           Dense(128, activation='relu'),
+           Dense(10, activation='softmax')
+       ])
+       return model
+   
+   # Adversarial example generation using FGSM
+   def fgsm(model, x, y, epsilon):
+       x = tf.convert_to_tensor(x, dtype=tf.float32)
+       with tf.GradientTape() as tape:
+           tape.watch(x)
+           prediction = model(x)
+           loss = tf.keras.losses.sparse_categorical_crossentropy(y, prediction)
+       gradient = tape.gradient(loss, x)
+       adversarial_example = x + epsilon * tf.sign(gradient)
+       adversarial_example = tf.clip_by_value(adversarial_example, 0, 1)
+       return adversarial_example
+   
+   # Training with dynamic adversarial adjustment
+   def train_with_adversarial_examples(model, x_train, y_train, x_test, y_test, epochs, initial_epsilon, adjustment_factor):
+       epsilon = initial_epsilon
+       optimizer = Adam()
+       loss_fn = tf.keras.losses.SparseCategoricalCrossentropy()
+       model.compile(optimizer=optimizer, loss=loss_fn, metrics=['accuracy'])
+       
+       for epoch in range(epochs):
+           print(f"\nEpoch {epoch + 1}/{epochs}")
+           # Generate adversarial examples
+           x_adv = fgsm(model, x_train, y_train, epsilon)
+           x_combined = np.concatenate([x_train, x_adv])
+           y_combined = np.concatenate([y_train, y_train])
+   
+           # Train on combined dataset
+           model.fit(x_combined, y_combined, epochs=1, batch_size=64, verbose=2)
+   
+           # Evaluate on test set
+           loss, accuracy = model.evaluate(x_test, y_test, verbose=2)
+           print(f"Test accuracy: {accuracy:.4f}, Epsilon: {epsilon:.4f}")
+   
+           # Adjust epsilon based on accuracy
+           if accuracy < 0.95:
+               epsilon += adjustment_factor
+           else:
+               epsilon = max(initial_epsilon, epsilon - adjustment_factor)
+   
+   # Initialize and train the model
+   model = create_model()
+   initial_epsilon = 0.01
+   adjustment_factor = 0.005
+   epochs = 10
+   
+   train_with_adversarial_examples(model, x_train, y_train, x_test, y_test, epochs, initial_epsilon, adjustment_factor)
    ```
 
-   In this example, the adversarial strength (`eps`) is dynamically adjusted based on the model's performance on a validation set. The model is then trained with adversarial examples using the adjusted strength for a specified number of epochs.
+   This script trains a simple neural network on the MNIST dataset, incorporating adversarial examples and dynamically adjusting their strength to improve robustness against adversarial attacks.
 
 These examples demonstrate how to incorporate feedback from adversarial tests into the training process, which can help improve the model's robustness against adversarial attacks. The provided code can be used as a starting point and customized based on specific requirements and models used.
