@@ -4,11 +4,9 @@ Feedback incorporation is an important aspect of adversarial testing, as it help
 
    - **Description**: Incorporate adversarial examples into the training process to improve the model's robustness.
    - **Sample Prompt**: ```Write a python script to demonstrate adversarial training for image classification.```
-   - **Test Code (Python with TensorFlow)**:
-
-   ```python
-   !pip install tensorflow
+   - **Test Code (Python with TensorFlow)**: Be sure to install TensorFlow first. ```pip install tensorflow```
    
+   ```python
    import tensorflow as tf
    from tensorflow.keras import layers, models
    import numpy as np
