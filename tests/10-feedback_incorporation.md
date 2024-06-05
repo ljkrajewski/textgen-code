@@ -81,25 +81,97 @@ Feedback incorporation is an important aspect of adversarial testing, as it help
 2. **Example: Fine-tuning with Adversarial Examples (Python with TensorFlow and CleverHans)**
 
    - **Description**: Fine-tune a pre-trained model using adversarial examples to enhance its resistance against adversarial attacks.
-
-   - **Test Code (Python with TensorFlow and CleverHans)**:
+   - **Sample Prompt**: ```Write an example python script showing how to fine-tune a pre-trained model using adversarial examples.```
+   - **Test Code (Python with PyTorch)**: Be sure to install Torch and Torchvision first. ```pip install torch torchvision```
 
    ```python
-   from tensorflow.keras.optimizers import Adam
-
-   # Load a pre-trained model (e.g., from the previous example)
-   model = ...
-
-   # Create an attack object (e.g., Fast Gradient Method)
-   fgsm = FastGradientMethod(keras_model, sess=tf.compat.v1.Session())
-
-   # Generate adversarial examples for a validation set
-   adv_val_x = fgsm.generate(val_x, eps=0.1, clip_min=0.0, clip_max=1.0)
-
-   # Fine-tune the model using adversarial examples
-   optimizer = Adam(learning_rate=0.0001)
-   model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-   model.fit(adv_val_x, val_y, epochs=5)
+   import torch
+   import torch.nn as nn
+   import torch.optim as optim
+   import torchvision
+   import torchvision.transforms as transforms
+   from torch.utils.data import DataLoader
+   from torchvision.models import resnet18
+   
+   # Define device
+   device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+   
+   # Load the CIFAR-10 dataset
+   transform = transforms.Compose([
+       transforms.ToTensor(),
+       transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+   ])
+   
+   train_dataset = torchvision.datasets.CIFAR10(root='./data', train=True, download=True, transform=transform)
+   train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True, num_workers=2)
+   
+   # Load a pre-trained model
+   model = resnet18(pretrained=True)
+   model.fc = nn.Linear(model.fc.in_features, 10)  # Adjust the final layer for CIFAR-10
+   model = model.to(device)
+   
+   # Define loss function and optimizer
+   criterion = nn.CrossEntropyLoss()
+   optimizer = optim.Adam(model.parameters(), lr=0.001)
+   
+   # Function to create adversarial examples
+   def fgsm_attack(image, epsilon, gradient):
+       # Collect the element-wise sign of the data gradient
+       sign_data_grad = gradient.sign()
+       # Create the perturbed image by adjusting each pixel of the input image
+       perturbed_image = image + epsilon * sign_data_grad
+       # Adding clipping to maintain [0,1] range
+       perturbed_image = torch.clamp(perturbed_image, 0, 1)
+       return perturbed_image
+   
+   # Training loop with adversarial examples
+   num_epochs = 5
+   epsilon = 0.1  # Strength of the adversarial attack
+   
+   for epoch in range(num_epochs):
+       model.train()
+       running_loss = 0.0
+   
+       for data in train_loader:
+           inputs, labels = data
+           inputs, labels = inputs.to(device), labels.to(device)
+   
+           # Enable gradient tracking for the inputs
+           inputs.requires_grad = True
+   
+           # Zero the parameter gradients
+           optimizer.zero_grad()
+   
+           # Forward pass
+           outputs = model(inputs)
+           loss = criterion(outputs, labels)
+           
+           # Backward pass to compute gradients
+           loss.backward()
+   
+           # Generate adversarial examples
+           data_grad = inputs.grad.data
+           adv_inputs = fgsm_attack(inputs, epsilon, data_grad)
+   
+           # Forward pass with adversarial examples
+           adv_outputs = model(adv_inputs)
+           adv_loss = criterion(adv_outputs, labels)
+   
+           # Combine the loss
+           combined_loss = (loss + adv_loss) / 2
+           
+           # Zero the gradients before backward pass
+           optimizer.zero_grad()
+           
+           # Backward pass and optimization
+           #combined_loss.backward()
+           optimizer.step()
+   
+           running_loss += combined_loss.item()
+   
+       print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {running_loss/len(train_loader)}")
+   
+   print('Finished Training')
    ```
 
    In this example, the pre-trained model is fine-tuned using adversarial examples generated for a validation set. This process helps the model become more robust against adversarial attacks.
