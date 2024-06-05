@@ -2,7 +2,7 @@
 
 Feedback incorporation is an important aspect of adversarial testing, as it helps improve the robustness of a system against adversarial attacks. Here are three specific examples of feedback incorporation for adversarial tests, along with sample code or instructions:
 
-1. **Example: Adversarial Training for Image Classification (Python with TensorFlow and CleverHans)**
+1. **Example: Adversarial Training for Image Classification (Python with TensorFlow)**
 
    - **Description**: Incorporate adversarial examples into the training process to improve the model's robustness.
    - **Sample Prompt**: ```Write a python script to demonstrate adversarial training for image classification.```
@@ -80,7 +80,7 @@ Feedback incorporation is an important aspect of adversarial testing, as it help
 
    This script demonstrates the basics of adversarial training, which involves creating adversarial examples and incorporating them into the training process to improve the model's robustness against such attacks.
 
-2. **Example: Fine-tuning with Adversarial Examples (Python with TensorFlow and CleverHans)**
+2. **Example: Fine-tuning with Adversarial Examples (Python with Torch and Torchvision)**
 
    - **Description**: Fine-tune a pre-trained model using adversarial examples to enhance its resistance against adversarial attacks.
    - **Sample Prompt**: ```Write an example python script showing how to fine-tune a pre-trained model using adversarial examples.```
@@ -178,7 +178,7 @@ Feedback incorporation is an important aspect of adversarial testing, as it help
 
    This script will fine-tune the pre-trained model using adversarial examples, enhancing its robustness against adversarial attacks. Adjust the epsilon parameter to control the strength of the adversarial perturbations.
 
-3. **Example: Adaptive Adversarial Training with Feedback (Python with TensorFlow and CleverHans)**
+3. **Example: Adaptive Adversarial Training with Feedback (Python with TensorFlow)**
 
    - **Description**: Incorporate adversarial examples during training, and dynamically adjust the adversarial strength based on model performance.
    - **Sample Prompt**: ```Write a python script that incorporates adversarial examples during training and dynamically adjusts the adversarial strength based on model performance.```
