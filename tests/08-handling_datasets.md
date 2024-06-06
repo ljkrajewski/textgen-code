@@ -128,25 +128,49 @@ Handling large datasets is a critical consideration for applications that need t
 3. **Example: Distributed Data Processing (Python with Dask)**
 
    - **Description**: Test a distributed computing framework (Dask) to handle large datasets by parallelizing computations.
-
+   - **Sample Prompt**: ```Write a python script to run in Google Colab to demonstrate the difference between handling large datasets by parallelizing computations and handling them without.```
    - **Test Code (Python with Dask)**:
 
    ```python
-   import dask.array as da
-
-   def handle_large_dataset():
-       # Generate a large random dataset (1 billion elements)
-       large_array = da.random.random((1000000000,), chunks=(100000,))
-
-       # Perform computations on the dataset
-       result = (large_array + 1).sum()
-
-       return result.compute()  # Compute the result
-
-   result = handle_large_dataset()
-   print(result)
+   !pip install dask[complete]
+   
+   import dask.dataframe as dd
+   import pandas as pd
+   import numpy as np
+   import time
+   
+   # Generate a large random dataset with pandas
+   n_rows = 10**7  # 10 million rows
+   df = pd.DataFrame({
+       'A': np.random.rand(n_rows),
+       'B': np.random.rand(n_rows),
+       'C': np.random.randint(1, 100, size=n_rows)
+   })
+   
+   # Convert to Dask DataFrame
+   ddf = dd.from_pandas(df, npartitions=10)  # Split into 10 partitions for parallel processing
+   
+   def compute_grouped_mean_dask(ddf):
+       return ddf.groupby('C').A.mean().compute()
+   
+   def compute_grouped_mean_pandas(df):
+       return df.groupby('C').A.mean()
+   
+   start_time = time.time()
+   result = compute_grouped_mean_dask(ddf)
+   end_time = time.time()
+   
+   print(f"Time taken (dask): {end_time - start_time} seconds")
+   print(result.head())  # Display the first few results
+   
+   start_time = time.time()
+   result = compute_grouped_mean_pandas(df)
+   end_time = time.time()
+   
+   print(f"Time taken (pandas): {end_time - start_time} seconds")
+   print(result.head())  # Display the first few results
    ```
 
-   In this example, Dask is used to handle a large dataset by parallelizing computations. The generated random array contains 1 billion elements, and computations are performed in a distributed manner.
-
+   Running this script in Google Colab will demonstrate the handling of large datasets by parallelizing computations using Dask and with pandas, then compare the results. This particular example also demonstrates that parallelizing process doesn't always produce faster results.
+   
 These examples demonstrate techniques for handling large datasets to achieve scalability, including pagination and lazy loading, data streaming, and distributed data processing using Dask. The provided code illustrates how to implement these strategies.
