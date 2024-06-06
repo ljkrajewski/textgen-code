@@ -1,7 +1,7 @@
 ## Handling Large Datasets
 Handling large datasets is a critical consideration for applications that need to scale to accommodate a high volume of data. Here are three specific examples of handling large datasets for scalability tests, along with sample code or instructions:
 
-1. **Example: Pagination and Lazy Loading (Python with Flask and SQLAlchemy)**
+1. **Example: Pagination and Lazy Loading (Python with Flask)**
 
    - **Description**: Test a web application to ensure it efficiently handles large datasets by implementing pagination and lazy loading.
    - **Sample Prompt**: ```Write a sample web application to demonstrate handling large datasets by implementing pagination and lazy loading. Write the application in python using flask to run inside a Google Colab notebook.```
@@ -74,35 +74,56 @@ Handling large datasets is a critical consideration for applications that need t
        app.run()
    ```
 
-   In this example, the `get_items` function implements pagination to retrieve a specified number of items per page from a database. This approach allows for efficient handling of large datasets.
+   This script is a simple example of how to handle large datasets using pagination and lazy loading in a Flask web application. 
 
 2. **Example: Data Streaming (Python with Flask)**
 
    - **Description**: Test a web application to ensure it can stream large amounts of data in chunks, reducing memory usage.
-
+   - **Sample Prompt**: ```Write a new web application to demonstrate streaming large amounts of data in chunks to reduce memory usage. Write the application in python, using flask, to run in Google Colab.```
    - **Test Code (Python with Flask)**:
 
-   ```python
+   ```python (Google Colab)
+   from google.colab.output import eval_js
+   print(eval_js("google.colab.kernel.proxyPort(5000)"))
+
+   !pip install flask
+   
    from flask import Flask, Response
-
+   import random
+   
    app = Flask(__name__)
-
+   
    def generate_large_data():
-       # Generate large dataset (e.g., from a database query)
-       large_data = [str(i) for i in range(1000000)]
-
-       for data in large_data:
-           yield data + '\n'
-
-   @app.route('/stream_data', methods=['GET'])
+       # Simulate generating a large dataset using a generator
+       for i in range(1, 10001):
+           data = {"id": i, "value": random.randint(1, 1000)}
+           yield f"{data}\n"
+   
+   @app.route('/stream')
    def stream_data():
-       return Response(generate_large_data(), content_type='text/plain')
-
+       return Response(generate_large_data(), content_type='application/json')
+   
+   @app.route('/')
+   def index():
+       HTML = """
+       <!DOCTYPE html>
+       <html>
+       <head>
+           <title>Stream Data</title>
+       </head>
+       <body>
+           <h1>Stream Data</h1>
+           <div id="data"><a href="/stream">Click here</a></div>
+       </body>
+       </html>
+       """
+       return HTML
+   
    if __name__ == '__main__':
        app.run()
    ```
 
-   In this example, the `generate_large_data` function generates a large dataset and yields it in chunks. The `/stream_data` route returns a response that streams this data, reducing memory consumption.
+   In this example, the `generate_large_data` function generates a large dataset and yields it in chunks. The `/stream` route returns a response that streams this data, reducing memory consumption.
 
 3. **Example: Distributed Data Processing (Python with Dask)**
 
