@@ -4,33 +4,108 @@ Load handling tests are crucial for evaluating how a system performs under a sig
 1. **Example: Load Testing a Web Application (Python with Locust)**
 
    - **Description**: Test a web application by simulating a large number of concurrent users making HTTP requests.
-   - **Sample Prompt**: ```insert prompt here```
-   - **Test Code (Python with Locust)**:
-
-   Install Locust using `pip install locust`.
-
-   Create a file named `locustfile.py` with the following content:
+   - **Sample Prompt**: ```Write a dummy web application and an application to demonstrate load testing of the dummy web app. Have both run in one Google Colab notebook.```
+   - **Test Code (Google Colab/Jupyter Notebook)**:
 
    ```python
+   ### Cell 1 ###
+   # Install Flask
+   !pip install flask
+   
+   ### Cell 2 ###
+   # Save the Flask application to a file
+   flask_app_content = """
+   from flask import Flask
+   import os
+   
+   app = Flask(__name__)
+   
+   @app.route('/')
+   def home():
+       return "Welcome to the home page!"
+   
+   @app.route('/about')
+   def about():
+       return "This is the about page."
+   
+   @app.route('/contact')
+   def contact():
+       return "This is the contact page."
+   
+   @app.route('/pid' )
+   def pid():
+       return "app.py PID = "+str(os.getpid())
+   
+   if __name__ == '__main__':
+       with open('app_PID.txt', 'w') as f:
+           f.write(str(os.getpid()))
+       app.run(host='0.0.0.0', port=5000)
+   """
+   
+   with open('app.py', 'w') as f:
+       f.write(flask_app_content)
+   
+   print("Flask app has been created.")
+   
+   ### Cell 3 ###
+   # Install Locust
+   !pip install locust
+   
+   # Create a locustfile.py for load testing
+   locustfile_content = """
    from locust import HttpUser, task, between
-
-   class WebsiteUser(HttpUser):
-       wait_time = between(5, 15)  # Simulate users with random think times between requests
-
+   
+   class MyWebAppUser(HttpUser):
+       wait_time = between(1, 5)
+   
        @task
-       def index_page(self):
+       def load_main_page(self):
            self.client.get("/")
-
+           
        @task
-       def about_page(self):
+       def load_about_page(self):
            self.client.get("/about")
-
-   # To run the test, execute: locust -f locustfile.py
+   
+       @task
+       def load_contact_page(self):
+           self.client.get("/contact")
+   """
+   
+   # Write the locustfile content to a file
+   with open('locustfile.py', 'w') as f:
+       f.write(locustfile_content)
+   
+   print("locustfile.py has been created.")
+   
+   ### Cell 4 ###
+   import multiprocessing
+   import time
+   import os
+   import signal
+   
+   # Function to run the Flask app
+   def run_flask_app():
+       print(f"Running Flask app on PID {os.getpid()}")
+       os.system('python app.py')
+   
+   # Start the Flask app in a separate process
+   flask_process = multiprocessing.Process(target=run_flask_app)
+   flask_process.start()
+   
+   # Give the Flask app a few seconds to start
+   time.sleep(5)
+   
+   # Run the Locust load test
+   !locust -f locustfile.py --headless -u 100 -r 10 -t 1m --host http://0.0.0.0:5000
+   
+   # Terminate the Flask app after the load test
+   flask_process.terminate()
+   flask_process.join()
+   !kill -9 $(cat app_PID.txt)
+   print("Flask app has been terminated.")
    ```
 
-   In this example, we use Locust, a popular load testing tool in Python. It defines a user that simulates browsing a website with tasks to visit the home page and the about page. You can adjust the wait times and tasks based on your specific application.
-
-   To run the test, execute `locust -f locustfile.py` in the terminal.
+   This setup will run a simple Flask web application on Google Colab and perform load testing on it using Locust.
 
 2. **Example: Load Testing an API (Python with Locust)**
 
