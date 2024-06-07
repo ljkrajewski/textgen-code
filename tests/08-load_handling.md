@@ -188,31 +188,102 @@ Load handling tests are crucial for evaluating how a system performs under a sig
 3. **Example: Load Testing a Database (Python with SQLAlchemy and Locust)**
 
    - **Description**: Test a database by simulating a large number of concurrent queries.
-   - **Sample Prompt**: ```insert prompt here```
-   - **Test Code (Python with SQLAlchemy and Locust)**:
-
-   Create a file named `locustfile.py` with the following content:
-
+   - **Sample Prompt**: ```Write a working python script that demonstrates load testing a database with a large number of concurrent connections. ```
+   - **Test Code (Jupyter Notebook)**:
    ```python
-   from locust import User, task, between
-   from sqlalchemy import create_engine, select, MetaData, Table
-
-   class DbUser(User):
-       wait_time = between(5, 15)  # Simulate users with random think times between requests
-
-       def __init__(self, *args, **kwargs):
-           super().__init__(*args, **kwargs)
-           self.engine = create_engine('postgresql://username:password@localhost:5432/database')
-           self.metadata = MetaData(bind=self.engine)
-           self.table = Table('table_name', self.metadata, autoload=True)
-
-       @task
-       def select_query(self):
-           query = select([self.table]).limit(10)
-           with self.engine.connect() as conn:
-               conn.execute(query)
-
-   # To run the test, execute: locust -f locustfile.py
+   ### Cell 1 ###
+   # Write setup_db.py
+   
+   SETUP_DB="""
+   import sqlite3
+   
+   # Database file
+   DB_FILE = 'test_db.sqlite'
+   
+   def create_test_db():
+       # Create a test SQLite database and insert sample data.
+       conn = sqlite3.connect(DB_FILE)
+       cursor = conn.cursor()
+   
+       # Create a table
+       cursor.execute('''
+       CREATE TABLE IF NOT EXISTS test_table (
+           id INTEGER PRIMARY KEY AUTOINCREMENT,
+           name TEXT NOT NULL,
+           value INTEGER NOT NULL
+       )
+       ''')
+   
+       # Insert sample data
+       cursor.executemany('''
+       INSERT INTO test_table (name, value) VALUES (?, ?)
+       ''', [(f'Name{i}', i) for i in range(100)])
+   
+       conn.commit()
+       conn.close()
+   
+   if __name__ == "__main__":
+       create_test_db()
+       print("Test database created and populated with sample data.")
+   """
+   with open('setup_db.py', 'w') as f:
+       f.write(SETUP_DB)
+   
+   ### Cell 2 ###
+   # Write load_test_db.py
+   
+   LOAD_TEST_DB="""
+   import sqlite3
+   import concurrent.futures
+   import time
+   
+   # Database file
+   DB_FILE = 'test_db.sqlite'
+   
+   def execute_query():
+       # Fetch data from the SQLite database to simulate load.
+       conn = sqlite3.connect(DB_FILE)
+       try:
+           cursor = conn.cursor()
+           cursor.execute("SELECT name, value FROM test_table WHERE id = ?", (1,))
+           result = cursor.fetchone()
+           return result
+       except Exception as e:
+           print(f"Error executing query: {e}")
+       finally:
+           conn.close()
+   
+   def load_test_db(num_requests=100):
+       # Perform load testing by executing multiple queries concurrently.
+       results = []
+       with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
+           future_to_query = {
+               executor.submit(execute_query): i for i in range(num_requests)
+           }
+           for future in concurrent.futures.as_completed(future_to_query):
+               try:
+                   result = future.result()
+                   results.append(result)
+               except Exception as e:
+                   print(f"Query resulted in an error: {e}")
+       return results
+   
+   if __name__ == "__main__":
+       start_time = time.time()
+       num_requests = 100000
+       results = load_test_db(num_requests)
+       end_time = time.time()
+       elapsed_time = end_time - start_time
+   
+       print(f"Executed {num_requests} queries in {elapsed_time:.2f} seconds.")
+       print(f"Average time per query: {elapsed_time / num_requests:.4f} seconds.")
+   """
+   with open('load_test_db.py', 'w') as f:
+       f.write(LOAD_TEST_DB)
+       
+   ### Cell 3 ###
+   !python setup_db.py
+   !python load_test_db.py
    ```
 
    In this example, the `DbUser` class simulates users making database queries. It uses SQLAlchemy to connect to a database and execute a select query.
