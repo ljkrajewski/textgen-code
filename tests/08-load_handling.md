@@ -188,7 +188,7 @@ Load handling tests are crucial for evaluating how a system performs under a sig
 3. **Example: Load Testing a Database (Python with SQLAlchemy and Locust)**
 
    - **Description**: Test a database by simulating a large number of concurrent queries.
-   - **Sample Prompt**: ```Write a working python script that demonstrates load testing a database with a large number of concurrent connections. ```
+   - **Sample Prompt**: ```Write a working python script that demonstrates load testing a database with a large number of concurrent connections. Use SQLite for the database.```
    - **Test Code (Jupyter Notebook)**:
    ```python
    ### Cell 1 ###
@@ -286,8 +286,8 @@ Load handling tests are crucial for evaluating how a system performs under a sig
    !python load_test_db.py
    ```
 
-   In this example, the `DbUser` class simulates users making database queries. It uses SQLAlchemy to connect to a database and execute a select query.
+   Sure! Below is a Python script that demonstrates load testing an SQLite database with a large number of concurrent connections using the sqlite3 library and concurrent.futures for handling concurrency.
 
-   To run the test, execute `locust -f locustfile.py` in the terminal.
+   The script includes creating a test SQLite database and table, inserting some sample data, and then performing the load test..
 
 These examples demonstrate how to perform load handling tests using Locust, simulating concurrent users or requests for web applications, APIs, and databases. The provided code can be used as a starting point and customized based on specific requirements.
