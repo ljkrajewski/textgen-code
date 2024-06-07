@@ -1,7 +1,7 @@
 ## Load Handling
 Load handling tests are crucial for evaluating how a system performs under a significant load of concurrent users or requests. Here are three specific examples of load handling tests, along with sample code or instructions:
 
-1. **Example: Load Testing a Web Application (Python with Locust)**
+1. **Example: Load Testing a Web Application**
 
    - **Description**: Test a web application by simulating a large number of concurrent users making HTTP requests.
    - **Sample Prompt**: ```Write a dummy web application and an application to demonstrate load testing of the dummy web app. Have both run in Jupyter Notebook.```
@@ -107,7 +107,7 @@ Load handling tests are crucial for evaluating how a system performs under a sig
 
    This setup will run a simple Flask web application on Google Colab and perform load testing on it using Locust.
 
-2. **Example: Load Testing an API (Python with Locust)**
+2. **Example: Load Testing an API**
 
    - **Description**: Test an API by simulating a large number of concurrent requests.
    - **Sample Prompt**: ```Write a working demonstration in python of load balance testing of an API.```
