@@ -4,8 +4,8 @@ Load handling tests are crucial for evaluating how a system performs under a sig
 1. **Example: Load Testing a Web Application (Python with Locust)**
 
    - **Description**: Test a web application by simulating a large number of concurrent users making HTTP requests.
-   - **Sample Prompt**: ```Write a dummy web application and an application to demonstrate load testing of the dummy web app. Have both run in one Google Colab notebook.```
-   - **Test Code (Google Colab/Jupyter Notebook)**:
+   - **Sample Prompt**: ```Write a dummy web application and an application to demonstrate load testing of the dummy web app. Have both run in Jupyter Notebook.```
+   - **Test Code (Jupyter Notebook)**:
 
    ```python
    ### Cell 1 ###
