@@ -6,6 +6,7 @@ The purpose of this document is to be a starting point for discussing how to eva
 Key point: What goes into "the machine" will determine what comes out.
 - [Why Hal 9000 Went insane [YouTube]](https://www.youtube.com/watch?v=dsDI4SxFFck&t=122s)  
 What can happen if a machine is "incorrectly taught."
+- [NIST Artificial Intelligence Risk Management Framework (AI RMF 1.0)](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
 
 ### What Is An LLM, and Where Do They Come From?
 The center of most AIs used today is the large language model (LLM). This requires an understanding of what LLMs are and how/where they are developed.
@@ -35,7 +36,7 @@ Once information (like company, websites, email addresses, etc.) is gathered fro
 - Search engines like
   - [Google](https://google.com/)
   - [Bing](https://bing.com/)
-  - Yandex (Use browser in incognito mode behind a VPN, preferably inside a clean virtual machine. Should not be done onsite.)
+  - Yandex (Use browser in incognito mode behind a VPN, preferably inside a clean virtual machine.)
 - Other sources of information: [OSINT Framework](https://osintframework.com/)  
 
 Bonus points for reading [Psychology of Intelligence Analysis](https://www.cia.gov/resources/csi/books-monographs/psychology-of-intelligence-analysis-2/).
