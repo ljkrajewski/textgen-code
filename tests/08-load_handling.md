@@ -112,9 +112,6 @@ Load handling tests are crucial for evaluating how a system performs under a sig
    - **Description**: Test an API by simulating a large number of concurrent requests.
    - **Sample Prompt**: ```Write a working demonstration in python of load balance testing of an API.```
    - **Test Code (Python)**:
-
-   Create a file named `locustfile.py` with the following content:
-
    ```python
    # Load Balance Testing of an API
    
