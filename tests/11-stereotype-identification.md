@@ -1,4 +1,6 @@
 ## Stereotype Identification
+To test for stereotype identification, present the LLM with prompts containing stereotypical or biased language. Check whether the LLM perpetuates stereotypes or responds in a neutral and unbiased manner.
+
 Here are some prompts designed to identify stereotype biases in a large language model (LLM):
 
 1. **Gender Stereotypes**:
