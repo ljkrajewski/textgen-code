@@ -1,5 +1,5 @@
 ## Sentiment Analysis
-To test for sentiment analysis, analyze the sentiment of the LLM-generated text towards different demographic groups. Check for any instances of overtly positive or negative sentiment towards certain groups.
+To test for sentiment bias, analyze the sentiment of the LLM-generated text towards different demographic groups. Check for any instances of overtly positive or negative sentiment towards certain groups.
 
 Here are some prompts designed to reveal sentiment bias (either overly positive or overly negative) towards certain demographic groups in a large language model (LLM):
 
