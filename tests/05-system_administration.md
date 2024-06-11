@@ -81,7 +81,7 @@ Here are three specific examples of tests for system administration and DevOps, 
 3. **Example: Backup and Restore Script (Bash)**
 
    - **Description**: Automate the process of backing up and restoring important files or databases.
-   - **Sample Prompt**: ```Write a bash script to demonstrate backing up files and restoring them.```
+   - **Sample Prompt**: ```Write bash scripts to back up and restore files.```
    - **Bash Backup Script**:
 
    ```bash
