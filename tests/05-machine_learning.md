@@ -44,7 +44,7 @@ Here are three specific examples of tests for machine learning and data science,
    prediction = clf.predict(sample)
    print(f"Predicted class for sample {sample}: {prediction[0]} (0: Setosa, 1: Versicolor, 2: Virginica)")
    ```
-   This example uses scikit's iris data set consisting of 3 different types of irises’ (Setosa, Versicolour, and Virginica) petal and sepal length, stored in a 150x4 numpy.ndarray.
+   To demonstrate evaluating the classification accuracy of a machine learning model, we'll use a simple classification task with the Iris dataset, which is a standard dataset for demonstrating machine learning algorithms. This example uses scikit's iris data set consisting of 3 different types of irises’ (Setosa, Versicolour, and Virginica) petal and sepal length, stored in a 150x4 numpy.ndarray.
 
    - **Sample Prompt 2**: ```Provide an example of feature data (X) and target labels (Y) that can be used with this script.```
    - **Test Code (Python with scikit-learn)**:
@@ -95,7 +95,7 @@ Here are three specific examples of tests for machine learning and data science,
    print(f"Predicted class for sample {sample}: {prediction[0]} (0: Setosa, 1: Versicolor, 2: Virginica)")
    ```
 
-This script calculates accuracy, a common metric. Depending on your problem, you may want to use other metrics like precision, recall, F1-score, or ROC AUC. Scikit-learn provides functions for these metrics as well.
+To provide an example of feature data (X) and target labels (Y) for use with this script, we'll simulate a small dataset similar to the Iris dataset. This script calculates accuracy, a common metric. Depending on your problem, you may want to use other metrics like precision, recall, F1-score, or ROC AUC. Scikit-learn provides functions for these metrics as well.
 
 
 2. **Example: Regression Model R-squared Test (Python with scikit-learn)**
@@ -142,36 +142,40 @@ This script calculates accuracy, a common metric. Depending on your problem, you
    print(f"Predicted house price for sample {sample}: {single_prediction[0]:.2f}")
    ```
 
-   In this example, we load the Boston housing dataset, split it into training and testing sets, train a linear regression model, and evaluate its R-squared score using `r2_score` from scikit-learn. Be aware, the Boston housing dataset has been deprecated in _scikit-learn_ as of version 1.2.
+   To demonstrate evaluating the R-squared score of a regression model, we can use a simple linear regression example with the Boston housing dataset from the scikit-learn library. The Boston housing dataset contains information about houses in Boston, such as crime rate, number of rooms, and house prices. We used scikit-learn to load the dataset, split it into training and testing sets, train a linear regression model, make predictions, and evaluate the model using the R-squared score. In this example, we load the Boston housing dataset, split it into training and testing sets, train a linear regression model, and evaluate its R-squared score using `r2_score` from scikit-learn. Be aware, the Boston housing dataset has been deprecated in _scikit-learn_ as of version 1.2.
 
 3. **Example: Cross-Validation Test (Python with scikit-learn)**
 
    - **Description**: Perform k-fold cross-validation to assess model performance.
-   - **Sample Prompt**: ```xxx```
+   - **Sample Prompt**: ```Write a python script that demonstrates k-fold cross-validation to assess model performance.```
    - **Test Code (Python with scikit-learn)**:
 
    ```python
-   from sklearn.datasets import load_iris
-   from sklearn.model_selection import cross_val_score
+   import numpy as np
+   from sklearn import datasets
    from sklearn.tree import DecisionTreeClassifier
-
-   def ml_ds_test_cross_validation():
-       # Load Iris dataset for classification
-       data = load_iris()
-       X, y = data.data, data.target
-
-       # Train a decision tree classifier
-       model = DecisionTreeClassifier()
-
-       # Perform 5-fold cross-validation
-       cross_val_scores = cross_val_score(model, X, y, cv=5)
-
-       # Calculate mean cross-validation score
-       mean_cv_score = cross_val_scores.mean()
-
-       assert mean_cv_score >= 0.9  # Assuming we want mean CV score greater than or equal to 90%
+   from sklearn.model_selection import cross_val_score
+   
+   # Load the Iris dataset
+   iris = datasets.load_iris()
+   X = iris.data
+   y = iris.target
+   
+   # Initialize the classifier
+   clf = DecisionTreeClassifier(random_state=42)
+   
+   # Perform k-fold cross-validation with k=5
+   k = 5
+   cv_scores = cross_val_score(clf, X, y, cv=k)
+   
+   # Print the cross-validation scores
+   print(f"Cross-validation scores: {cv_scores}")
+   
+   # Print the mean and standard deviation of the cross-validation scores
+   print(f"Mean cross-validation score: {cv_scores.mean():.2f}")
+   print(f"Standard deviation of cross-validation scores: {cv_scores.std():.2f}")
    ```
 
-   In this example, we load the Iris dataset, train a decision tree classifier, and perform 5-fold cross-validation to assess the model's performance using `cross_val_score` from scikit-learn.
+   K-fold cross-validation is a technique used to evaluate the performance of a machine learning model by dividing the dataset into k equal-sized subsets (folds). The model is trained on k-1 folds and tested on the remaining fold. This process is repeated k times, with each fold used exactly once as the test set. The final performance metric is the average of the performance metrics across all k trials. In this example, we load the Iris dataset, train a decision tree classifier, and perform 5-fold cross-validation to assess the model's performance using `cross_val_score` from scikit-learn.
 
 These examples demonstrate tests for machine learning and data science, including classification accuracy, regression R-squared score, and k-fold cross-validation. The provided code demonstrates how to evaluate model performance using various metrics and techniques.
