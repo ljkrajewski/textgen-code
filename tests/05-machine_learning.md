@@ -99,7 +99,7 @@ This script calculates accuracy, a common metric. Depending on your problem, you
 2. **Example: Regression Model R-squared Test (Python with scikit-learn)**
 
    - **Description**: Evaluate the R-squared score of a regression model.
-
+   - **Sample Prompt**: ```xxx```
    - **Test Code (Python with scikit-learn)**:
 
    ```python
@@ -134,7 +134,7 @@ This script calculates accuracy, a common metric. Depending on your problem, you
 3. **Example: Cross-Validation Test (Python with scikit-learn)**
 
    - **Description**: Perform k-fold cross-validation to assess model performance.
-
+   - **Sample Prompt**: ```xxx```
    - **Test Code (Python with scikit-learn)**:
 
    ```python
