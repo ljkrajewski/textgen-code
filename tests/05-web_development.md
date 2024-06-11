@@ -173,79 +173,80 @@ Domain-specific tests in web development focus on evaluating specific functional
    In this example, the test uses Selenium, a browser automation tool, to automate the process of registering a user and logging in. It interacts with the web page elements using element IDs. Make sure to adapt the script to fit the structure and behavior of the specific website you are testing. Additionally, consider using more robust waiting mechanisms (e.g., WebDriverWait) to ensure that the page elements are present before interacting with them.  
    _Note: The web app in this example will fail the tests because of errors in the registration section._
 
-3. **Example: Testing RESTful API Endpoints (Python with Flask)**
+2. **Example: Testing RESTful API Endpoints (Python)**
 
    - **Description**: Automate testing of RESTful API endpoints to ensure they return the expected responses.
-   - **Sample prompt**: ```Write a python script to automate testing of a RESTful API. Also write the API script that would be tested.```
+   - **Sample prompt**: ```Write a working python script to demonstrate automated testing of a RESTful API. Use a working public API for the demonstration.```
    - **Test Code (Python)**:
  
    ```python
-   #Automated testing script
+   import unittest
    import requests
-   import json
    
-   # Define API base URL
-   base_url = "https://api.example.com"
+   class TestJSONPlaceholderAPI(unittest.TestCase):
+       BASE_URL = "https://jsonplaceholder.typicode.com"
    
-   # Define test function with endpoint and expected behavior
-   def test_api(endpoint, method, expected_status_code, expected_data=None):
-     # Build the complete URL
-     url = f"{base_url}/{endpoint}"
+       def test_get_posts(self):
+           # Test the /posts endpoint
+           response = requests.get(f"{self.BASE_URL}/posts")
+           self.assertEqual(response.status_code, 200)
+           self.assertIsInstance(response.json(), list)
+           self.assertGreater(len(response.json()), 0)
+           print("GET /posts passed")
    
-     # Send the request
-     response = requests.request(method, url)
+       def test_get_post_by_id(self):
+           # Test the /posts/1 endpoint
+           response = requests.get(f"{self.BASE_URL}/posts/1")
+           self.assertEqual(response.status_code, 200)
+           self.assertIsInstance(response.json(), dict)
+           self.assertEqual(response.json()['id'], 1)
+           print("GET /posts/1 passed")
    
-     # Validate status code
-     assert response.status_code == expected_status_code, f"Unexpected status code: {response.status_code}"
+       def test_create_post(self):
+           # Test the POST /posts endpoint
+           new_post = {
+               "title": "foo",
+               "body": "bar",
+               "userId": 1
+           }
+           response = requests.post(f"{self.BASE_URL}/posts", json=new_post)
+           self.assertEqual(response.status_code, 201)
+           response_json = response.json()
+           self.assertIsInstance(response_json, dict)
+           self.assertEqual(response_json['title'], new_post['title'])
+           self.assertEqual(response_json['body'], new_post['body'])
+           self.assertEqual(response_json['userId'], new_post['userId'])
+           print("POST /posts passed")
    
-     # Validate response data (if provided)
-     if expected_data:
-       response_data = response.json()
-       assert response_data == expected_data, f"Unexpected response data: {response_data}"
+       def test_update_post(self):
+           # Test the PUT /posts/1 endpoint
+           updated_post = {
+               "id": 1,
+               "title": "foo",
+               "body": "bar",
+               "userId": 1
+           }
+           response = requests.put(f"{self.BASE_URL}/posts/1", json=updated_post)
+           self.assertEqual(response.status_code, 200)
+           response_json = response.json()
+           self.assertIsInstance(response_json, dict)
+           self.assertEqual(response_json['title'], updated_post['title'])
+           self.assertEqual(response_json['body'], updated_post['body'])
+           self.assertEqual(response_json['userId'], updated_post['userId'])
+           print("PUT /posts/1 passed")
    
-   # Example test cases
-   test_api("/users", "GET", 200)  # Test GET for users endpoint
-   
-   # Example with expected data
-   user_data = {"name": "John Doe", "email": "john.doe@example.com"}
-   test_api("/users/1", "GET", 200, user_data)  # Test GET for specific user with expected data
-   
-   # Run the tests
-   print("Tests completed!")
-   ```
-   - **Sample prompt**: ```Write the API script that the above code would test.```
-   - **Test Code (Python)**:
-   ```python (with Flask)
-   # API script to test
-   from flask import Flask, jsonify, request
-   
-   app = Flask(__name__)
-   
-   # Sample user data (replace with your actual data storage)
-   users = [
-       {"id": 1, "name": "John Doe", "email": "john.doe@example.com"},
-   ]
-   
-   @app.route("/users", methods=["GET"])
-   def get_users():
-     """Returns a list of all users"""
-     return jsonify(users)
-   
-   @app.route("/users/<int:user_id>", methods=["GET"])
-   def get_user(user_id):
-     """Returns a specific user based on ID"""
-     user = [u for u in users if u["id"] == user_id]
-     if not user:
-       return jsonify({"error": "User not found"}), 404
-     return jsonify(user[0])
+       def test_delete_post(self):
+           # Test the DELETE /posts/1 endpoint
+           response = requests.delete(f"{self.BASE_URL}/posts/1")
+           self.assertEqual(response.status_code, 200)
+           print("DELETE /posts/1 passed")
    
    if __name__ == "__main__":
-     app.run(debug=True)
+       unittest.main()
    ```
+This script provides a basic structure for automated API testing using unittest and requests. You can extend it by adding more tests for different endpoints and scenarios.This script provides a basic structure for automated API testing using unittest and requests. You can extend it by adding more tests for different endpoints and scenarios.
 
-
-
-4. **Example: Testing Form Submission (JavaScript with Jest)**
+3. **Example: Testing Form Submission (JavaScript with Jest)**
 
    - **Description**: Automate testing of form submission in a web application using Jest, a JavaScript testing framework.
    - **Sample prompt**: ```Write a python script to automate testing of a RESTful API.```
