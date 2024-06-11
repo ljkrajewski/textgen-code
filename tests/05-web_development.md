@@ -244,34 +244,6 @@ Domain-specific tests in web development focus on evaluating specific functional
    if __name__ == "__main__":
        unittest.main()
    ```
-This script provides a basic structure for automated API testing using unittest and requests. You can extend it by adding more tests for different endpoints and scenarios.This script provides a basic structure for automated API testing using unittest and requests. You can extend it by adding more tests for different endpoints and scenarios.
-
-3. **Example: Testing Form Submission (JavaScript with Jest)**
-
-   - **Description**: Automate testing of form submission in a web application using Jest, a JavaScript testing framework.
-   - **Sample prompt**: ```Write a python script to automate testing of a RESTful API.```
-   - **Test Code (JavaScript with Jest)**:
-
-   ```javascript
-   // Assuming a web page with a form and submit button
-
-   test('Form Submission Test', async () => {
-     const form = document.querySelector('form');
-     const input = form.querySelector('input');
-     const button = form.querySelector('button');
-
-     input.value = 'test_input';
-     const submitEvent = new Event('submit');
-     form.dispatchEvent(submitEvent);
-
-     // Assuming the form submission triggers an API call or some action
-     await new Promise(resolve => setTimeout(resolve, 1000));
-
-     // Check if the form submission was successful (e.g., UI update)
-     expect(/* Check UI for expected change */).toBeTruthy();
-   });
-   ```
-
-   In this example, a Jest test checks if form submission triggers the expected action, such as an API call or UI update.
+   This script provides a basic structure for automated API testing using unittest and requests. You can extend it by adding more tests for different endpoints and scenarios.This script provides a basic structure for automated API testing using unittest and requests. You can extend it by adding more tests for different endpoints and scenarios.
 
 These examples showcase domain-specific tests for web development, including user registration/login, testing API endpoints, and form submission. The provided code demonstrates how to automate these tests using various tools and frameworks.
