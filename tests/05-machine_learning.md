@@ -99,37 +99,48 @@ This script calculates accuracy, a common metric. Depending on your problem, you
 2. **Example: Regression Model R-squared Test (Python with scikit-learn)**
 
    - **Description**: Evaluate the R-squared score of a regression model.
-   - **Sample Prompt**: ```xxx```
+   - **Sample Prompt**: ```Write a python script that demonstrates evaluating the R-squared score of a regression model.```
    - **Test Code (Python with scikit-learn)**:
 
    ```python
-   from sklearn.datasets import load_boston
+   import numpy as np
+   import pandas as pd
+   from sklearn import datasets
    from sklearn.model_selection import train_test_split
    from sklearn.linear_model import LinearRegression
    from sklearn.metrics import r2_score
-
-   def ml_ds_test_regression_r_squared():
-       # Load Boston housing dataset for regression
-       data = load_boston()
-       X, y = data.data, data.target
-
-       # Split data into training and testing sets
-       X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-       # Train a linear regression model
-       model = LinearRegression()
-       model.fit(X_train, y_train)
-
-       # Predict target values on the test set
-       y_pred = model.predict(X_test)
-
-       # Calculate R-squared score
-       r_squared = r2_score(y_test, y_pred)
-
-       assert r_squared >= 0.7  # Assuming we want R-squared greater than or equal to 0.7
+   
+   # Load the Boston housing dataset
+   data_url = "http://lib.stat.cmu.edu/datasets/boston"
+   raw_df = pd.read_csv(data_url, sep="\s+", skiprows=22, header=None)
+   X = data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
+   y = target = raw_df.values[1::2, 2]
+   
+   # Split the dataset into training and testing sets
+   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+   
+   # Initialize the regression model
+   regressor = LinearRegression()
+   
+   # Train the model
+   regressor.fit(X_train, y_train)
+   
+   # Make predictions on the test set
+   y_pred = regressor.predict(X_test)
+   
+   # Calculate the R-squared score
+   r2 = r2_score(y_test, y_pred)
+   
+   # Print the R-squared score
+   print(f"R-squared score: {r2:.2f}")
+   
+   # Example of making a single prediction
+   sample = np.array([[0.1, 20.0, 5.0, 1.0, 0.5, 6.0, 40.0, 4.0, 1.0, 300.0, 15.0, 400.0, 5.0]])  # Example input data
+   single_prediction = regressor.predict(sample)
+   print(f"Predicted house price for sample {sample}: {single_prediction[0]:.2f}")
    ```
 
-   In this example, we load the Boston housing dataset, split it into training and testing sets, train a linear regression model, and evaluate its R-squared score using `r2_score` from scikit-learn.
+   In this example, we load the Boston housing dataset, split it into training and testing sets, train a linear regression model, and evaluate its R-squared score using `r2_score` from scikit-learn. Be aware, the Boston housing dataset has been deprecated in _scikit-learn_ as of version 1.2.
 
 3. **Example: Cross-Validation Test (Python with scikit-learn)**
 
