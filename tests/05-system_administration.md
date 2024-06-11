@@ -1,3 +1,4 @@
+## System Administration and DevOps
 System administration and DevOps tests assess the ability to manage and automate tasks in a system or cloud environment. Please note, due to the nature of these specific scripts and the environments required to test them, they could not be tested like other scripts in this document. Any scripts written by an LLM should be reviewed and tested just as if they were written by a human.
 
 Here are three specific examples of tests for system administration and DevOps, along with sample code or instructions:
@@ -5,7 +6,7 @@ Here are three specific examples of tests for system administration and DevOps, 
 1. **Example: Automated Server Provisioning (Bash with AWS CLI)**
 
    - **Description**: Automate the process of provisioning a new server in AWS.
-
+   - **Sample Prompt**: ```xxx```
    - **Test Code (Bash with AWS CLI)**:
 
    ```bash
@@ -42,7 +43,7 @@ Here are three specific examples of tests for system administration and DevOps, 
 2. **Example: Continuous Integration/Continuous Deployment (CI/CD) Pipeline (Jenkins Pipeline)**
 
    - **Description**: Automate the process of building, testing, and deploying a web application using Jenkins.
-
+   - **Sample Prompt**: ```xxx```
    - **Jenkins Pipeline Code (Jenkinsfile)**:
 
    ```groovy
@@ -80,7 +81,7 @@ Here are three specific examples of tests for system administration and DevOps, 
 3. **Example: Backup and Restore Script (Bash)**
 
    - **Description**: Automate the process of backing up and restoring important files or databases.
-
+   - **Sample Prompt**: ```xxx```
    - **Bash Backup Script**:
 
    ```bash
