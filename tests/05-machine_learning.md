@@ -1,5 +1,7 @@
 ## Machine Learning and Data Science
-Machine learning and data science tests assess the effectiveness and accuracy of models and algorithms. Here are three specific examples of tests for machine learning and data science, along with sample code or instructions:
+Machine learning and data science tests assess the effectiveness and accuracy of models and algorithms. All of these examples use Scikit. When running these examples, ensure that scikit-learn is installed. ```pip install scikit-learn```
+
+Here are three specific examples of tests for machine learning and data science, along with sample code or instructions:
 
 1. **Example: Classification Accuracy Test (Python with scikit-learn)**
 
@@ -42,7 +44,7 @@ Machine learning and data science tests assess the effectiveness and accuracy of
    prediction = clf.predict(sample)
    print(f"Predicted class for sample {sample}: {prediction[0]} (0: Setosa, 1: Versicolor, 2: Virginica)")
    ```
-   This example uses scikit's iris data set consisting of 3 different types of irises’ (Setosa, Versicolour, and Virginica) petal and sepal length, stored in a 150x4 numpy.ndarray. Be sure to install scikit (_pip install scikit-learn_) before running the script.
+   This example uses scikit's iris data set consisting of 3 different types of irises’ (Setosa, Versicolour, and Virginica) petal and sepal length, stored in a 150x4 numpy.ndarray.
 
    - **Sample Prompt 2**: ```Provide an example of feature data (X) and target labels (Y) that can be used with this script.```
    - **Test Code (Python with scikit-learn)**:
@@ -93,7 +95,7 @@ Machine learning and data science tests assess the effectiveness and accuracy of
    print(f"Predicted class for sample {sample}: {prediction[0]} (0: Setosa, 1: Versicolor, 2: Virginica)")
    ```
 
-This script calculates accuracy, a common metric. Depending on your problem, you may want to use other metrics like precision, recall, F1-score, or ROC AUC. Scikit-learn provides functions for these metrics as well. Be sure to install scikit (_pip install scikit-learn_) before running the script.
+This script calculates accuracy, a common metric. Depending on your problem, you may want to use other metrics like precision, recall, F1-score, or ROC AUC. Scikit-learn provides functions for these metrics as well.
 
 
 2. **Example: Regression Model R-squared Test (Python with scikit-learn)**
