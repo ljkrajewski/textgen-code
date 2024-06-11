@@ -1,4 +1,4 @@
-System administration and DevOps tests assess the ability to manage and automate tasks in a system or cloud environment. Please note, these specific scripts could not be tested like other scripts in this document. Any scripts written by an LLM should be reviewed and tested just as if they were written by a human.
+System administration and DevOps tests assess the ability to manage and automate tasks in a system or cloud environment. Please note, due to the nature of these specific scripts and the environments required to test them, they could not be tested like other scripts in this document. Any scripts written by an LLM should be reviewed and tested just as if they were written by a human.
 
 Here are three specific examples of tests for system administration and DevOps, along with sample code or instructions:
 
