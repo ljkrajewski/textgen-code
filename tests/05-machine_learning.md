@@ -4,65 +4,97 @@ Machine learning and data science tests assess the effectiveness and accuracy of
 1. **Example: Classification Accuracy Test (Python with scikit-learn)**
 
    - **Description**: Evaluate the classification accuracy of a machine learning model.
-   - **Sample Prompt 1**: ```Write a python script to evaluate the classification accuracy of a machine learning model.```
-   - **Test Code (Python with scikit-learn)**:
+   - **Sample Prompt 1**: ```Write a working python script to demonstrate evaluating the classification accuracy of a machine learning model.```
+   - **Test Code (Python with scikit-learn)**:  
 
    ```python
+   import numpy as np
+   from sklearn import datasets
    from sklearn.model_selection import train_test_split
+   from sklearn.tree import DecisionTreeClassifier
    from sklearn.metrics import accuracy_score
    
-   # Load your data
-   X = # Your feature data
-   y = # Your target labels
+   # Load the Iris dataset
+   iris = datasets.load_iris()
+   X = iris.data
+   y = iris.target
    
-   # Split data into training and test sets
-   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+   # Split the dataset into training and testing sets
+   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
    
-   # Train your model (replace this with your model)
-   model = # Your machine learning model
+   # Initialize the classifier
+   clf = DecisionTreeClassifier(random_state=42)
    
-   # Train the model
-   model.fit(X_train, y_train)
+   # Train the classifier
+   clf.fit(X_train, y_train)
    
    # Make predictions on the test set
-   y_pred = model.predict(X_test)
+   y_pred = clf.predict(X_test)
    
-   # Evaluate accuracy
+   # Calculate the accuracy
    accuracy = accuracy_score(y_test, y_pred)
    
    # Print the accuracy
-   print("Accuracy:", accuracy)
+   print(f"Classification accuracy: {accuracy:.2f}")
+   
+   # Example of making a single prediction
+   sample = np.array([[5.1, 3.5, 1.4, 0.2]])  # Example input data
+   prediction = clf.predict(sample)
+   print(f"Predicted class for sample {sample}: {prediction[0]} (0: Setosa, 1: Versicolor, 2: Virginica)")
    ```
+   This example uses scikit's iris data set consisting of 3 different types of irises’ (Setosa, Versicolour, and Virginica) petal and sepal length, stored in a 150x4 numpy.ndarray. Be sure to install scikit (_pip install scikit-learn_) before running the script.
+
    - **Sample Prompt 2**: ```Provide an example of feature data (X) and target labels (Y) that can be used with this script.```
    - **Test Code (Python with scikit-learn)**:
    ```python
-   import pandas as pd
+   import numpy as np
+   from sklearn.model_selection import train_test_split
+   from sklearn.tree import DecisionTreeClassifier
+   from sklearn.metrics import accuracy_score
    
-   data = {
-       "Word_count": [200, 50, 120, 300, 100],
-       "Avg_sentence_length": [10, 5, 8, 15, 7],
-       "Has_capital_letters": [False, True, False, True, False],
-       "Has_urls": [True, False, True, True, False],
-       "Has_attachments": [False, False, True, False, True],
-       "Label": [0, 1, 0, 1, 0]  # 0: Not Spam, 1: Spam
-   }
+   # Example feature data (X)
+   X = np.array([
+       [5.1, 3.5, 1.4, 0.2],
+       [4.9, 3.0, 1.4, 0.2],
+       [4.7, 3.2, 1.3, 0.2],
+       [4.6, 3.1, 1.5, 0.2],
+       [5.0, 3.6, 1.4, 0.2],
+       [5.4, 3.9, 1.7, 0.4],
+       [4.6, 3.4, 1.4, 0.3],
+       [5.0, 3.4, 1.5, 0.2],
+       [4.4, 2.9, 1.4, 0.2],
+       [4.9, 3.1, 1.5, 0.1]
+   ])
    
-   df = pd.DataFrame(data)
+   # Example target labels (Y)
+   Y = np.array([0, 0, 0, 0, 0, 1, 1, 1, 2, 2])
    
-   # Separate features and target labels
-   X = df.drop("Label", axis=1)  # Features
-   y = df["Label"]  # Target labels
-   ```
-   - **Sample Prompt 3**: ```Give an example of a training model that can be plugged into this script.```
-   - **Test Code (Python with scikit-learn)**:
-   ```python
-   from sklearn.linear_model import LogisticRegression
+   # Split the dataset into training and testing sets
+   X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
    
-   # Replace the model line in your script with this:
-   model = LogisticRegression(solver='liblinear')
+   # Initialize the classifier
+   clf = DecisionTreeClassifier(random_state=42)
+   
+   # Train the classifier
+   clf.fit(X_train, y_train)
+   
+   # Make predictions on the test set
+   y_pred = clf.predict(X_test)
+   
+   # Calculate the accuracy
+   accuracy = accuracy_score(y_test, y_pred)
+   
+   # Print the accuracy
+   print(f"Classification accuracy: {accuracy:.2f}")
+   
+   # Example of making a single prediction
+   sample = np.array([[5.1, 3.5, 1.4, 0.2]])  # Example input data
+   prediction = clf.predict(sample)
+   print(f"Predicted class for sample {sample}: {prediction[0]} (0: Setosa, 1: Versicolor, 2: Virginica)")
    ```
 
-This script calculates accuracy, a common metric. Depending on your problem, you may want to use other metrics like precision, recall, F1-score, or ROC AUC. Scikit-learn provides functions for these metrics as well.
+This script calculates accuracy, a common metric. Depending on your problem, you may want to use other metrics like precision, recall, F1-score, or ROC AUC. Scikit-learn provides functions for these metrics as well. Be sure to install scikit (_pip install scikit-learn_) before running the script.
+
 
 2. **Example: Regression Model R-squared Test (Python with scikit-learn)**
 
