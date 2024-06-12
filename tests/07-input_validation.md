@@ -135,9 +135,9 @@ Input validation is a critical aspect of security as it helps protect against ma
       </html>
       ```
      To run the application:
-     1. ```python db_setup.py``` to set up the database.
-     2. ```python app.py``` to start the Flask application.
-     3. Open your web browser and go to ```http://127.0.0.1:5000/```  
+      1. ```python db_setup.py``` to set up the database.
+      2. ```python app.py``` to start the Flask application.
+      3. Open your web browser and go to ```http://127.0.0.1:5000/```  
      
      To test the application:
      - Use the vulnerable form to search for john_doe or jane_smith to see valid results.
@@ -149,29 +149,108 @@ Input validation is a critical aspect of security as it helps protect against ma
 2. **Example: Cross-Site Scripting (XSS) Prevention (JavaScript)**
 
    - **Description**: Test a web application to ensure it properly validates and escapes user input to prevent cross-site scripting attacks.
-   - **Sample Prompt**: ```xxx```
-   - **Test Code (JavaScript)**:
-
-   ```javascript
-   function validate_input(input_value) {
-       // Assuming input_value is user-provided data to be displayed on a web page
-       const sanitized_input = escapeHtml(input_value);
-
-       // Display sanitized input on the page
-       document.getElementById('output').innerHTML = sanitized_input;
-   }
-
-   function escapeHtml(unsafe) {
-       return unsafe
-           .replace(/&/g, "&amp;")
-           .replace(/</g, "&lt;")
-           .replace(/>/g, "&gt;")
-           .replace(/"/g, "&quot;")
-           .replace(/'/g, "&#039;");
-   }
-   ```
-
-   In this example, the `validate_input` function takes user input (`input_value`) and uses the `escapeHtml` function to escape special characters to prevent them from being interpreted as HTML or JavaScript. This helps prevent XSS attacks.
+   - **Sample Prompt**: ```Write a working flask application to demonstrate cross-site scripting and how to prevent it.```
+   - **Test Code (Python with Flask)**:
+     - **Flask Application (app.py)**
+      ```python
+      # app.py
+      from flask import Flask, request, render_template, escape
+      app = Flask(__name__)
+      
+      comments = []
+      
+      @app.route('/')
+      def index():
+          return render_template('index.html', comments=comments)
+      
+      @app.route('/submit_vulnerable', methods=['POST'])
+      def submit_vulnerable():
+          comment = request.form['comment']
+          comments.append({'content': comment, 'safe': False})
+          return render_template('result.html', comments=comments)
+      
+      @app.route('/submit_secure', methods=['POST'])
+      def submit_secure():
+          comment = request.form['comment']
+          comments.append({'content': escape(comment), 'safe': True})
+          return render_template('result.html', comments=comments)
+      
+      if __name__ == '__main__':
+          app.run(debug=True)
+     ```
+     - **templates/index.html**
+      ```html
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <title>XSS Demonstration</title>
+      </head>
+      <body>
+          <h1>XSS Demonstration</h1>
+          <h2>Submit a Comment</h2>
+          <form action="/submit_vulnerable" method="post">
+              <label for="comment">Comment (Vulnerable):</label><br>
+              <textarea id="comment" name="comment"></textarea><br>
+              <button type="submit">Submit</button>
+          </form>
+          <br>
+          <form action="/submit_secure" method="post">
+              <label for="comment">Comment (Secure):</label><br>
+              <textarea id="comment" name="comment"></textarea><br>
+              <button type="submit">Submit</button>
+          </form>
+          <h2>Comments</h2>
+          <ul>
+              {% for comment in comments %}
+                  <li>
+                      {% if comment.safe %}
+                          {{ comment.content }}
+                      {% else %}
+                          {{ comment.content|safe }}
+                      {% endif %}
+                  </li>
+              {% endfor %}
+          </ul>
+      </body>
+      </html>
+      ```
+     - **templates/result.html**
+      ```html
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <title>XSS Demonstration Result</title>
+      </head>
+      <body>
+          <h1>XSS Demonstration</h1>
+          <h2>Comments</h2>
+          <ul>
+              {% for comment in comments %}
+                  <li>
+                      {% if comment.safe %}
+                          {{ comment.content }}
+                      {% else %}
+                          {{ comment.content|safe }}
+                      {% endif %}
+                  </li>
+              {% endfor %}
+          </ul>
+          <a href="/">Go Back</a>
+      </body>
+      </html>
+      ```
+     To run the application:
+      1. ```python app.py``` to start the Flask application.
+      2. Open your web browser and go to ```http://127.0.0.1:5000/```  
+     
+     To test the application:
+      - Use the vulnerable form to submit a regular comment and an XSS attack, e.g., <script>alert('XSS');</script>.
+      - Observe that the XSS payload gets executed, demonstrating the vulnerability.
+      - Use the secure form to submit the same XSS payload and notice that it gets displayed as plain text, demonstrating the protection against XSS.
+   
+     This demonstrates the importance of escaping user input to protect against Cross-Site Scripting (XSS) attacks.
 
 5. **Example: File Upload Security (Python with Flask)**
 
