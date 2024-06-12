@@ -3,38 +3,105 @@ Access control is a crucial aspect of security, ensuring that only authorized us
 1. **Example: Role-Based Access Control (RBAC) in a Web Application (Python with Flask)**
 
    - **Description**: Test a web application to ensure that access to certain routes or functionalities is restricted based on user roles.
-
-   - **Test Code (Python with Flask)**:
-
-   ```python
-   from flask import Flask, request, abort
-
-   app = Flask(__name__)
-
-   def check_user_role(username, required_role):
-       # Assuming user roles are stored in a database or another data source
-       user_roles = {'admin': 'admin', 'user1': 'user', 'user2': 'user'} 
-
-       if username in user_roles and user_roles[username] == required_role:
-           return True
-       else:
-           abort(403)  # Access forbidden
-
-   @app.route('/admin_dashboard')
-   def admin_dashboard():
-       username = request.args.get('username')
-       if check_user_role(username, 'admin'):
-           return f"Welcome to the admin dashboard, {username}!"
-   
-   @app.route('/user_dashboard')
-   def user_dashboard():
-       username = request.args.get('username')
-       if check_user_role(username, 'user'):
-           return f"Welcome to the user dashboard, {username}!"
-
-   if __name__ == '__main__':
-       app.run()
-   ```
+   - **Sample Prompt**: ```Write a working demonstration of testing a web application to ensure that access to certain routes or functionalities are restricted based on user roles.```
+   - **Test Code (Python with Flask and PyTest)**: Ensure PyTest and Flask are installed. (```pip install pytest flask-testing```)
+     - **app.py**
+      ```python
+      from flask import Flask, jsonify, request, abort
+      from functools import wraps
+      
+      app = Flask(__name__)
+      
+      # In-memory user store
+      users = {
+          "admin": {"password": "adminpass", "role": "admin"},
+          "user": {"password": "userpass", "role": "user"}
+      }
+      
+      # Dummy login function to simulate user login
+      def login(username, password):
+          user = users.get(username)
+          if user and user["password"] == password:
+              return {"username": username, "role": user["role"]}
+          return None
+      
+      # Role-based access control decorator
+      def role_required(role):
+          def decorator(f):
+              @wraps(f)
+              def decorated_function(*args, **kwargs):
+                  auth = request.authorization
+                  if not auth or not login(auth.username, auth.password):
+                      return abort(401)
+                  user = login(auth.username, auth.password)
+                  if user["role"] != role:
+                      return abort(403)
+                  return f(*args, **kwargs)
+              return decorated_function
+          return decorator
+      
+      @app.route('/admin')
+      @role_required('admin')
+      def admin_route():
+          return jsonify({"message": "Welcome, admin!"})
+      
+      @app.route('/user')
+      @role_required('user')
+      def user_route():
+          return jsonify({"message": "Welcome, user!"})
+      
+      @app.route('/public')
+      def public_route():
+          return jsonify({"message": "Welcome, guest!"})
+      
+      if __name__ == '__main__':
+          app.run()
+      ```
+      - **test_app.py**
+      ```python
+      import pytest
+      from flask import Flask
+      from app import app
+      
+      @pytest.fixture
+      def client():
+          app.config['TESTING'] = True
+          with app.test_client() as client:
+              yield client
+      
+      def test_public_route(client):
+          response = client.get('/public')
+          assert response.status_code == 200
+          assert response.get_json() == {"message": "Welcome, guest!"}
+      
+      def test_user_route_with_user_role(client):
+          response = client.get('/user', headers={'Authorization': 'Basic dXNlcjp1c2VycGFzcw=='}) # user:userpass
+          assert response.status_code == 200
+          assert response.get_json() == {"message": "Welcome, user!"}
+      
+      def test_user_route_with_admin_role(client):
+          response = client.get('/user', headers={'Authorization': 'Basic YWRtaW46YWRtaW5wYXNz'}) # admin:adminpass
+          assert response.status_code == 403
+      
+      def test_admin_route_with_admin_role(client):
+          response = client.get('/admin', headers={'Authorization': 'Basic YWRtaW46YWRtaW5wYXNz'}) # admin:adminpass
+          assert response.status_code == 200
+          assert response.get_json() == {"message": "Welcome, admin!"}
+      
+      def test_admin_route_with_user_role(client):
+          response = client.get('/admin', headers={'Authorization': 'Basic dXNlcjp1c2VycGFzcw=='}) # user:userpass
+          assert response.status_code == 403
+      
+      def test_admin_route_without_auth(client):
+          response = client.get('/admin')
+          assert response.status_code == 401
+      
+      def test_user_route_without_auth(client):
+          response = client.get('/user')
+          assert response.status_code == 401
+      ```
+   To run the tests:
+   - Run ```pytest test_app.py```
 
    In this example, the `check_user_role` function verifies if a user has the required role to access a specific route. If not, it aborts the request with a 403 Forbidden error. The routes `/admin_dashboard` and `/user_dashboard` demonstrate access control based on user roles.
 
@@ -70,7 +137,7 @@ Access control is a crucial aspect of security, ensuring that only authorized us
 
    In this example, the `authenticate_api_key` function verifies if the provided API key matches the expected key. If not, it aborts the request with a 401 Unauthorized error. The `/protected_endpoint` route demonstrates access control based on API key authentication.
 
-3. **Example: File System Access Control (Python)**
+4. **Example: File System Access Control (Python)**
 
    - **Description**: Test a script to ensure that only authorized users have access to certain files or directories.
 
