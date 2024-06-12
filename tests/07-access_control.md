@@ -101,11 +101,12 @@ Access control is a crucial aspect of security, ensuring that only authorized us
           assert response.status_code == 401
       ```
    To run the tests:
+   - Start the web app with ```python app.py```
    - Run ```pytest test_app.py```
 
    In this example, the `check_user_role` function verifies if a user has the required role to access a specific route. If not, it aborts the request with a 403 Forbidden error. The routes `/admin_dashboard` and `/user_dashboard` demonstrate access control based on user roles.
 
-2. **Example: API Access Control (Python with Flask)**
+3. **Example: API Access Control (Python with Flask)**
 
    - **Description**: Test an API to ensure that only authenticated users with the correct API key have access to certain endpoints.
 
