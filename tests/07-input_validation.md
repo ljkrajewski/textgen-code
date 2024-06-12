@@ -134,14 +134,19 @@ Input validation is a critical aspect of security as it helps protect against ma
       </body>
       </html>
       ```
-  To run the application:
-  1. ```python db_setup.py``` to set up the database.
-  2. ```python app.py``` to start the Flask application.  
-  
-  To test the application:
-  
+     To run the application:
+     1. ```python db_setup.py``` to set up the database.
+     2. ```python app.py``` to start the Flask application.
+     3. Open your web browser and go to ```http://127.0.0.1:5000/```  
+     
+     To test the application:
+     - Use the vulnerable form to search for john_doe or jane_smith to see valid results.
+     - Try a SQL injection attack using the vulnerable form, e.g., john_doe' OR '1'='1.
+     - Use the secure form to demonstrate that the SQL injection attack does not work.
+   
+     This demonstrates the importance of using parameterized queries to protect against SQL injection attacks.  
 
-4. **Example: Cross-Site Scripting (XSS) Prevention (JavaScript)**
+2. **Example: Cross-Site Scripting (XSS) Prevention (JavaScript)**
 
    - **Description**: Test a web application to ensure it properly validates and escapes user input to prevent cross-site scripting attacks.
    - **Sample Prompt**: ```xxx```
