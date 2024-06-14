@@ -10,3 +10,7 @@ The following conditions can increase the impact of this vulnerability:
 - 3rd party plugins do not adequately validate inputs.
 
 ### Examples
+- **Example #1**: An application utilizes an LLM plugin to generate responses for a chatbot feature. The plugin also offers a number of administrative functions accessible to another privileged LLM. The general purpose LLM directly passes its response, without proper output validation, to the plugin causing the plugin to shut down for maintenance.
+- **Example #2**: A user utilizes a website summarizer tool powered by an LLM to generate a concise summary of an article. The website includes a prompt injection instructing the LLM to capture sensitive content from either the website or from the user's conversation. From there the LLM can encode the sensitive data and send it, without any output validation or filtering, to an attacker-controlled server.
+- **Example #3**:
+- **Example #4**: 
