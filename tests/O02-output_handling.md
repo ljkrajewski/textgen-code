@@ -8,3 +8,5 @@ The following conditions can increase the impact of this vulnerability:
 - The application grants the LLM privileges beyond what is intended for end users, enabling escalation of privileges or remote code execution.
 - The application is vulnerable to indirect prompt injection attacks, which could allow an attacker to gain privileged access to a target user's environment.
 - 3rd party plugins do not adequately validate inputs.
+
+### Examples
