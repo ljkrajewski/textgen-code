@@ -180,3 +180,5 @@ on a visited website exploits this plugin, leading to unauthorized purchases.
   - _User Confirmation_: Require explicit user confirmation for sensitive actions, such as finalizing a purchase, especially if multiple items or large quantities are involved.
     
   By implementing these protections, e-commerce sites can significantly reduce the risk of unauthorized purchases via malicious exploitation of LLM plugins.
+
+- **Example #5**:  A rogue instruction and content embedded on a visited website exploits other plugins to scam users.
