@@ -132,11 +132,22 @@ The following conditions can increase the impact of this vulnerability:
      - _Alice_: A regular user who wants to query the database.
      - _Bob_: A malicious actor who wants to delete all database tables.
    - Steps
-     1. _Bob's Malicious Request_: Bob requests a query to delete all database tables using the LLM.
-     2. _LLM's Response_: The LLM generates the SQL query based on Bob's request without proper validation or scrutiny.
-     3. _Execution_: The generated query is executed on the backend database, resulting in the deletion of all tables.
+     1. _Bob's Malicious Request_: Bob requests a query to delete all database tables using the LLM.  
+        - _Bob asks the LLM: "Can you create a query to delete all database tables?"_
+     2. _LLM's Response_: The LLM generates the SQL query based on Bob's request without proper validation or scrutiny.  
+        - _The LLM responds with: "DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS orders; DROP TABLE IF EXISTS products;"_
+     3. _Execution_: The generated query is executed on the backend database, resulting in the deletion of all tables.  
+        - _The generated query is executed without any validation, resulting in the deletion of the_ users, orders, _and_ products _tables in the database._
 
-  **Mitigation**
+  **Mitigation**  
+  To prevent such vulnerabilities:
+  - _Query Validation_: Implement strict validation to ensure that generated SQL queries do not contain destructive commands like DROP TABLE, DELETE, or TRUNCATE.
+  - _Role-based Access Control_: Restrict the types of queries users can request based on their roles. Regular users should not be able to perform administrative tasks.
+  - _Whitelisting_: Use a whitelist approach where only approved SQL commands can be executed.
+  - _Parameterized Queries_: Ensure that the LLM generates parameterized queries to prevent SQL injection and limit the scope of executable commands.
+  - _User Confirmation_: For any potentially destructive actions, require explicit confirmation from an authenticated administrator.
+
+  By implementing these safeguards, the system can mitigate the risk of executing harmful queries and protect the integrity of the database.
   
 - **Example #4**: A web app uses an LLM to generate content from user text prompts without output sanitization. An attacker could submit a crafted prompt causing the LLM to return an unsanitized JavaScript payload, leading to XSS when rendered on a victim's browser. Insufficient validation of prompts enabled this attack.
 
