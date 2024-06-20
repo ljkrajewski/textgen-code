@@ -125,13 +125,13 @@ The following conditions can increase the impact of this vulnerability:
 - **Example #3**: An LLM allows users to craft SQL queries for a backend database through a chat-like feature. A user requests a query to delete all database tables. If the crafted query from the LLM is not scrutinized, then all database tables will be deleted.
 
   **Sample**
-  - Setup
+  - **Setup**
     - _LLM-based SQL Query Tool_: An interface where users can request SQL queries through an LLM.
     - _Backend Database_: A database with several tables that store important data.
-   - Actors
+   - **Actors**
      - _Alice_: A regular user who wants to query the database.
      - _Bob_: A malicious actor who wants to delete all database tables.
-   - Steps
+   - **Steps**
      1. _Bob's Malicious Request_: Bob requests a query to delete all database tables using the LLM.  
         - _Bob asks the LLM: "Can you create a query to delete all database tables?"_
      2. _LLM's Response_: The LLM generates the SQL query based on Bob's request without proper validation or scrutiny.  
@@ -152,6 +152,33 @@ The following conditions can increase the impact of this vulnerability:
 - **Example #4**: A web app uses an LLM to generate content from user text prompts without output sanitization. An attacker could submit a crafted prompt causing the LLM to return an unsanitized JavaScript payload, leading to XSS when rendered on a victim's browser. Insufficient validation of prompts enabled this attack.
 
   **Sample**
+  - **Setup**
+    - _Web Application_: Allows users to submit text prompts to generate content.
+    - _LLM_: Generates content based on user prompts.
+    - _Vulnerability_: The web application does not sanitize the output from the LLM before rendering it in the browser.
+  - **Actors**
+    - _Alice_: A regular user who uses the web application to generate content.
+    - _Eve_: A malicious actor who wants to execute malicious JavaScript in Alice's browser.
+  - **Steps**
+    1. _Eve's Malicious Prompt_: Eve submits a prompt to the web application designed to inject JavaScript into the generated content.
+       - _Eve submits the following prompt to the web application:_ ```<script>alert('XSS');</script>```
+    2. _LLM's Response_: The LLM generates a response that includes the unsanitized JavaScript payload.
+       - _The LLM generates the content based on Eve's prompt. Because the LLM does not filter out harmful scripts, it includes the_ <script> _tags in its output._
+    3. _Web Application Rendering_: The web application renders the LLM's response without sanitizing it, leading to the execution of Eve's malicious JavaScript in Alice's browser.
+       - _The web application renders the generated content directly in the HTML without sanitizing it._
+         ```html
+         <html>
+             <body>
+                 <h1>Generated Content</h1>
+                 <div><script>alert('XSS');</script></div>
+             </body>
+         </html>
+         ```
+     4. _XSS Execution_: When Alice visits the page, the script is executed in her browser, displaying an alert box with the message "XSS". This demonstrates a successful XSS attack, which could be used for more malicious purposes such as stealing cookies or session tokens.
 
   **Mitigation**
-  
+  To prevent such vulnerabilities:
+  - _Output Sanitization_: Always sanitize the LLM's output before rendering it in the browser. Use libraries such as bleach in Python to escape or remove potentially dangerous HTML and JavaScript.
+  - _Content Security Policy (CSP)_: Implement a strong Content Security Policy to restrict the execution of scripts on your web pages.
+  - _Input Validation_: Validate and sanitize user inputs to prevent malicious data from being processed by the LLM.
+  - _Escaping Output_: Ensure that any dynamic content inserted into HTML is properly escaped to prevent execution of unintended scripts.
