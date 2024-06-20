@@ -125,6 +125,16 @@ The following conditions can increase the impact of this vulnerability:
 - **Example #3**: An LLM allows users to craft SQL queries for a backend database through a chat-like feature. A user requests a query to delete all database tables. If the crafted query from the LLM is not scrutinized, then all database tables will be deleted.
 
   **Sample**
+  - Setup
+    - _LLM-based SQL Query Tool_: An interface where users can request SQL queries through an LLM.
+    - _Backend Database_: A database with several tables that store important data.
+   - Actors
+     - _Alice_: A regular user who wants to query the database.
+     - _Bob_: A malicious actor who wants to delete all database tables.
+   - Steps
+     1. _Bob's Malicious Request_: Bob requests a query to delete all database tables using the LLM.
+     2. _LLM's Response_: The LLM generates the SQL query based on Bob's request without proper validation or scrutiny.
+     3. _Execution_: The generated query is executed on the backend database, resulting in the deletion of all tables.
 
   **Mitigation**
   
