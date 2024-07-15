@@ -49,7 +49,7 @@ This manipulates a large language model (LLM) through crafty inputs, causing uni
 This vulnerability occurs when an LLM output is accepted without scrutiny, exposing backend systems. Misuse may lead to severe consequences like XSS, CSRF, SSRF, privilege escalation, or remote code execution.
 3. [**Training Data Poisoning**](O03-data_poisoning.md)  
 This occurs when LLM training data is tampered, introducing vulnerabilities or biases that compromise security, effectiveness, or ethical behavior. Sources include Common Crawl, WebText, OpenWebText, & books.
-4. [**Model Denial of Service**](O04-model_dos.md)  
+4. [**Model Denial of Service**](O04-mdos_vulnerability.md)  
 Attackers cause resource-heavy operations on LLMs, leading to service degradation or high costs. The vulnerability is magnified due to the resource-intensive nature of LLMs and unpredictability of user inputs.
 5. [**Supply Chain Vulnerabilities**](O05-supply_chain.md)  
 LLM application lifecycle can be compromised by vulnerable components or services, leading to security attacks. Using third-party datasets, pre- trained models, and plugins can add vulnerabilities.
