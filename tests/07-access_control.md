@@ -182,32 +182,85 @@ Access control is a crucial aspect of security, ensuring that only authorized us
        }
        ```
 
-   In this example, the `authenticate_api_key` function verifies if the provided API key matches the expected key. If not, it aborts the request with a 401 Unauthorized error. The `/protected_endpoint` route demonstrates access control based on API key authentication.
+   **Explanaion**
+   - **API Keys**: The API_KEYS dictionary contains the valid API keys and their corresponding users. In a real application, these keys should be stored securely.
+   - **Checking API Key**: The check_api_key function checks if the provided API key exists in the API_KEYS dictionary.
+   - **Public Endpoint**: The /public endpoint is accessible to anyone without an API key.
+   - **Private Endpoint**: The /private endpoint requires an API key. If the API key is missing or invalid, the server returns a 401 or 403 status code respectively. If the API key is valid, the endpoint returns a welcome message including the user's name.
+
+This is a basic demonstration. In a production environment, you should consider additional security measures, such as storing API keys securely, using HTTPS, and implementing rate limiting.
 
 3. **Example: File System Access Control (Python)**
 
    - **Description**: Test a script to ensure that only authorized users have access to certain files or directories.
-
+   - **Sample Prompt**: ```Write a python script to test that only authorized users have access to certain files or directories.```
    - **Test Code (Python)**:
 
    ```python
    import os
-
-   def read_sensitive_file(file_path, user):
-       # Assuming user permissions are stored in a database or another data source
-       user_permissions = {'admin': ['/etc/passwd'], 'user1': ['/etc/hosts']} 
-
-       if user in user_permissions and file_path in user_permissions[user]:
-           with open(file_path, 'r') as file:
-               content = file.read()
-           return content
+   import stat
+   import pwd
+   import grp
+   
+   def get_user_info(username):
+       try:
+           user_info = pwd.getpwnam(username)
+           return user_info.pw_uid, user_info.pw_gid
+       except KeyError:
+           raise ValueError(f"User '{username}' not found.")
+   
+   def check_permissions(path, username):
+       if not os.path.exists(path):
+           raise FileNotFoundError(f"Path '{path}' does not exist.")
+   
+       file_stat = os.stat(path)
+       file_mode = file_stat.st_mode
+   
+       uid, gid = get_user_info(username)
+       file_uid = file_stat.st_uid
+       file_gid = file_stat.st_gid
+   
+       # Check owner permissions
+       if file_uid == uid:
+           owner_perms = (file_mode & stat.S_IRWXU) >> 6
+           if owner_perms & stat.S_IRUSR:
+               return True
+   
+       # Check group permissions
+       if file_gid == gid:
+           group_perms = (file_mode & stat.S_IRWXG) >> 3
+           if group_perms & stat.S_IRGRP:
+               return True
+   
+       # Check others permissions
+       others_perms = file_mode & stat.S_IRWXO
+       if others_perms & stat.S_IROTH:
+           return True
+   
+       return False
+   
+   def main():
+       # Example usage
+       path = "/content/sample_data"
+       username = "nobody"
+   
+       if check_permissions(path, username):
+           print(f"User '{username}' has access to '{path}'.")
        else:
-           return "Access denied"
-
-   result = read_sensitive_file('/etc/passwd', 'admin')
-   print(result)
+           print(f"User '{username}' does not have access to '{path}'.")
+   
+   if __name__ == "__main__":
+       main()
    ```
 
-   In this example, the `read_sensitive_file` function checks if a user has permission to read a specific file. If not, it returns an "Access denied" message.
+   In this script:
+   - _get_user_info(username)_: Retrieves the user ID and group ID of the given username.
+   - _check_permissions(path, username)_: Checks if the user has read access to the specified path by evaluating the file's owner, group, and others permissions.
+   - _main()_: Demonstrates how to use the check_permissions function.
+   
+   Replace "/content/sample_data" with the actual path you want to check and "nobody" with the username you want to test.
 
+   This script only checks read access, but you can modify it to check for write or execute permissions by changing the relevant stat constants (stat.S_IWUSR, stat.S_IXUSR, etc.).
+   
 These examples demonstrate access control techniques to enhance security, including role-based access control in a web application, API key authentication, and file system access control. The provided code illustrates how to implement these access control measures.
+
