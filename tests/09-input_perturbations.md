@@ -3,7 +3,7 @@ Input perturbations are used to test the robustness of machine learning models a
 1. **Example: Adversarial Input Generation for Image Classification (Python with TensorFlow and CleverHans)**
 
    - **Description**: Generate adversarial examples to test the robustness of an image classification model against small perturbations.
-
+   - **Sample prompt**: 
    - **Test Code (Python with TensorFlow and CleverHans)**:
 
    Install TensorFlow and CleverHans using `pip install tensorflow cleverhans`.
@@ -35,7 +35,7 @@ Input perturbations are used to test the robustness of machine learning models a
 2. **Example: Text Classification with Adversarial Perturbations (Python with TextAttack)**
 
    - **Description**: Generate adversarial text examples to test the robustness of a text classification model.
-
+   - **Sample prompt**: 
    - **Test Code (Python with TextAttack)**:
 
    Install TextAttack using `pip install textattack`.
@@ -66,7 +66,7 @@ Input perturbations are used to test the robustness of machine learning models a
 3. **Example: Speech Recognition with Adversarial Noise (Python with Adversarial Robustness Toolbox)**
 
    - **Description**: Add adversarial noise to audio input to test the robustness of a speech recognition model.
-
+   - **Sample prompt**: 
    - **Test Code (Python with Adversarial Robustness Toolbox)**:
 
    Install Adversarial Robustness Toolbox using `pip install adversarial-robustness-toolbox`.
