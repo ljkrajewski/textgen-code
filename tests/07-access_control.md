@@ -107,39 +107,84 @@ Access control is a crucial aspect of security, ensuring that only authorized us
 
    This setup provides a solid foundation for testing role-based access control in a Flask web application..
 
-3. **Example: API Access Control (Python with Flask)**
+2. **Example: API Access Control (Python with Flask)**
 
    - **Description**: Test an API to ensure that only authenticated users with the correct API key have access to certain endpoints.
-
+   - **Sample Prompt**: ```Write a working demonstration of how only authenticated users with the correct API key can have access to certain endpoints.```
    - **Test Code (Python with Flask)**:
 
    ```python
-   from flask import Flask, request, abort
-
+   from flask import Flask, request, jsonify
+   
    app = Flask(__name__)
-
-   API_KEY = 'my_secret_api_key'
-
-   def authenticate_api_key(api_key):
-       if api_key == API_KEY:
-           return True
-       else:
-           abort(401)  # Unauthorized access
-
-   @app.route('/protected_endpoint')
-   def protected_endpoint():
-       api_key = request.headers.get('Authorization')
-
-       if authenticate_api_key(api_key):
-           return "Access granted!"
+   
+   # This is a hardcoded example of an API key. In a real application,
+   # you would store these securely, such as in an environment variable
+   # or a database.
+   API_KEYS = {
+       "123456": "user1",
+       "abcdef": "user2"
+   }
+   
+   def check_api_key(api_key):
+       return API_KEYS.get(api_key)
+   
+   @app.route('/public')
+   def public_endpoint():
+       return jsonify(message="This is a public endpoint, no API key required.")
+   
+   @app.route('/private')
+   def private_endpoint():
+       api_key = request.headers.get('X-API-KEY')
+       if not api_key:
+           return jsonify(message="API key is missing."), 401
+       
+       user = check_api_key(api_key)
+       if not user:
+           return jsonify(message="Invalid API key."), 403
+       
+       return jsonify(message=f"This is a private endpoint. Welcome {user}!")
    
    if __name__ == '__main__':
-       app.run()
+       app.run(debug=True)
    ```
+
+   To test the code,
+   - Start the application:
+     ```python app.py```
+   - Run the following commands to test access:
+     - ```curl http://localhost:5000/public```  
+       Response:
+       ```
+       {
+         "message": "This is a public endpoint, no API key required."
+       }
+       ```
+     - ```curl http://localhost:5000/private```  
+       Response:
+       ```
+       {
+         "message": "API key is missing."
+       }
+       ```
+     - ```curl -H "X-API-KEY: wrongkey" http://127.0.0.1:5000/private```  
+       Response:
+       ```
+       {
+         "message": "Invalid API key."
+       }
+       ```
+     - ```curl -H "X-API-KEY: 123456" http://127.0.0.1:5000/private```  
+       Response:
+       ```
+       {
+         "message": "This is a private endpoint. Welcome user1!"
+       }
+       ```
 
    In this example, the `authenticate_api_key` function verifies if the provided API key matches the expected key. If not, it aborts the request with a 401 Unauthorized error. The `/protected_endpoint` route demonstrates access control based on API key authentication.
 
-4. **Example: File System Access Control (Python)**
+3. **Example: File System Access Control (Python)**
 
    - **Description**: Test a script to ensure that only authorized users have access to certain files or directories.
 
