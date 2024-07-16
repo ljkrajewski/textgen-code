@@ -1,7 +1,7 @@
 ## Access control
 Access control is a crucial aspect of security, ensuring that only authorized users or systems have access to certain resources. Here are three specific examples of access control for security tests, along with sample code or instructions:
 
-1. **Example: Role-Based Access Control (RBAC) in a Web Application (Python with Flask)**
+1. **Example: Role-Based Access Control (RBAC) in a Web Application**
 
    - **Description**: Test a web application to ensure that access to certain routes or functionalities is restricted based on user roles.
    - **Sample Prompt**: ```Write a working demonstration of testing a web application to ensure that access to certain routes or functionalities are restricted based on user roles.```
