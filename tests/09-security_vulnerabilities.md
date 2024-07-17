@@ -3,7 +3,7 @@ Here are three specific examples of security vulnerabilities that can be tested 
 1. **Example: Cross-Site Scripting (XSS) Vulnerability**
 
    - **Description**: Test a web application for vulnerabilities related to Cross-Site Scripting, where an attacker injects malicious scripts into a webpage.
-
+   - **Sample Prompt**: 
    - **Test Code (JavaScript)**:
 
    ```javascript
@@ -22,7 +22,7 @@ Here are three specific examples of security vulnerabilities that can be tested 
 2. **Example: SQL Injection Vulnerability**
 
    - **Description**: Test a web application for vulnerabilities related to SQL Injection, where an attacker manipulates input to execute malicious SQL queries.
-
+   - **Sample Prompt**: 
    - **Test Code (Python with Flask and SQLAlchemy)**:
 
    ```python
@@ -43,7 +43,7 @@ Here are three specific examples of security vulnerabilities that can be tested 
 3. **Example: Remote Code Execution (RCE) Vulnerability**
 
    - **Description**: Test a system for vulnerabilities related to Remote Code Execution, where an attacker can execute arbitrary code on a server.
-
+   - **Sample Prompt**: 
    - **Test Code (Python)**:
 
    ```python
