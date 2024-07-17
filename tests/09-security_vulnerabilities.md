@@ -160,19 +160,49 @@ Here are three specific examples of security vulnerabilities that can be tested 
 4. **Example: Remote Code Execution (RCE) Vulnerability**
 
    - **Description**: Test a system for vulnerabilities related to Remote Code Execution, where an attacker can execute arbitrary code on a server.
-   - **Sample Prompt**: 
+   - **Sample Prompt**: ```Write a simple web application that demonstrates Remote Code Execution and a python script that tests that application for Remote Code Execution vulnerabilities.```
    - **Test Code (Python)**:
 
+   **app.py**:
    ```python
-   # Example vulnerable code
-   def process_user_input(input_data):
-       exec(input_data)
-
-   # Injected malicious code by an attacker
-   malicious_code = "__import__('os').system('rm -rf /')"
-   process_user_input(malicious_code)
+   from flask import Flask, request
+   
+   app = Flask(__name__)
+   
+   @app.route("/", methods=["GET"])
+   def index():
+       return "Hello, World!"
+   
+   @app.route("/exec", methods=["POST"])
+   def exec_code():
+       code = request.form["code"]
+       result = eval(code)
+       return f"Result: {result}"
+   
+   if __name__ == "__main__":
+       app.run()
    ```
 
-   In this example, an attacker injects code that could potentially have destructive effects. This can be tested by injecting the malicious code and observing if it executes on the server.
+   This application has two routes: `/` and `/exec`. The `/` route returns a simple message, while the `/exec` route takes a piece of Python code as input, evaluates it using `eval()`, and returns the result.
+   
+   **testing.py**
+   ```python
+   import requests
+   
+   # Set up the URL and payload for the request
+   url = "http://localhost:5000/exec"
+   payload = {"code": "__import__('os').system('ls -la')"}
+   
+   # Make the request and get the response
+   response = requests.post(url, data=payload)
+   
+   # Check if the response contains the expected result
+   if "Result: None" in response.text:
+       print("Remote Code Execution vulnerability detected!")
+   else:
+       print("No Remote Code Execution vulnerability detected.")
+   ```
+
+   This script makes a POST request to the `/exec` route of the application with a piece of Python code that imports the `os` module and executes the `ls -la` command. If the response contains the expected result (i.e., "Result: None"), then it means that the application is vulnerable to Remote Code Execution attacks.
 
 It's important to note that these examples demonstrate how vulnerabilities can be exploited adversarially. In practice, identifying and mitigating such vulnerabilities is critical to ensuring the security of applications and systems. Security testing should be conducted responsibly and with proper authorization.
