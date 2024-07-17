@@ -1,3 +1,5 @@
+## Security Vulnerabilities
+
 Here are three specific examples of security vulnerabilities that can be tested for adversarially, along with sample code or instructions:
 
 1. **Example: Cross-Site Scripting (XSS) Vulnerability**
