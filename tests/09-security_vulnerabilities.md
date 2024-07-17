@@ -3,23 +3,58 @@ Here are three specific examples of security vulnerabilities that can be tested 
 1. **Example: Cross-Site Scripting (XSS) Vulnerability**
 
    - **Description**: Test a web application for vulnerabilities related to Cross-Site Scripting, where an attacker injects malicious scripts into a webpage.
-   - **Sample Prompt**: 
-   - **Test Code (JavaScript)**:
+   - **Sample Prompt**: ```Write a simple Flask application that demonstrates cross-site scripting and a python script that tests that application for cross-site scripting vulnerabilities.```
+   - **Test Code (Python with Flask)**:
 
-   ```javascript
-   // Example vulnerable code
-   function displayMessage(message) {
-       document.getElementById('message').innerHTML = message;
-   }
-
-   // Injected malicious script by an attacker
-   var maliciousScript = '<script>alert("XSS Attack!")</script>';
-   displayMessage(maliciousScript);
+   **vulnerable_app.py:**
+   ```python
+      from flask import Flask, request, render_template_string
+      
+      app = Flask(__name__)
+      
+      @app.route('/', methods=['GET', 'POST'])
+      def index():
+          name = request.args.get('name', 'Guest')
+          template = f'''
+          <h1>Welcome, {name}!</h1>
+          <form action="/" method="get">
+              <input type="text" name="name" placeholder="Enter your name">
+              <input type="submit" value="Submit">
+          </form>
+          '''
+          return render_template_string(template)
+      
+      if __name__ == '__main__':
+          app.run(debug=True)
+      ```
+   This application is vulnerable to XSS because it directly includes user input in the template without any sanitization.
+   
+   **xss_tester.py:**
+   ```python
+   import requests
+   
+   def test_xss(url):
+       payloads = [
+           "<script>alert('XSS')</script>",
+           "<img src=x onerror=alert('XSS')>",
+           "<svg onload=alert('XSS')>",
+           "javascript:alert('XSS')"
+       ]
+   
+       for payload in payloads:
+           response = requests.get(f"{url}?name={payload}")
+           if payload in response.text:
+               print(f"Potential XSS vulnerability found with payload: {payload}")
+           else:
+               print(f"No XSS vulnerability detected with payload: {payload}")
+   
+   if __name__ == '__main__':
+       target_url = "http://localhost:5000"
+       test_xss(target_url)
    ```
+   The tester script will attempt to inject various XSS payloads and report whether they were successful or not.
 
-   In this example, an attacker injects a malicious script that gets executed in the context of the victim's browser. This can be tested by injecting the script and observing if it executes.
-
-2. **Example: SQL Injection Vulnerability**
+1. **Example: SQL Injection Vulnerability**
 
    - **Description**: Test a web application for vulnerabilities related to SQL Injection, where an attacker manipulates input to execute malicious SQL queries.
    - **Sample Prompt**: 
@@ -40,7 +75,7 @@ Here are three specific examples of security vulnerabilities that can be tested 
 
    In this example, an attacker injects a malicious SQL query that could lead to unintended consequences. This can be tested by injecting the malicious input and observing if it affects the database.
 
-3. **Example: Remote Code Execution (RCE) Vulnerability**
+2. **Example: Remote Code Execution (RCE) Vulnerability**
 
    - **Description**: Test a system for vulnerabilities related to Remote Code Execution, where an attacker can execute arbitrary code on a server.
    - **Sample Prompt**: 
