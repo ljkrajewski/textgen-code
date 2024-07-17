@@ -100,58 +100,108 @@ Input perturbations are used to test the robustness of machine learning models a
    - **Sample prompt**: ```Write an example python script to generate adversarial text examples to test the robustness of a text classification model.```
    - **Test Code (Python with TextAttack)**:
 
-   Install TextAttack using `pip install textattack`.
-
    ```python
-   from textattack.attack_recipes import BAEGarg2019
-
-   # Load a pre-trained text classification model (e.g., BERT)
-   model = ...
-
-   # Choose an attack recipe (e.g., BAEGarg2019)
-   attack = BAEGarg2019.build(model)
-
-   # Set the goal (e.g., misclassification)
-   goal_function = ...
-
-   # Generate adversarial examples
-   adversarial_examples = attack.attack(goal_function, dataset)
-
-   # Test the model's performance on adversarial examples
-   for example in adversarial_examples:
-       prediction = model.predict(example.original_text)
-       adv_prediction = model.predict(example.perturbed_text)
+   import random
+   import nltk
+   from nltk.corpus import wordnet
+   nltk.download('wordnet')
+   
+   def get_synonyms(word):
+       synonyms = []
+       for syn in wordnet.synsets(word):
+           for lemma in syn.lemmas():
+               synonyms.append(lemma.name())
+       return list(set(synonyms))
+   
+   def generate_adversarial_example(text, n_changes=3):
+       words = text.split()
+       for _ in range(n_changes):
+           idx = random.randint(0, len(words) - 1)
+           word = words[idx]
+           synonyms = get_synonyms(word)
+           if synonyms:
+               words[idx] = random.choice(synonyms)
+       return ' '.join(words)
+   
+   def main():
+       original_texts = [
+           "This movie was great and I enjoyed it a lot.",
+           "The service at this restaurant was terrible.",
+           "I'm feeling happy today because the weather is nice."
+       ]
+       
+       print("Original texts:")
+       for text in original_texts:
+           print(f"- {text}")
+       
+       print("\nAdversarial examples:")
+       for text in original_texts:
+           adversarial_text = generate_adversarial_example(text)
+           print(f"- {adversarial_text}")
+   
+   if __name__ == "__main__":
+       main()
    ```
 
-   In this example, we use TextAttack to perform adversarial attacks on text classification models. The BAEGarg2019 attack recipe is used to generate adversarial examples.
+   This script creates adversarial examples by replacing random words with their synonyms, which can be used to test the robustness of a text classification model. The adversarial examples should have similar meanings to the original texts but with different word choices, potentially challenging the model's ability to classify them correctly.
 
-4. **Example: Speech Recognition with Adversarial Noise (Python with Adversarial Robustness Toolbox)**
+3. **Example: Speech Recognition with Adversarial Noise (Python with Adversarial Robustness Toolbox)**
 
    - **Description**: Add adversarial noise to audio input to test the robustness of a speech recognition model.
-   - **Sample prompt**: 
+   - **Sample prompt**: ```Write an example python script to add adversarial noise to audio input to test the robustness of a speech recognition model.```
    - **Test Code (Python with Adversarial Robustness Toolbox)**:
 
-   Install Adversarial Robustness Toolbox using `pip install adversarial-robustness-toolbox`.
-
    ```python
-   from art.attacks import AudioAdversarial
-
-   # Load a pre-trained speech recognition model
-   model = ...
-
-   # Choose an attack (e.g., AudioAdversarial)
-   attack = AudioAdversarial(model)
-
-   # Generate adversarial noise
-   adv_noise = attack.generate(x)
-
-   # Add the adversarial noise to the input audio
-   adv_audio = x + adv_noise
-
-   # Test the model's performance on adversarial audio
-   prediction = model.predict(adv_audio)
+   # Upload audio file to 'perterb'
+   from google.colab import files
+   uploaded = files.upload()
+   for fn in uploaded.keys():
+     print('User uploaded file "{name}" with length {length} bytes'.format(
+         name=fn, length=len(uploaded[fn])))
+   
+   import numpy as np
+   import librosa
+   import soundfile as sf
+   from scipy import signal
+   
+   def add_adversarial_noise(audio_path, output_path, epsilon=0.1):
+       # Load the audio file
+       audio, sr = librosa.load(audio_path, sr=None)
+       
+       # Generate adversarial noise
+       noise = np.random.normal(0, 1, size=audio.shape)
+       
+       # Normalize the noise
+       noise = noise / np.linalg.norm(noise)
+       
+       # Scale the noise by epsilon
+       scaled_noise = epsilon * noise
+       
+       # Add the scaled noise to the original audio
+       adversarial_audio = audio + scaled_noise
+       
+       # Clip the audio to the valid range [-1, 1]
+       adversarial_audio = np.clip(adversarial_audio, -1, 1)
+       
+       # Save the adversarial audio
+       sf.write(output_path, adversarial_audio, sr)
+       
+       return adversarial_audio
+   
+   # Example usage
+   input_audio = "/content/"+fn
+   output_audio = "/content/adversarial_audio.wav"
+   epsilon = 10.0  # Adjust this value to control the strength of the adversarial noise
+   
+   adversarial_sample = add_adversarial_noise(input_audio, output_audio, epsilon)
+   
+   print(f"Adversarial audio saved to: {output_audio}")
    ```
 
-   In this example, we use the Adversarial Robustness Toolbox (ART) to generate adversarial noise and apply it to audio input for speech recognition. The adversarial audio is then used to evaluate the model's performance.
+   This script adds untargeted adversarial noise to the audio. The noise is random and not specifically designed to cause misclassification in any particular direction. For more sophisticated attacks, you might want to use gradient-based methods that specifically optimize the noise to cause misclassification while minimizing the perturbation.
+   
+   To test the robustness of a speech recognition model, you would run this adversarial audio through your model and compare the results with the original audio. A robust model should ideally produce similar results for both the original and adversarial audio.
+   
+   Remember that the effectiveness of this simple approach may vary, and more advanced techniques might be necessary depending on your specific use case and the complexity of the speech recognition model you're testing.
 
 These examples demonstrate how to perform adversarial tests using input perturbations for image classification, text classification, and speech recognition. The provided code can be used as a starting point and customized based on specific requirements and models used.
