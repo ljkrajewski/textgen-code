@@ -9,37 +9,46 @@ Graceful degradation is a design principle that ensures a system can continue to
 
    ```python
    import requests
+   import json
    
-   # Define the desired API endpoint (replace with your actual API)
-   API_URL = "https://api.github.com/users/bard"
+   def get_user_data_from_api(user_id):
+       # Attempt to fetch user data from an external API.
+       url = f"https://jsonplaceholder.typicode.com/users/{user_id}"
+       try:
+           response = requests.get(url, timeout=5)
+           response.raise_for_status()
+           return response.json()
+       except (requests.RequestException, json.JSONDecodeError) as e:
+           print(f"Error fetching data from API: {e}")
+           return None
    
-   def get_user_info_from_api():
-     """Attempts to fetch user information from the API."""
-     try:
-       response = requests.get(API_URL)
-       response.raise_for_status()  # Raise an exception for non-200 status codes
-       return response.json()
-     except requests.exceptions.RequestException as e:
-       print(f"Error fetching data from API: {e}")
-       return None
+   def get_fallback_user_data(user_id):
+       # Provide fallback user data when the API is unavailable.
+       fallback_data = {
+           1: {"name": "John Doe", "email": "john@example.com"},
+           2: {"name": "Jane Smith", "email": "jane@example.com"},
+       }
+       return fallback_data.get(user_id, {"name": "Unknown", "email": "unknown@example.com"})
    
-   def get_user_info():
-     """Fetches user information, gracefully handling API errors."""
-     # Try to get data from the API
-     user_data = get_user_info_from_api()
+   def get_user_data(user_id):
+       # Get user data with graceful degradation.
+       api_data = get_user_data_from_api(user_id)
+       if api_data:
+           print("Data retrieved from API")
+           return api_data
+       else:
+           print("Using fallback data")
+           return get_fallback_user_data(user_id)
    
-     # If API failed, use a default value
-     if not user_data:
-       user_data = {"name": "Unknown User", "public_repos": 0}
+   def main():
+       user_id = 13
+       user_data = get_user_data(user_id)
+       print(f"User data for user {user_id}:")
+       print(f"Name: {user_data.get('name')}")
+       print(f"Email: {user_data.get('email')}")
    
-     return user_data
-   
-   # Get user information
-   user_info = get_user_info()
-   
-   # Print the user information (name and number of public repos)
-   print(f"Name: {user_info['name']}")
-   print(f"Public Repositories: {user_info['public_repos']}")
+   if __name__ == "__main__":
+       main()
    ```
 
    In this example, the function `graceful_degradation_test_external_service` attempts to fetch weather information from an external service. If the service is unavailable, it gracefully handles the error by providing a user-friendly message.
