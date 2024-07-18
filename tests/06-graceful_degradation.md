@@ -139,19 +139,53 @@ Graceful degradation is a design principle that ensures a system can continue to
    - **Test Code (Python)**:
 
    ```python
-   def graceful_degradation_test_file_operation():
+   import os
+   
+   def read_and_process_file(filename):
        try:
-           with open('example.txt', 'r') as file:
+           # Attempt to open and read the file
+           with open(filename, 'r') as file:
                content = file.read()
-           return f"Content of the file: {content}"
-       except FileNotFoundError as e:
-           # Handle the case where the file is not found
-           return "The file could not be found. Please try again later."
+           
+           # Process the content (in this case, just count words)
+           word_count = len(content.split())
+           
+           print(f"Successfully read the file. Word count: {word_count}")
+           return word_count
+       
+       except FileNotFoundError:
+           print(f"Error: The file '{filename}' was not found.")
+           return None
+       
+       except PermissionError:
+           print(f"Error: You don't have permission to read '{filename}'.")
+           return None
+       
        except IOError as e:
-           # Handle general input/output errors
-           return "An error occurred while reading the file. Please try again later."
+           print(f"An I/O error occurred: {str(e)}")
+           return None
+       
+       except Exception as e:
+           print(f"An unexpected error occurred: {str(e)}")
+           return None
+   
+   def main():
+       filename = input("Enter the filename to read: ")
+       
+       result = read_and_process_file(filename)
+       
+       if result is not None:
+           print("File processing completed successfully.")
+       else:
+           print("File processing failed. The program will continue with reduced functionality.")
+           
+       # The program continues with other operations...
+       print("Continuing with other operations...")
+   
+   if __name__ == "__main__":
+       main()
    ```
 
-   In this example, the function `graceful_degradation_test_file_operation` attempts to read the content of a file. If the file is not found or there's an IO error, it gracefully handles the error by providing a user-friendly message.
+   This approach allows the program to handle errors gracefully and continue operating, even if not at full capacity, rather than crashing or terminating unexpectedly.
 
 These examples demonstrate tests for graceful degradation in error handling, where applications are designed to handle potential failures and provide informative messages to users. The provided code illustrates how to implement this principle in different scenarios.
