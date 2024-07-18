@@ -56,25 +56,81 @@ Graceful degradation is a design principle that ensures a system can continue to
 2. **Example: Database Connection (Python with SQLAlchemy)**
 
    - **Description**: Test a web application that relies on a database connection. Verify that the application can handle database connection failures and provide an appropriate response.
-   - **Sample Prompt**: 
-   - **Test Code (Python with SQLAlchemy)**:
+   - **Sample Prompt**: ```Write a python script to demonstrate "graceful degradation," that the script that relies on a database connection can handle database connection failures and provide an appropriate response. For the demonstration, use python and sqlite.```
+   - **Test Code (Python with SQLite)**:
 
    ```python
-   from sqlalchemy import create_engine
-   from sqlalchemy.exc import OperationalError
-
-   def graceful_degradation_test_database_connection():
-       try:
-           engine = create_engine('postgresql://username:password@localhost:5432/database')
-           connection = engine.connect()
-           result = connection.execute('SELECT * FROM table_name')
-           return result.fetchall()
-       except OperationalError as e:
-           # Handle the case where the database connection fails
-           return "Unable to connect to the database. Please try again later."
+   import sqlite3
+   import time
+   
+   def create_table(conn):
+       cursor = conn.cursor()
+       cursor.execute('''
+           CREATE TABLE IF NOT EXISTS users (
+               id INTEGER PRIMARY KEY,
+               name TEXT NOT NULL,
+               email TEXT UNIQUE NOT NULL
+           )
+       ''')
+       conn.commit()
+   
+   def insert_user(conn, name, email):
+       cursor = conn.cursor()
+       cursor.execute('INSERT INTO users (name, email) VALUES (?, ?)', (name, email))
+       conn.commit()
+   
+   def get_all_users(conn):
+       cursor = conn.cursor()
+       cursor.execute('SELECT * FROM users')
+       return cursor.fetchall()
+   
+   def connect_to_database(max_retries=3, retry_delay=2):
+       retries = 0
+       while retries < max_retries:
+           try:
+               conn = sqlite3.connect('example.db')
+               print("Successfully connected to the database.")
+               return conn
+           except sqlite3.Error as e:
+               print(f"Database connection failed: {e}")
+               retries += 1
+               if retries < max_retries:
+                   print(f"Retrying in {retry_delay} seconds...")
+                   time.sleep(retry_delay)
+               else:
+                   print("Max retries reached. Unable to connect to the database.")
+                   return None
+   
+   def main():
+       conn = connect_to_database()
+       
+       if conn is not None:
+           try:
+               create_table(conn)
+               insert_user(conn, "Alice", "alice@example.com")
+               insert_user(conn, "Bob", "bob@example.com")
+               
+               users = get_all_users(conn)
+               print("Users in the database:")
+               for user in users:
+                   print(user)
+           except sqlite3.Error as e:
+               print(f"An error occurred while performing database operations: {e}")
+           finally:
+               conn.close()
+               print("Database connection closed.")
+       else:
+           print("Falling back to alternative behavior or error handling.")
+           # Here you could implement alternative behavior, such as:
+           # - Using a local cache
+           # - Providing limited functionality
+           # - Displaying a user-friendly error message
+   
+   if __name__ == "__main__":
+       main()
    ```
 
-   In this example, the function `graceful_degradation_test_database_connection` attempts to connect to a database and execute a query. If the database connection fails, it gracefully handles the error by providing a user-friendly message.
+   This script provides a foundation for graceful degradation. In a production environment, you might want to add more robust logging, more sophisticated retry mechanisms, or implement specific fallback behaviors based on your application's needs.
 
 3. **Example: File Read/Write Operation (Python)**
 
