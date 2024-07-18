@@ -1,9 +1,10 @@
-Certainly! Error messages play a crucial role in providing feedback to users and developers when something goes wrong. Here are three specific examples of error messages for error handling tests, along with sample code or instructions:
+## Error Messages
+Error messages play a crucial role in providing feedback to users and developers when something goes wrong. Here are three specific examples of error messages for error handling tests, along with sample code or instructions:
 
 1. **Example: Input Validation Error Message (Python)**
 
    - **Description**: Test a function that validates user input and returns an error message if the input is invalid.
-
+   - **Sample prompt**: 
    - **Test Code (Python)**:
 
    ```python
@@ -28,7 +29,7 @@ Certainly! Error messages play a crucial role in providing feedback to users and
 2. **Example: Database Connection Error Message (Python with SQLAlchemy)**
 
    - **Description**: Test a function that attempts to connect to a database and returns an error message if the connection fails.
-
+   - **Sample prompt**: 
    - **Test Code (Python with SQLAlchemy)**:
 
    ```python
@@ -52,7 +53,7 @@ Certainly! Error messages play a crucial role in providing feedback to users and
 3. **Example: File Read Error Message (Python)**
 
    - **Description**: Test a function that reads the content of a file and returns an error message if the file cannot be read.
-
+   - **Sample prompt**: 
    - **Test Code (Python)**:
 
    ```python
