@@ -1,3 +1,4 @@
+## Graceful Degradation
 Graceful degradation is a design principle that ensures a system can continue to function, albeit with reduced capabilities, in the event of an error or failure. Here are three specific examples of tests for graceful degradation in error handling, along with sample code or instructions:
 
 1. **Example: Web Application with External Service Dependency (Python with Flask)**
@@ -46,7 +47,7 @@ Graceful degradation is a design principle that ensures a system can continue to
 2. **Example: Database Connection (Python with SQLAlchemy)**
 
    - **Description**: Test a web application that relies on a database connection. Verify that the application can handle database connection failures and provide an appropriate response.
-
+   - **Sample Prompt**: 
    - **Test Code (Python with SQLAlchemy)**:
 
    ```python
@@ -69,7 +70,7 @@ Graceful degradation is a design principle that ensures a system can continue to
 3. **Example: File Read/Write Operation (Python)**
 
    - **Description**: Test a file operation in an application. Verify that the application can handle file-related errors and provide a suitable response.
-
+   - **Sample Prompt**: 
    - **Test Code (Python)**:
 
    ```python
