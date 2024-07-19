@@ -50,23 +50,34 @@ Error messages play a crucial role in providing feedback to users and developers
 2. **Example: Database Connection Error Message (Python with SQLAlchemy)**
 
    - **Description**: Test a function that attempts to connect to a database and returns an error message if the connection fails.
-   - **Sample prompt**: 
-   - **Test Code (Python with SQLAlchemy)**:
+   - **Sample prompt**: ```Write a python script that demonstrates connecting to a database, returning an error message if the connection fails.```
+   - **Test Code (Python with SQLite)**:
 
    ```python
-   from sqlalchemy import create_engine
-   from sqlalchemy.exc import OperationalError
-
-   def connect_to_database():
+   import sqlite3
+   
+   def connect_to_database(db_name):
        try:
-           engine = create_engine('postgresql://username:password@localhost:5432/database')
-           connection = engine.connect()
-           return "Connected to the database."
-       except OperationalError as e:
-           return "Unable to connect to the database. Please try again later."
-
-   def error_handling_test_database_connection():
-       return connect_to_database()
+           # Attempt to establish a connection to the database
+           conn = sqlite3.connect(db_name)
+           print(f"Successfully connected to {db_name}")
+           return conn
+       except sqlite3.Error as e:
+           # If an error occurs, return the error message
+           return f"Error connecting to database: {e}"
+   
+   # Example usage
+   db_name = "example.db"
+   result = connect_to_database(db_name)
+   
+   # Check if the result is a connection object or an error message
+   if isinstance(result, sqlite3.Connection):
+       # If it's a connection, close it
+       result.close()
+       print("Connection closed.")
+   else:
+       # If it's an error message, print it
+       print(result)
    ```
 
    In this example, the `connect_to_database` function attempts to establish a connection to a database. If the connection fails, it catches the `OperationalError` and returns a user-friendly error message. The `error_handling_test_database_connection` function tests this behavior.
