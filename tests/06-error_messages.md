@@ -8,23 +8,44 @@ Error messages play a crucial role in providing feedback to users and developers
    - **Test Code (Python)**:
 
    ```python
-   def validate_input(input_value):
-       if not isinstance(input_value, int):
-           raise ValueError("Input must be an integer.")
-       if input_value < 0:
-           raise ValueError("Input must be a positive integer.")
-
-       return "Input is valid."
-
-   def error_handling_test_input_validation():
+   def validate_age(age):
        try:
-           result = validate_input("invalid_input")
-           return result
-       except ValueError as e:
-           return str(e)
+           age = int(age)
+           if age < 0 or age > 120:
+               return False, "Age must be between 0 and 120."
+           return True, age
+       except ValueError:
+           return False, "Please enter a valid integer for age."
+   
+   def validate_email(email):
+       if '@' not in email or '.' not in email:
+           return False, "Invalid email format. Please include '@' and '.' in your email."
+       return True, email
+   
+   def get_user_info():
+       while True:
+           age = input("Enter your age: ")
+           is_valid, result = validate_age(age)
+           if is_valid:
+               age = result
+               break
+           print(result)
+   
+       while True:
+           email = input("Enter your email: ")
+           is_valid, result = validate_email(email)
+           if is_valid:
+               email = result
+               break
+           print(result)
+   
+       print(f"Valid input received. Age: {age}, Email: {email}")
+   
+   if __name__ == "__main__":
+       get_user_info()
    ```
 
-   In this example, the `validate_input` function checks if the input is a positive integer. If not, it raises a `ValueError` with an appropriate error message. The `error_handling_test_input_validation` function tests the behavior when invalid input is provided.
+   The script provides a user-friendly interface that guides the user to input correct information by providing specific error messages when the input is invalid. This approach improves the user experience and helps ensure that the program receives valid data to work with.
 
 2. **Example: Database Connection Error Message (Python with SQLAlchemy)**
 
