@@ -80,7 +80,7 @@ Error messages play a crucial role in providing feedback to users and developers
        print(result)
    ```
 
-   In this example, the `connect_to_database` function attempts to establish a connection to a database. If the connection fails, it catches the `OperationalError` and returns a user-friendly error message. The `error_handling_test_database_connection` function tests this behavior.
+   This script demonstrates basic error handling in database connections. It's adaptable to different database systems by changing the import and connection method. The error handling ensures that the program doesn't crash if the connection fails, instead providing useful feedback.
 
 3. **Example: File Read Error Message (Python)**
 
