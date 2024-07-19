@@ -47,7 +47,7 @@ Error messages play a crucial role in providing feedback to users and developers
 
    The script provides a user-friendly interface that guides the user to input correct information by providing specific error messages when the input is invalid. This approach improves the user experience and helps ensure that the program receives valid data to work with.
 
-2. **Example: Database Connection Error Message (Python with SQLAlchemy)**
+2. **Example: Database Connection Error Message (Python with SQLite)**
 
    - **Description**: Test a function that attempts to connect to a database and returns an error message if the connection fails.
    - **Sample prompt**: ```Write a python script that demonstrates connecting to a database, returning an error message if the connection fails.```
