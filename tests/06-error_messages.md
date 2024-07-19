@@ -4,7 +4,7 @@ Error messages play a crucial role in providing feedback to users and developers
 1. **Example: Input Validation Error Message (Python)**
 
    - **Description**: Test a function that validates user input and returns an error message if the input is invalid.
-   - **Sample prompt**: 
+   - **Sample prompt**: ```Write a python script that demonstrates validating user input and returning an error message if the input is invalid.```
    - **Test Code (Python)**:
 
    ```python
