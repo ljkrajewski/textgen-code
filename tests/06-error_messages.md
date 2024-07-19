@@ -85,7 +85,7 @@ Error messages play a crucial role in providing feedback to users and developers
 3. **Example: File Read Error Message (Python)**
 
    - **Description**: Test a function that reads the content of a file and returns an error message if the file cannot be read.
-   - **Sample prompt**: 
+   - **Sample prompt**: ```Write a python script that reads the content of a file and returns an error message if the file cannot be read.```
    - **Test Code (Python)**:
 
    ```python
@@ -94,15 +94,15 @@ Error messages play a crucial role in providing feedback to users and developers
            with open(file_path, 'r') as file:
                content = file.read()
            return content
-       except FileNotFoundError as e:
-           return "The file could not be found. Please check the file path and try again."
        except IOError as e:
-           return "An error occurred while reading the file. Please try again later."
-
-   def error_handling_test_file_read():
-       return read_file('nonexistent_file.txt')
+           return f"Error: Unable to read the file. {str(e)}"
+   
+   # Example usage
+   file_path = 'example.txt'
+   result = read_file(file_path)
+   print(result)
    ```
 
-   In this example, the `read_file` function attempts to read the content of a file. If the file is not found or there's an IO error, it catches the appropriate exceptions and returns corresponding error messages. The `error_handling_test_file_read` function tests this behavior.
+   This script provides a robust way to read a file, handling potential errors gracefully. If the file can be read, it returns the content. If not, it returns an informative error message.
 
 These examples demonstrate error messages for different error handling scenarios, including input validation, database connection, and file reading. The provided code illustrates how to communicate meaningful error messages to users or developers in case of errors.
